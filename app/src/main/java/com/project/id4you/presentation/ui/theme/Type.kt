@@ -1,4 +1,4 @@
-package com.project.id4you.ui.theme
+package com.project.id4you.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
