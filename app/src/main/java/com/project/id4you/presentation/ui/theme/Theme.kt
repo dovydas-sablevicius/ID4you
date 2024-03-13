@@ -1,4 +1,4 @@
-package com.project.id4you.ui.theme
+package com.project.id4you.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
