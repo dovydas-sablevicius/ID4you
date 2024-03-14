@@ -36,13 +36,3 @@ jobs:
           distribution: 'temurin'
       - name: Run tests
         run: ./gradlew test
-
-  cancel:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'synchronize'
-    steps:
-      - uses: actions/checkout@v4
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.12.1
-        with:
-          access_token: ${{ github.token }}
