@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    //id("org.jetbrains.kotlinx.kover") version "0.7.6"
+    id("org.jetbrains.kotlinx.kover") version "0.7.6"
 }
 
 android {
@@ -48,6 +48,24 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    koverReport {
+        filters {
+            excludes {
+                classes("com.baeldung.code.not.covered")
+            }
+        }
+
+        verify {
+            rule {
+                isEnabled = true
+                bound {
+                    minValue = 80
+                }
+            }
+        }
+    }
+
 }
 
 dependencies {

@@ -23,3 +23,8 @@ jobs:
         run: chmod +x ./gradlew
       - name: Build with Gradle+
         run: ./gradlew build
+      - name: Upload Coverage to CodeCov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./build/reports/kover/xmlReport.xml
+          fail_ci_if_error: true
