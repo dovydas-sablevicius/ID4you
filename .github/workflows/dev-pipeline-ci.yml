@@ -1,12 +1,8 @@
-name: test-pipeline-ci
+name: dev-pipeline-ci
 
 on:
-  push:
-    branches:
-      - main
-      - release/**
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [ opened, synchronize, reopened ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
