@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    //id("org.jetbrains.kotlinx.kover") version "0.7.6"
 }
 
 android {
