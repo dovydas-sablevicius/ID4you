@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    //id("org.jetbrains.kotlinx.kover") version "0.7.6"
 }
 
 android {
