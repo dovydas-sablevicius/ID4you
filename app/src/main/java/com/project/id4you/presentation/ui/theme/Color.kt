@@ -2,7 +2,7 @@ package com.project.id4you.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-//@Suppress("UtilityClassWithPublicConstructor")
+@Suppress("UtilityClassWithPublicConstructor")
 class Color {
     companion object {
         val Purple80 = Color(0xFFD0BCFF)
