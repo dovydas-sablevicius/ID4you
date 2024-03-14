@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    kotlin("kapt")
     id("com.google.dagger.hilt.android")
     //id("org.jetbrains.kotlinx.kover") version "0.7.6"
 }
@@ -73,17 +72,13 @@ dependencies {
 
     //hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    annotationProcessor(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.lifecycle.viewmodel)
-    kapt(libs.androidx.hilt.compiler)
+    annotationProcessor(libs.androidx.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
     //retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
-}
-
-kapt {
-    correctErrorTypes = true
 }
