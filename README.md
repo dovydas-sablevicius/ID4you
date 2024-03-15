@@ -1,7 +1,14 @@
+# Before pushing your code
+
+`./gradlew clean build`
+
 # Test Coverage
 
-To get test coverage run:
+To get test coverage report run:
 `./gradlew koverHtmlReportDebug`
+
+To get test coverage % run:
+`./gradlew koverVerifyDebug`
 
 # Clean Code
 
