@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    //id("org.jetbrains.kotlinx.kover") version "0.7.6"
+    id("io.gitlab.arturbosch.detekt") version "1.23.5"
+    id("org.jetbrains.kotlinx.kover") version "0.7.6"
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -50,6 +52,17 @@ android {
     }
 }
 
+koverReport {
+    verify {
+        rule {
+            isEnabled = false
+            bound {
+                minValue = 80
+            }
+        }
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -67,4 +80,16 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //hilt
+    implementation(libs.hilt.android)
+    annotationProcessor(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.lifecycle.viewmodel)
+    annotationProcessor(libs.androidx.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+    //retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 }
