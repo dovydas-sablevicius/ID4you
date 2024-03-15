@@ -28,11 +28,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.project.id4you.presentation.ui.theme.Blue
+import com.project.id4you.presentation.ui.theme.Color.Companion.Blue
 
-
+@Suppress("LongParameterList")
 @Composable
-fun TextField(
+fun CustomTextField(
     labelText: String,
     isPasswordField: Boolean = false,
     color: Color = Blue,
