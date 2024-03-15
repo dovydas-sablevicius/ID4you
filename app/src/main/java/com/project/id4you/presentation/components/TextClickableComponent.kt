@@ -2,7 +2,6 @@ package com.project.id4you.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -16,9 +15,9 @@ import androidx.compose.ui.text.font.SystemFontFamily
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.project.id4you.presentation.ui.theme.Blue
+import com.project.id4you.presentation.ui.theme.Color.Companion.Blue
 
-
+@Suppress("LongParameterList")
 @Composable
 fun TextClickableComponent(
     labelText: String,
@@ -29,8 +28,7 @@ fun TextClickableComponent(
     fontSize: TextUnit = 12.sp,
     fontWeight: Int = 500,
     method: () -> Unit = {},
-    passedColumnModifier: Modifier = Modifier
-        .fillMaxSize(),
+    passedColumnModifier: Modifier = Modifier,
     vertical: Arrangement.Vertical = Arrangement.spacedBy(8.dp)
 ) {
     Column(
@@ -54,4 +52,3 @@ fun TextClickableComponent(
         }
     }
 }
-
