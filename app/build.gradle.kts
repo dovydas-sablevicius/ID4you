@@ -51,6 +51,17 @@ android {
     }
 }
 
+koverReport {
+    verify {
+        rule {
+            isEnabled = true
+            bound {
+                minValue = 80
+            }
+        }
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
