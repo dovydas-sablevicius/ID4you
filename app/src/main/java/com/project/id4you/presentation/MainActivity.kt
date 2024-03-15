@@ -10,10 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.project.id4you.presentation.components.loginButton
-import com.project.id4you.presentation.ui.theme.Blue
 import com.project.id4you.presentation.ui.theme.ID4YouTheme
-import com.project.id4you.presentation.ui.theme.White
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    loginButton("Login", White, Blue)
+                    Greeting("Android")
                 }
             }
         }
