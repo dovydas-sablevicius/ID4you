@@ -33,7 +33,7 @@ class UserRepositoryImpl @Inject constructor(
             } catch (e: HttpException) {
                 emit(Resource.Error(e.localizedMessage ?: httpExceptionMessage))
             } catch (e: IOException) {
-                emit(Resource.Error(ioExceptionMessage))
+                emit(Resource.Error(e.localizedMessage ?: ioExceptionMessage))
             }
         }
 
@@ -46,7 +46,7 @@ class UserRepositoryImpl @Inject constructor(
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: httpExceptionMessage))
         } catch (e: IOException) {
-            emit(Resource.Error(ioExceptionMessage))
+            emit(Resource.Error(e.localizedMessage ?: ioExceptionMessage))
         }
     }
 
