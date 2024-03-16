@@ -38,8 +38,8 @@ class UserRepositoryImpl @Inject constructor(
         }
 
     override suspend fun loginUser(email: String, password: String): Flow<Resource<User>> = flow {
+        emit(Resource.Loading())
         try {
-            emit(Resource.Loading())
             val userLoginDto: UserLoginDto = UserLoginDto(email, password)
             val user: User = api.loginUser(userLoginDto).toUser()
             emit(Resource.Success(user))
