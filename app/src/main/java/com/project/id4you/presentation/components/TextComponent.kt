@@ -15,7 +15,7 @@ fun TextComponent(
     fontFamily: SystemFontFamily = FontFamily.Default,
     fontStyle: FontStyle = FontStyle.Normal,
     fontSize: TextUnit = 12.sp,
-    fontWeight: Int = 500,
+    fontWeight: Int = 400,
 ) {
     Text(
         text = labelText,
