@@ -11,15 +11,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.project.id4you.R
+import com.project.id4you.presentation.ui.theme.Color.Companion.Blue
 
 
 @Composable
-fun filterButton(
+fun FilterButton(
     size: Dp = 30.dp,
-    color: Color = Color.Blue,
+    color: Color = Blue,
     method: () -> Unit = {}
 ) {
-    IconButton(onClick = { method }) {
+    IconButton(
+        onClick = { method },
+        modifier = Modifier.size(size)
+    ) {
         Icon(
             modifier = Modifier.size(size),
             painter = painterResource(id = R.drawable.baseline_tune_24),
