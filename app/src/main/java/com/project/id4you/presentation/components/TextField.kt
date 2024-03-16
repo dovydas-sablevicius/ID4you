@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -35,6 +36,7 @@ import com.project.id4you.presentation.ui.theme.Color.Companion.Blue
 fun CustomTextField(
     labelText: String,
     isPasswordField: Boolean = false,
+    inputState: MutableState<TextFieldValue>,
     color: Color = Blue,
     borderWidth: Dp = 1.dp,
     fontFamily: SystemFontFamily = FontFamily.Default,
@@ -46,7 +48,7 @@ fun CustomTextField(
     roundCornerRadius: Dp = 8.dp,
 ) {
     val (isPasswordVisible, setPasswordVisible) = remember { mutableStateOf(!isPasswordField) }
-    val (inputValue, setInputValue) = remember { mutableStateOf(TextFieldValue()) }
+    val (inputValue, setInputValue) = inputState
 
     Box() {
         TextField(
