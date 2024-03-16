@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("io.gitlab.arturbosch.detekt") version "1.23.5"
+    id("org.jetbrains.kotlinx.kover") version "0.7.6"
     id("com.google.dagger.hilt.android")
-    //id("org.jetbrains.kotlinx.kover") version "0.7.6"
 }
 
 android {
@@ -51,8 +52,18 @@ android {
     }
 }
 
-dependencies {
+koverReport {
+    verify {
+        rule {
+            isEnabled = false
+            bound {
+                minValue = 80
+            }
+        }
+    }
+}
 
+dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -62,6 +73,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation("com.google.android.material:material:1.2.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
