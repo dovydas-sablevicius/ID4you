@@ -53,7 +53,11 @@ fun CustomTextField(
     Box() {
         TextField(
             value = inputValue,
-            onValueChange = { newValue -> setInputValue(newValue) },
+            onValueChange = { newValue ->
+                if (newValue.text.length <= 30) {
+                    setInputValue(newValue)
+                }
+            },
             label = {
                 Text(
                     text = labelText,
@@ -81,6 +85,7 @@ fun CustomTextField(
                 unfocusedLabelColor = color,
             ),
             visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            singleLine = true
         )
         if (isPasswordField) {
             Button(
