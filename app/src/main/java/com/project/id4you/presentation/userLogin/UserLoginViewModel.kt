@@ -20,7 +20,7 @@ class UserLoginViewModel @Inject constructor(
     val state: State<UserLoginState> = _state
 
     fun loginUser(email: String, password: String) {
-        val unexpectedErrorMessage: String = "An unexpected error occurred.";
+        val unexpectedErrorMessage: String = "An unexpected error occurred."
         viewModelScope.launch {
             loginUserUseCase(email, password).onEach { result ->
                 when (result) {

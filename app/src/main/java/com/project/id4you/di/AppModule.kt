@@ -22,12 +22,12 @@ object AppModule {
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(PocketBaseApi::class.java);
+            .create(PocketBaseApi::class.java)
     }
 
     @Provides
     @Singleton
     fun provideUserRepository(api: PocketBaseApi): UserRepository {
-        return UserRepositoryImpl(api);
+        return UserRepositoryImpl(api)
     }
 }

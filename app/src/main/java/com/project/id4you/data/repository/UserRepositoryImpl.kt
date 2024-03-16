@@ -16,7 +16,7 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val api: PocketBaseApi
 ) : UserRepository {
-    private val httpExceptionMessage: String = "An unexpected error occurred.";
+    private val httpExceptionMessage: String = "An unexpected error occurred."
     private val ioExceptionMessage: String = "Couldn't reach server."
     override suspend fun registerUser(
         email: String,
@@ -29,7 +29,7 @@ class UserRepositoryImpl @Inject constructor(
                 val userRegistrationDto: UserRegistrationDto =
                     UserRegistrationDto(email, password, passwordAgain)
                 val response: Unit = api.registerUser(userRegistrationDto)
-                emit(Resource.Success(response));
+                emit(Resource.Success(response))
             } catch (e: HttpException) {
                 emit(Resource.Error(e.localizedMessage ?: httpExceptionMessage))
             } catch (e: IOException) {
