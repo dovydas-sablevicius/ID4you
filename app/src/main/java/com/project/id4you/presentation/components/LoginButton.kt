@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 
 @Suppress("LongParameterList")
 @Composable
-fun loginButton(
+fun ButtonComponent(
     labelText: String,
     textColor: Color,
     buttonColor: Color,
