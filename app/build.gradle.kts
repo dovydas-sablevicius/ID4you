@@ -4,6 +4,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.23.5"
     id("org.jetbrains.kotlinx.kover") version "0.7.6"
     id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -83,13 +84,22 @@ dependencies {
 
     //hilt
     implementation(libs.hilt.android)
-    annotationProcessor(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.lifecycle.viewmodel)
-    annotationProcessor(libs.androidx.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
+    // For instrumentation tests
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
+    // For local unit tests
+    testImplementation(libs.hilt.android.testing)
+    kaptTest(libs.hilt.compiler)
+
+
     //retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
+}
+kapt {
+    correctErrorTypes = true
 }
