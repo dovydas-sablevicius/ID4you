@@ -37,7 +37,7 @@ class UserLoginViewModel @Inject constructor(
                         _state.value = UserLoginState(isLoading = false, user = result.data)
                     }
                 }
-            }.launchIn(this)
+            }.launchIn(viewModelScope)
         }
     }
 }
