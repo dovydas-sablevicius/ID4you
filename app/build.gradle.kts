@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("io.gitlab.arturbosch.detekt") version "1.23.5"
+    //id("io.gitlab.arturbosch.detekt") version "1.23.5"
     id("org.jetbrains.kotlinx.kover") version "0.7.6"
+    id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 }
 
@@ -73,7 +74,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("com.google.android.material:material:1.2.0")
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -83,14 +84,27 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     //hilt
+    // For hilt Implementation
     implementation(libs.hilt.android)
-    annotationProcessor(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.lifecycle.viewmodel)
-    annotationProcessor(libs.androidx.hilt.compiler)
+    kapt(libs.hilt.compiler)
+
+    // For instrumentation tests
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
+
+    // For local unit tests
+    testImplementation(libs.hilt.android.testing)
+    kaptTest(libs.hilt.compiler)
+
     implementation(libs.androidx.hilt.navigation.compose)
+
     //retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
+}
+
+kapt {
+    correctErrorTypes = true
 }
