@@ -1,9 +1,11 @@
 package com.project.id4you.presentation.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckCircle
@@ -25,7 +27,7 @@ fun CardComponent(
     documentName: String,
     documentType: String,
     documentStatus: String,
-    backgroundColor: Color,
+    backgroundColor: Color = Color.White,
     statusIconColor: Color,
     documentNameColor: Color = Color.Black,
     documentTypeColor: Color = Color.Gray,
@@ -44,12 +46,15 @@ fun CardComponent(
         border = BorderStroke(1.dp, Color.Black)
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(20.dp)
         ) {
+
             Icon(
                 painter = painterResource(id = R.drawable.document_icon),
                 tint = iconColor,
-                contentDescription = null
+                contentDescription = null,
+                modifier = Modifier.size(44.dp)
             )
 
             Column(
@@ -59,13 +64,15 @@ fun CardComponent(
                 Text(text = documentType, color = documentTypeColor, fontSize = 12.sp)
             }
 
-            Text(text = documentStatus, color = documentNameColor)
+            Text(text = documentStatus, color = documentNameColor, fontSize = 18.sp)
+
             when (documentStatus) {
                 "Pending" -> {
                     Icon(
                         painter = painterResource(id = R.drawable.clock_icon),
                         tint = statusIconColor,
-                        contentDescription = null
+                        contentDescription = null,
+                        modifier = Modifier.size(30.dp)
                     )
                 }
 
@@ -73,7 +80,8 @@ fun CardComponent(
                     Icon(
                         imageVector = Icons.Outlined.CheckCircle,
                         tint = statusIconColor,
-                        contentDescription = null
+                        contentDescription = null,
+                        modifier = Modifier.size(30.dp)
                     )
                 }
 
@@ -81,7 +89,8 @@ fun CardComponent(
                     Icon(
                         painter = painterResource(id = R.drawable.rejected_icon),
                         tint = statusIconColor,
-                        contentDescription = null
+                        contentDescription = null,
+                        modifier = Modifier.size(30.dp)
                     )
                 }
             }
