@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.project.id4you.R
 
+@Suppress("LongParameterList")
 @Composable
 fun CardComponent(
     documentName: String,
