@@ -1,24 +1,24 @@
 package com.project.id4you.presentation.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.project.id4you.R
 
 @Composable
 fun CardComponent(
@@ -26,13 +26,12 @@ fun CardComponent(
     documentType: String,
     documentStatus: String,
     backgroundColor: Color,
-    textColor: Color,
+    statusIconColor: Color,
+    documentNameColor: Color = Color.Black,
+    documentTypeColor: Color = Color.Gray,
+    iconColor: Color = Color.Black,
     modifier: Modifier = Modifier,
-    method: () -> Unit = {},
-    fontFamily: FontFamily = FontFamily.Default,
-    fontStyle: FontStyle = FontStyle.Normal,
-    fontSize: TextUnit = 12.sp,
-    fontWeight: FontWeight = FontWeight.Normal,
+    method: () -> Unit = {}
 ) {
     Button(
         onClick = method,
@@ -40,20 +39,52 @@ fun CardComponent(
             .height(100.dp)
             .width(300.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = backgroundColor,
-            contentColor = textColor,
+            containerColor = backgroundColor
         ),
-        border = BorderStroke(2.dp, Color.Black)
+        border = BorderStroke(1.dp, Color.Black)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
+            Icon(
+                painter = painterResource(id = R.drawable.document_icon),
+                tint = iconColor,
+                contentDescription = null
+            )
+
             Column(
             ) {
-                Text(text = documentName)
-                Text(text = documentType)
+
+                Text(text = documentName, color = documentNameColor, fontSize = 18.sp)
+                Text(text = documentType, color = documentTypeColor, fontSize = 12.sp)
             }
-            Text(text = documentStatus)
+
+            Text(text = documentStatus, color = documentNameColor)
+            when (documentStatus) {
+                "Pending" -> {
+                    Icon(
+                        painter = painterResource(id = R.drawable.clock_icon),
+                        tint = statusIconColor,
+                        contentDescription = null
+                    )
+                }
+
+                "Verified" -> {
+                    Icon(
+                        imageVector = Icons.Outlined.CheckCircle,
+                        tint = statusIconColor,
+                        contentDescription = null
+                    )
+                }
+
+                "Rejected" -> {
+                    Icon(
+                        painter = painterResource(id = R.drawable.rejected_icon),
+                        tint = statusIconColor,
+                        contentDescription = null
+                    )
+                }
+            }
         }
     }
 }
