@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.SystemFontFamily
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
-import com.project.id4you.presentation.ui.theme.Color.Companion.Blue
+import com.project.id4you.presentation.ui.theme.AppColor.Companion.Blue
 
 @Suppress("LongParameterList")
 @Composable

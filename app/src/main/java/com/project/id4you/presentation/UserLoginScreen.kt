@@ -15,19 +15,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.TextClickableComponent
 import com.project.id4you.presentation.components.TextComponent
-import com.project.id4you.presentation.ui.theme.Color
-import com.project.id4you.presentation.userLogin.UserLoginViewModel
+import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
 fun UserLoginScreen(
-    navController: NavController,
-    viewModel: UserLoginViewModel = hiltViewModel()
+    navController: NavController
+    //viewModel: UserLoginViewModel = hiltViewModel()
 ) {
     val inputStateEmail = remember { mutableStateOf(TextFieldValue()) }
     val (inputValueEmail, setInputValueEmail) = inputStateEmail
@@ -52,8 +50,8 @@ fun UserLoginScreen(
         ButtonComponent(
             Modifier.width(375.dp),
             labelText = "Login",
-            Color.White,
-            Color.Blue
+            AppColor.White,
+            AppColor.Blue
         )
         TextClickableComponent(
             labelText = "Forgot your password?",
@@ -86,4 +84,3 @@ fun ScreenHeader(navController: NavController) {
     }
     Spacer(modifier = Modifier.height(16.dp))
 }
-

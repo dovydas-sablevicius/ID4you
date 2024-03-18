@@ -27,18 +27,14 @@ import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.TextClickableComponent
 import com.project.id4you.presentation.components.TextComponent
-import com.project.id4you.presentation.ui.theme.Color
-import com.project.id4you.presentation.userLogin.UserRegistrationViewModel
+import com.project.id4you.presentation.ui.theme.AppColor
+import com.project.id4you.presentation.userRegistration.UserRegistrationViewModel
 
 @Composable
 fun RegistrationScreen(
     navController: NavController,
     viewModel: UserRegistrationViewModel = hiltViewModel()
 ) {
-
-    val testEmail = "abcdef@gmail.com"
-    val testPassword = "abcdef123456"
-
     val state = viewModel.state.value
     val errorMessage = "Oops.. An unexpected error occurred."
 
@@ -85,8 +81,8 @@ fun RegistrationScreen(
                     passwordRepeatInputValue
                 )
             },
-            textColor = Color.White,
-            buttonColor = Color.Blue
+            textColor = AppColor.White,
+            buttonColor = AppColor.Blue
         )
     }
 
@@ -146,7 +142,7 @@ fun ErrorText(errorMessage: String) {
     ) {
         Text(
             text = errorMessage,
-            color = Color.Red,
+            color = AppColor.Red,
             modifier = Modifier.offset(y = (-300).dp)
         )
     }
@@ -161,7 +157,7 @@ fun LoadingIndicator() {
         contentAlignment = Alignment.BottomCenter
     ) {
         CircularProgressIndicator(
-            color = Color.Blue,
+            color = AppColor.Blue,
             modifier = Modifier.offset(y = (-300).dp)
         )
     }

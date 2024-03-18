@@ -15,16 +15,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Color.White,
-    secondary = Color.Blue,
-    tertiary = Color.Black
+private val DarkAppColorScheme = darkColorScheme(
+    primary = AppColor.White,
+    secondary = AppColor.Blue,
+    tertiary = AppColor.Black
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Color.White,
-    secondary = Color.Blue,
-    tertiary = Color.Black
+private val LightAppColorScheme = lightColorScheme(
+    primary = AppColor.White,
+    secondary = AppColor.Blue,
+    tertiary = AppColor.Black
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -50,8 +50,8 @@ fun ID4YouTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> DarkAppColorScheme
+        else -> LightAppColorScheme
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
