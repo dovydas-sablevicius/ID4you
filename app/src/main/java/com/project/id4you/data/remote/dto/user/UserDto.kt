@@ -1,4 +1,4 @@
-package com.project.id4you.data.remote.dto
+package com.project.id4you.data.remote.dto.user
 
 import com.project.id4you.data.repository.model.User
 

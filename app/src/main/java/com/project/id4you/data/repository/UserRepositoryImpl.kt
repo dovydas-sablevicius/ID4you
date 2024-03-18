@@ -2,9 +2,9 @@ package com.project.id4you.data.repository
 
 import com.project.id4you.common.Resource
 import com.project.id4you.data.remote.PocketBaseApi
-import com.project.id4you.data.remote.dto.UserLoginDto
-import com.project.id4you.data.remote.dto.UserRegistrationDto
-import com.project.id4you.data.remote.dto.toUser
+import com.project.id4you.data.remote.dto.user.UserLoginDto
+import com.project.id4you.data.remote.dto.user.UserRegistrationDto
+import com.project.id4you.data.remote.dto.user.toUser
 import com.project.id4you.data.repository.model.User
 import com.project.id4you.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow

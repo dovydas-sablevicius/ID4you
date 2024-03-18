@@ -1,8 +1,8 @@
 package com.project.id4you.data.remote.interfaces
 
-import com.project.id4you.data.remote.dto.UserDto
-import com.project.id4you.data.remote.dto.UserLoginDto
-import com.project.id4you.data.remote.dto.UserRegistrationDto
+import com.project.id4you.data.remote.dto.user.UserDto
+import com.project.id4you.data.remote.dto.user.UserLoginDto
+import com.project.id4you.data.remote.dto.user.UserRegistrationDto
 import retrofit2.http.Body
 import retrofit2.http.POST
 
