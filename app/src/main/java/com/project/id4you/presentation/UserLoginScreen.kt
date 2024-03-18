@@ -19,7 +19,7 @@ import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.TextClickableComponent
 import com.project.id4you.presentation.components.TextComponent
-import com.project.id4you.presentation.ui.theme.Color
+import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
 fun UserLoginScreen(
@@ -48,8 +48,8 @@ fun UserLoginScreen(
         ButtonComponent(
             Modifier.width(375.dp),
             labelText = "Login",
-            Color.White,
-            Color.Blue
+            AppColor.White,
+            AppColor.Blue
         )
         TextClickableComponent(
             labelText = "Forgot your password?",
