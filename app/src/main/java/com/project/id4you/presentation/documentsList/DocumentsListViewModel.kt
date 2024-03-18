@@ -20,6 +20,10 @@ class DocumentsListViewModel @Inject constructor(
     private val _state = mutableStateOf(DocumentsListState())
     val state: State<DocumentsListState> = _state
 
+    init {
+        getDocuments("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3MTIwMDc0MTIsImlkIjoiNDQ5MG1rNzlvazRiOXlqIiwidHlwZSI6ImF1dGhSZWNvcmQifQ.-5lq5yHy7vnnZuWECckhheVMdS8QbOOTldaeTMLgpZA")
+    }
+
     fun getDocuments(authToken: String) {
         viewModelScope.launch {
             getIdCardsUseCase(authToken).onEach { result ->
@@ -37,7 +41,10 @@ class DocumentsListViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         _state.value =
-                            DocumentsListState(isLoading = false, documents = result.data)
+                            DocumentsListState(
+                                isLoading = false,
+                                documents = result.data ?: emptyList()
+                            )
                     }
                 }
             }.launchIn(viewModelScope)
