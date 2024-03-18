@@ -1,5 +1,6 @@
 package com.project.id4you.data.remote.dto.idCard
 
+import com.google.gson.annotations.SerializedName
 import com.project.id4you.data.repository.model.IdCard
 
 data class IdCardDto(
@@ -10,7 +11,8 @@ data class IdCardDto(
     val name: String,
     val photos: List<String>,
     val updated: String,
-    val user_relation: String
+    @SerializedName("user_relation")
+    val userRelation: String
 )
 
 fun IdCardDto.toIdCard(): IdCard {
