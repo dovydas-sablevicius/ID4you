@@ -15,17 +15,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.TextClickableComponent
 import com.project.id4you.presentation.components.TextComponent
-import com.project.id4you.presentation.documentsList.DocumentsListViewModel
 import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
 fun UserLoginScreen(
-    viewModel: DocumentsListViewModel = hiltViewModel(),
+
 ) {
     val inputStateEmail = remember { mutableStateOf(TextFieldValue()) }
     val (inputValueEmail, setInputValueEmail) = inputStateEmail
@@ -51,15 +49,7 @@ fun UserLoginScreen(
             Modifier.width(375.dp),
             labelText = "Login",
             AppColor.White,
-            AppColor.Blue,
-            method = {
-                viewModel.getDocuments(
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb" +
-                            "2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3MTE5OTQ1MzEsImlkIjoiNndsN3" +
-                            "hteGdrZzJ6bnc4IiwidHlwZSI6ImF1dGhSZWNvcmQifQ.Zev5I3164Otcsxw2zqrJVsBqIr2rDdW" +
-                            "bR5CCsNw9Ljo"
-                )
-            }
+            AppColor.Blue
         )
         TextClickableComponent(
             labelText = "Forgot your password?",
