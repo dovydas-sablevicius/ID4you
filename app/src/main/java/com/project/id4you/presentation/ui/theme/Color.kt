@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 @Suppress("UtilityClassWithPublicConstructor")
 class Color {
     companion object {
+        val Red = Color(0xFFEE0000)
         val Black = Color(0xFF000000)
         val White = Color(0xFFFFFFFF)
         val Blue = Color(0xFF404CFA)
