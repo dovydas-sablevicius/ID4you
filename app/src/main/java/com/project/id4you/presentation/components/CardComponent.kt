@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.project.id4you.R
 
-
+@Suppress("MatchingDeclarationName")
 enum class DocumentStatus {
     VERIFIED, PENDING, REJECTED
 }
