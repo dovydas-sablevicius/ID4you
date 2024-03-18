@@ -22,8 +22,11 @@ class DocumentsListViewModel @Inject constructor(
 
     init {
         getDocuments(
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3MTIwMDc0MTIsImlkIjoiNDQ5MG1rNzlva" +
-                    "zRiOXlqIiwidHlwZSI6ImF1dGhSZWNvcmQifQ.-5lq5yHy7vnnZuWECckhheVMdS8QbOOTldaeTMLgpZA"
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
+                    "eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3" +
+                    "MTIwMDc0MTIsImlkIjoiNDQ5MG1rNzlva" +
+                    "zRiOXlqIiwidHlwZSI6ImF1dGhSZWNvcmQifQ.-5lq5yHy7vn" +
+                    "nZuWECckhheVMdS8QbOOTldaeTMLgpZA"
         )
     }
 
