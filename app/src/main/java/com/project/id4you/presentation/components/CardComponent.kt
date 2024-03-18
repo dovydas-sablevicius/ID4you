@@ -22,11 +22,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.project.id4you.R
+import com.project.id4you.data.repository.model.DocumentStatus
 
-@Suppress("MatchingDeclarationName")
-enum class DocumentStatus {
-    VERIFIED, PENDING, REJECTED
-}
 
 @Suppress("LongParameterList")
 @Composable
