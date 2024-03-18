@@ -11,7 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.project.id4you.R
-import com.project.id4you.presentation.ui.theme.Color.Companion.Blue
+import com.project.id4you.presentation.ui.theme.AppColor.Companion.Blue
 
 
 @Composable

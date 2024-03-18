@@ -7,10 +7,10 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface PocketBaseApi {
-    @POST("/collections/users/records")
+    @POST("api/collections/users/records")
     suspend fun registerUser(@Body userRegistrationDto: UserRegistrationDto)
 
-    @POST("/collections/users/auth-with-password")
+    @POST("api/collections/users/auth-with-password")
     suspend fun loginUser(@Body userLoginDto: UserLoginDto): UserDto
 
 }
