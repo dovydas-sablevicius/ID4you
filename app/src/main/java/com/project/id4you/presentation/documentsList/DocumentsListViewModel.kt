@@ -1,4 +1,4 @@
-package com.project.id4you.presentation.userLogin
+package com.project.id4you.presentation.documentsList
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -6,37 +6,36 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project.id4you.common.ExceptionMessages
 import com.project.id4you.common.Resource
-import com.project.id4you.domain.useCase.loginUser.LoginUserUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.project.id4you.domain.useCase.getIdCards.GetIdCardsUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class UserLoginViewModel @Inject constructor(
-    private val loginUserUseCase: LoginUserUseCase
+class DocumentsListViewModel @Inject constructor(
+    private val getIdCardsUseCase: GetIdCardsUseCase
 ) : ViewModel() {
-    private val _state = mutableStateOf(UserLoginState())
-    val state: State<UserLoginState> = _state
+    private val _state = mutableStateOf(DocumentsListState())
+    val state: State<DocumentsListState> = _state
 
-    fun loginUser(email: String, password: String) {
+    fun getDocuments(authToken: String) {
         viewModelScope.launch {
-            loginUserUseCase(email, password).onEach { result ->
+            getIdCardsUseCase(authToken).onEach { result ->
                 when (result) {
                     is Resource.Error -> {
                         _state.value =
-                            UserLoginState(
+                            DocumentsListState(
                                 error = result.message ?: ExceptionMessages.unexpectedErrorMessage
                             )
                     }
 
                     is Resource.Loading -> {
-                        _state.value = UserLoginState(isLoading = true)
+                        _state.value = DocumentsListState(isLoading = true)
                     }
 
                     is Resource.Success -> {
-                        _state.value = UserLoginState(isLoading = false, user = result.data)
+                        _state.value =
+                            DocumentsListState(isLoading = false, documents = result.data)
                     }
                 }
             }.launchIn(viewModelScope)
