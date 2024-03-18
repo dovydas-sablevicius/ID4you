@@ -2,7 +2,7 @@ package com.project.id4you.di
 
 import com.project.id4you.common.Constants
 import com.project.id4you.data.remote.PocketBaseApi
-import com.project.id4you.data.repository.UserRepositoryImpl
+import com.project.id4you.data.repository.Impl.UserRepositoryImpl
 import com.project.id4you.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides

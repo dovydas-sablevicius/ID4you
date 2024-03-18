@@ -1,5 +1,6 @@
-package com.project.id4you.data.repository
+package com.project.id4you.data.repository.Impl
 
+import com.project.id4you.common.ExceptionMessages
 import com.project.id4you.common.Resource
 import com.project.id4you.data.remote.PocketBaseApi
 import com.project.id4you.data.remote.dto.user.UserLoginDto
@@ -16,8 +17,6 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val api: PocketBaseApi
 ) : UserRepository {
-    private val httpExceptionMessage: String = "An unexpected error occurred."
-    private val ioExceptionMessage: String = "Couldn't reach server."
     override suspend fun registerUser(
         email: String,
         password: String,
@@ -31,9 +30,9 @@ class UserRepositoryImpl @Inject constructor(
                 val response: Unit = api.registerUser(userRegistrationDto)
                 emit(Resource.Success(response))
             } catch (e: HttpException) {
-                emit(Resource.Error(e.localizedMessage ?: httpExceptionMessage))
+                emit(Resource.Error(e.localizedMessage ?: ExceptionMessages.httpExceptionMessage))
             } catch (e: IOException) {
-                emit(Resource.Error(e.localizedMessage ?: ioExceptionMessage))
+                emit(Resource.Error(e.localizedMessage ?: ExceptionMessages.ioExceptionMessage))
             }
         }
 
@@ -44,9 +43,9 @@ class UserRepositoryImpl @Inject constructor(
             val user: User = api.loginUser(userLoginDto).toUser()
             emit(Resource.Success(user))
         } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: httpExceptionMessage))
+            emit(Resource.Error(e.localizedMessage ?: ExceptionMessages.httpExceptionMessage))
         } catch (e: IOException) {
-            emit(Resource.Error(e.localizedMessage ?: ioExceptionMessage))
+            emit(Resource.Error(e.localizedMessage ?: ExceptionMessages.ioExceptionMessage))
         }
     }
 
