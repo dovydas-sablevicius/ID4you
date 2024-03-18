@@ -76,9 +76,10 @@ fun DocumentScreenHeader() {
     ) {
         AddButton(size = 35.dp)
         Spacer(modifier = Modifier.width(32.dp))
-        Text(text = "Documents", fontSize = 32.sp, fontWeight = FontWeight(500))
+        Text(text = "Documents", fontSize = 32.sp, fontWeight = FontWeight.Bold)
         FilterButton()
         SettingsButton()
     }
     Spacer(modifier = Modifier.height(10.dp))
 }
+

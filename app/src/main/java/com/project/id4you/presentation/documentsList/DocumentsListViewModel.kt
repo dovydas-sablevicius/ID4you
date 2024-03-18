@@ -21,7 +21,10 @@ class DocumentsListViewModel @Inject constructor(
     val state: State<DocumentsListState> = _state
 
     init {
-        getDocuments("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3MTIwMDc0MTIsImlkIjoiNDQ5MG1rNzlvazRiOXlqIiwidHlwZSI6ImF1dGhSZWNvcmQifQ.-5lq5yHy7vnnZuWECckhheVMdS8QbOOTldaeTMLgpZA")
+        getDocuments(
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3MTIwMDc0MTIsImlkIjoiNDQ5MG1rNzlva" +
+                    "zRiOXlqIiwidHlwZSI6ImF1dGhSZWNvcmQifQ.-5lq5yHy7vnnZuWECckhheVMdS8QbOOTldaeTMLgpZA"
+        )
     }
 
     fun getDocuments(authToken: String) {
