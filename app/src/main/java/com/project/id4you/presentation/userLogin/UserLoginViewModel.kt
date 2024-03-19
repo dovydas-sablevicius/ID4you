@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.project.id4you.common.ExceptionMessages
 import com.project.id4you.common.Resource
 import com.project.id4you.domain.useCase.loginUser.LoginUserUseCase
+import com.project.id4you.presentation.singleton.AuthToken
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -36,6 +37,7 @@ class UserLoginViewModel @Inject constructor(
                     }
 
                     is Resource.Success -> {
+                        AuthToken.value = result.data?.token ?: ""
                         _state.value = UserLoginState(isLoading = false, user = result.data)
                     }
                 }

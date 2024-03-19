@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.project.id4you.common.ExceptionMessages
 import com.project.id4you.common.Resource
 import com.project.id4you.domain.useCase.getIdCards.GetIdCardsUseCase
+import com.project.id4you.presentation.singleton.AuthToken
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -21,16 +22,10 @@ class DocumentsListViewModel @Inject constructor(
     val state: State<DocumentsListState> = _state
 
     init {
-        getDocuments(
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
-                    "eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3" +
-                    "MTIwMDc0MTIsImlkIjoiNDQ5MG1rNzlva" +
-                    "zRiOXlqIiwidHlwZSI6ImF1dGhSZWNvcmQifQ.-5lq5yHy7vn" +
-                    "nZuWECckhheVMdS8QbOOTldaeTMLgpZA"
-        )
+        getDocuments(AuthToken.value)
     }
 
-    fun getDocuments(authToken: String) {
+    private fun getDocuments(authToken: String) {
         viewModelScope.launch {
             getIdCardsUseCase(authToken).onEach { result ->
                 when (result) {
@@ -42,7 +37,7 @@ class DocumentsListViewModel @Inject constructor(
                     }
 
                     is Resource.Loading -> {
-                        _state.value = DocumentsListState(isLoading = true)
+                        _state.value = DocumentsListState(isLoading = false)
                     }
 
                     is Resource.Success -> {
