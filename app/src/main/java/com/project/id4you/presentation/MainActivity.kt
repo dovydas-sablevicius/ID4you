@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable("registration-screen") { RegistrationScreen(navController = navController) }
                         composable("login-screen") { UserLoginScreen(navController = navController) }
-                        composable("document-page-screen") { UserDocumentPageScreen(navController = navController) }
+                        composable("document-page-screen") { UserDocumentPageScreen() }
                     }
                 }
             }
