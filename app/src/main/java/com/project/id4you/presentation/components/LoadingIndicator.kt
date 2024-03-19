@@ -2,7 +2,6 @@ package com.project.id4you.presentation.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -17,11 +16,10 @@ fun LoadingIndicator() {
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp),
-        contentAlignment = Alignment.BottomCenter
+        contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(
-            color = AppColor.Blue,
-            modifier = Modifier.offset(y = (-300).dp)
+            color = AppColor.Blue
         )
     }
 }

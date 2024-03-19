@@ -38,10 +38,16 @@ class UserLoginViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         AuthToken.value = result.data?.token ?: ""
-                        _state.value = UserLoginState(isLoading = false, user = result.data)
+                        _state.value =
+                            UserLoginState(isLoading = false, user = result.data, isSuccess = true)
                     }
                 }
             }.launchIn(viewModelScope)
         }
+    }
+
+    fun resetState() {
+        _state.value =
+            _state.value.copy(isLoading = false, error = "", isSuccess = false)
     }
 }
