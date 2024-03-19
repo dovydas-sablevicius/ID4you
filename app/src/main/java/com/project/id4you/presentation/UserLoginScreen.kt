@@ -15,18 +15,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
+import com.project.id4you.presentation.components.ErrorText
+import com.project.id4you.presentation.components.LoadingIndicator
 import com.project.id4you.presentation.components.TextClickableComponent
 import com.project.id4you.presentation.components.TextComponent
 import com.project.id4you.presentation.ui.theme.AppColor
+import com.project.id4you.presentation.userLogin.UserLoginViewModel
 
 @Composable
 fun UserLoginScreen(
-    navController: NavController
-    //viewModel: UserLoginViewModel = hiltViewModel()
+    navController: NavController,
+    viewModel: UserLoginViewModel = hiltViewModel()
 ) {
+
+    val state = viewModel.state.value
+    val errorMessage = "Login is incorrect."
+
     val inputStateEmail = remember { mutableStateOf(TextFieldValue()) }
     val (inputValueEmail, setInputValueEmail) = inputStateEmail
 
@@ -48,16 +56,35 @@ fun UserLoginScreen(
             isPasswordField = true
         )
         ButtonComponent(
-            Modifier.width(375.dp),
+            method = {
+                login(
+                    viewModel = viewModel,
+                    emailValue = inputValueEmail,
+                    passwordValue = inputValuePassword
+                )
+            },
+            modifier = Modifier.width(375.dp),
             labelText = "Login",
-            AppColor.White,
-            AppColor.Blue
+            textColor = AppColor.White,
+            buttonColor = AppColor.Blue
         )
         TextClickableComponent(
             labelText = "Forgot your password?",
             fontWeight = 500,
             fontSize = 12.sp
         )
+    }
+
+    if (state.error.isNotBlank()) {
+        ErrorText(errorMessage = errorMessage)
+    }
+
+    if (state.isLoading) {
+        LoadingIndicator()
+    }
+
+    if (state.user != null) {
+        navController.navigate("document-page-screen")
     }
 }
 
@@ -83,4 +110,15 @@ fun ScreenHeader(navController: NavController) {
         )
     }
     Spacer(modifier = Modifier.height(16.dp))
+}
+
+fun login(
+    viewModel: UserLoginViewModel,
+    emailValue: TextFieldValue,
+    passwordValue: TextFieldValue,
+) {
+    viewModel.loginUser(
+        emailValue.text,
+        passwordValue.text,
+    )
 }

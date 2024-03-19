@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CircularProgressIndicator
@@ -28,6 +27,7 @@ import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.TextClickableComponent
 import com.project.id4you.presentation.components.TextComponent
 import com.project.id4you.presentation.ui.theme.AppColor
+import com.project.id4you.presentation.userRegistration.UserRegistrationState
 import com.project.id4you.presentation.userRegistration.UserRegistrationViewModel
 
 @Composable
@@ -84,25 +84,26 @@ fun RegistrationScreen(
             textColor = AppColor.White,
             buttonColor = AppColor.Blue
         )
+        if (state.error.isNotBlank()) {
+            setEmailInputValue(TextFieldValue(""))
+            setPasswordInputValue(TextFieldValue(""))
+            setPasswordRepeatInputValue(TextFieldValue(""))
+
+            ErrorText(errorMessage = errorMessage)
+        }
+        LoadingState(state = state)
     }
-
-    if (state.error.isNotBlank()) {
-        setEmailInputValue(TextFieldValue(""))
-        setPasswordInputValue(TextFieldValue(""))
-        setPasswordRepeatInputValue(TextFieldValue(""))
-
-        ErrorText(errorMessage = errorMessage)
-    }
-
-    if (state.isLoading) {
-        LoadingIndicator()
-    }
-
     if (state.isSuccess) {
         navController.navigate("login-screen")
     }
 }
 
+@Composable
+fun LoadingState(state: UserRegistrationState) {
+    if (state.isLoading) {
+        LoadingIndicator()
+    }
+}
 
 @Composable
 fun ScreenHeader(
@@ -138,12 +139,11 @@ fun ErrorText(errorMessage: String) {
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp),
-        contentAlignment = Alignment.BottomCenter
+        contentAlignment = Alignment.Center
     ) {
         Text(
             text = errorMessage,
             color = AppColor.Red,
-            modifier = Modifier.offset(y = (-300).dp)
         )
     }
 }
@@ -154,11 +154,10 @@ fun LoadingIndicator() {
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp),
-        contentAlignment = Alignment.BottomCenter
+        contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(
-            color = AppColor.Blue,
-            modifier = Modifier.offset(y = (-300).dp)
+            color = AppColor.Blue
         )
     }
 }

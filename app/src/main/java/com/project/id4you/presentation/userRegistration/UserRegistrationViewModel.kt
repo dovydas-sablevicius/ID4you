@@ -34,9 +34,7 @@ class UserRegistrationViewModel @Inject constructor(
                     }
 
                     is Resource.Success -> {
-                        _state.value = UserRegistrationState(isLoading = false)
-                        _state.value = UserRegistrationState(isSuccess = true)
-
+                        _state.value = UserRegistrationState(isLoading = false, isSuccess = true)
                     }
                 }
             }.launchIn(viewModelScope)
