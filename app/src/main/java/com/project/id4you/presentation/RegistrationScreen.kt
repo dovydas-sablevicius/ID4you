@@ -1,12 +1,17 @@
 package com.project.id4you.presentation
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,11 +24,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
-import com.project.id4you.presentation.components.ErrorText
-import com.project.id4you.presentation.components.LoadingIndicator
 import com.project.id4you.presentation.components.TextClickableComponent
 import com.project.id4you.presentation.components.TextComponent
 import com.project.id4you.presentation.ui.theme.AppColor
+import com.project.id4you.presentation.userRegistration.UserRegistrationState
 import com.project.id4you.presentation.userRegistration.UserRegistrationViewModel
 
 @Composable
@@ -80,22 +84,26 @@ fun RegistrationScreen(
             textColor = AppColor.White,
             buttonColor = AppColor.Blue
         )
-    }
+        if (state.error.isNotBlank()) {
+            setEmailInputValue(TextFieldValue(""))
+            setPasswordInputValue(TextFieldValue(""))
+            setPasswordRepeatInputValue(TextFieldValue(""))
 
-    if (state.error.isNotBlank()) {
-        
-        ErrorText(errorMessage = errorMessage)
+            ErrorText(errorMessage = errorMessage)
+        }
+        LoadingState(state = state)
     }
-
-    if (state.isLoading) {
-        LoadingIndicator()
-    }
-
     if (state.isSuccess) {
         navController.navigate("login-screen")
     }
 }
 
+@Composable
+fun LoadingState(state: UserRegistrationState) {
+    if (state.isLoading) {
+        LoadingIndicator()
+    }
+}
 
 @Composable
 fun ScreenHeader(
@@ -123,6 +131,35 @@ fun ScreenHeader(
         )
     }
     Spacer(modifier = Modifier.height(16.dp))
+}
+
+@Composable
+fun ErrorText(errorMessage: String) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = errorMessage,
+            color = AppColor.Red,
+        )
+    }
+}
+
+@Composable
+fun LoadingIndicator() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator(
+            color = AppColor.Blue
+        )
+    }
 }
 
 fun registerUser(
