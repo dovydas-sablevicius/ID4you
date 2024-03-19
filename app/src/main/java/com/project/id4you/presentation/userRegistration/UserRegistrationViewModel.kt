@@ -40,4 +40,8 @@ class UserRegistrationViewModel @Inject constructor(
             }.launchIn(viewModelScope)
         }
     }
+
+    fun resetState() {
+        _state.value = _state.value.copy(isSuccess = false, isLoading = false, error = "")
+    }
 }

@@ -83,8 +83,9 @@ fun UserLoginScreen(
         LoadingIndicator()
     }
 
-    if (state.user != null) {
+    if (state.isSuccess) {
         navController.navigate("document-page-screen")
+        viewModel.resetState()
     }
 }
 

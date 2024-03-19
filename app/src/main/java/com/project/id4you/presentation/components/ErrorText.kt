@@ -2,7 +2,6 @@ package com.project.id4you.presentation.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,12 +16,11 @@ fun ErrorText(errorMessage: String) {
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp),
-        contentAlignment = Alignment.BottomCenter
+        contentAlignment = Alignment.Center
     ) {
         Text(
             text = errorMessage,
             color = AppColor.Red,
-            modifier = Modifier.offset(y = (-300).dp)
         )
     }
 }
