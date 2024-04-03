@@ -21,7 +21,7 @@ class UserLoginViewModel @Inject constructor(
     private val _state = mutableStateOf(UserLoginState())
     val state: State<UserLoginState> = _state
 
-    fun loginUser(email: String, password: String) {
+    private fun loginUser(email: String, password: String) {
         viewModelScope.launch {
             loginUserUseCase(email, password).onEach { result ->
                 when (result) {
@@ -39,15 +39,27 @@ class UserLoginViewModel @Inject constructor(
                     is Resource.Success -> {
                         AuthToken.value = result.data?.token ?: ""
                         _state.value =
-                            UserLoginState(isLoading = false, user = result.data, isSuccess = true)
+                            UserLoginState(isLoading = false, isSuccess = true)
                     }
                 }
             }.launchIn(viewModelScope)
         }
     }
 
-    fun resetState() {
-        _state.value =
-            _state.value.copy(isLoading = false, error = "", isSuccess = false)
+
+    fun onEvent(event: UserLoginEvent) {
+        when (event) {
+            is UserLoginEvent.EnteredEmail -> {
+                _state.value = state.value.copy(email = event.value)
+            }
+
+            is UserLoginEvent.EnteredPassword -> {
+                _state.value = state.value.copy(password = event.value)
+            }
+
+            UserLoginEvent.PressedLoginButton -> {
+                loginUser(_state.value.email, _state.value.password)
+            }
+        }
     }
 }

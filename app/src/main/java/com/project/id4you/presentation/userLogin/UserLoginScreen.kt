@@ -9,11 +9,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -34,13 +31,6 @@ fun UserLoginScreen(
 
     val state = viewModel.state.value
     val errorMessage = "Login is incorrect."
-
-    val inputStateEmail = remember { mutableStateOf(TextFieldValue()) }
-    val (inputValueEmail, setInputValueEmail) = inputStateEmail
-
-    val inputStatePassword = remember { mutableStateOf(TextFieldValue()) }
-    val (inputValuePassword, setInputValuePassword) = inputStatePassword
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
@@ -48,20 +38,18 @@ fun UserLoginScreen(
         ScreenHeader(onNavigateToRegistration)
         CustomTextField(
             labelText = "Email",
-            inputState = inputStateEmail
+            value = state.email,
+            onValueChange = { viewModel.onEvent(UserLoginEvent.EnteredEmail(it)) }
         )
         CustomTextField(
             labelText = "Password",
-            inputState = inputStatePassword,
+            value = state.password,
+            onValueChange = { viewModel.onEvent(UserLoginEvent.EnteredPassword(it)) },
             isPasswordField = true
         )
         ButtonComponent(
             method = {
-                login(
-                    viewModel = viewModel,
-                    emailValue = inputValueEmail,
-                    passwordValue = inputValuePassword
-                )
+                viewModel.onEvent(UserLoginEvent.PressedLoginButton)
             },
             modifier = Modifier.width(375.dp),
             labelText = "Login",
@@ -114,13 +102,3 @@ fun ScreenHeader(onNavigateToRegistration: () -> Unit) {
     Spacer(modifier = Modifier.height(16.dp))
 }
 
-fun login(
-    viewModel: UserLoginViewModel,
-    emailValue: TextFieldValue,
-    passwordValue: TextFieldValue,
-) {
-    viewModel.loginUser(
-        emailValue.text,
-        passwordValue.text,
-    )
-}
