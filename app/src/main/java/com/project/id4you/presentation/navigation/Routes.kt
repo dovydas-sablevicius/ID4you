@@ -1,4 +1,4 @@
-package com.project.id4you.presentation
+package com.project.id4you.presentation.navigation
 
 sealed class Routes {
     sealed class Unauthenticated(val route: String) : Routes() {

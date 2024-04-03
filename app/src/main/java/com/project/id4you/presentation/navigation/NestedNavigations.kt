@@ -1,4 +1,4 @@
-package com.project.id4you.presentation
+package com.project.id4you.presentation.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
