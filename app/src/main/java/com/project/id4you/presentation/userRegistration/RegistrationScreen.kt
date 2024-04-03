@@ -9,11 +9,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -33,15 +30,6 @@ fun RegistrationScreen(
     val state = viewModel.state.value
     val errorMessage = "Oops.. An unexpected error occurred."
 
-    val emailInputState = remember { mutableStateOf(TextFieldValue()) }
-    val (emailInputValue, setEmailInputValue) = emailInputState
-
-    val passwordInputState = remember { mutableStateOf(TextFieldValue()) }
-    val (passwordInputValue, setPasswordInputValue) = passwordInputState
-
-    val passwordRepeatInputState = remember { mutableStateOf(TextFieldValue()) }
-    val (passwordRepeatInputValue, setPasswordRepeatInputValue) = passwordRepeatInputState
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
@@ -53,29 +41,25 @@ fun RegistrationScreen(
         )
         CustomTextField(
             labelText = "Email",
-            inputState = emailInputState
+            value = state.email,
+            onValueChange = { viewModel.onEvent(UserRegistrationEvent.EnteredEmail(it)) }
         )
         CustomTextField(
             labelText = "Password",
-            inputState = passwordInputState,
+            value = state.password,
+            onValueChange = { viewModel.onEvent(UserRegistrationEvent.EnteredPassword(it)) },
             isPasswordField = true
         )
         CustomTextField(
             labelText = "Repeat Password",
-            inputState = passwordRepeatInputState,
+            value = state.password,
+            onValueChange = { viewModel.onEvent(UserRegistrationEvent.EnteredPasswordAgain(it)) },
             isPasswordField = true
         )
         ButtonComponent(
             modifier = Modifier.width(375.dp),
             labelText = "Sign Up",
-            method = {
-                registerUser(
-                    viewModel,
-                    emailInputValue,
-                    passwordInputValue,
-                    passwordRepeatInputValue
-                )
-            },
+            method = { viewModel.onEvent(UserRegistrationEvent.PressedRegisterButton) },
             textColor = AppColor.White,
             buttonColor = AppColor.Blue
         )
@@ -125,17 +109,4 @@ fun ScreenHeader(
         )
     }
     Spacer(modifier = Modifier.height(16.dp))
-}
-
-fun registerUser(
-    viewModel: UserRegistrationViewModel,
-    emailValue: TextFieldValue,
-    passwordValue: TextFieldValue,
-    passwordRepeatValue: TextFieldValue
-) {
-    viewModel.registerUser(
-        emailValue.text,
-        passwordValue.text,
-        passwordRepeatValue.text
-    )
 }

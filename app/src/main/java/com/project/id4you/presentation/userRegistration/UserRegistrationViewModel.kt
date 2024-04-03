@@ -19,7 +19,7 @@ class UserRegistrationViewModel @Inject constructor(
     private val _state = mutableStateOf(UserRegistrationState())
     val state: State<UserRegistrationState> = _state
 
-    fun registerUser(email: String, password: String, passwordConfirm: String) {
+    private fun registerUser(email: String, password: String, passwordConfirm: String) {
         val unexpectedErrorMessage: String = "An unexpected error occurred."
         viewModelScope.launch {
             registerUserUseCase(email, password, passwordConfirm).onEach { result ->
@@ -41,7 +41,24 @@ class UserRegistrationViewModel @Inject constructor(
         }
     }
 
-    fun resetState() {
-        _state.value = _state.value.copy(isSuccess = false, isLoading = false, error = "")
+    fun onEvent(event: UserRegistrationEvent) {
+        when (event) {
+            is UserRegistrationEvent.EnteredEmail -> {
+                _state.value = state.value.copy(email = event.value)
+            }
+
+            is UserRegistrationEvent.EnteredPassword -> {
+                _state.value = state.value.copy(password = event.value)
+            }
+
+            is UserRegistrationEvent.EnteredPasswordAgain -> {
+                _state.value = state.value.copy(passwordAgain = event.value)
+            }
+
+            UserRegistrationEvent.PressedRegisterButton -> {
+                val (email, password, passwordAgain) = _state.value
+                registerUser(email, password, passwordAgain)
+            }
+        }
     }
 }
