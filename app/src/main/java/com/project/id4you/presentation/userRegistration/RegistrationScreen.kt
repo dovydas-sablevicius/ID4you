@@ -1,4 +1,4 @@
-package com.project.id4you.presentation
+package com.project.id4you.presentation.userRegistration
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -16,7 +17,6 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.ErrorText
@@ -24,73 +24,87 @@ import com.project.id4you.presentation.components.LoadingIndicator
 import com.project.id4you.presentation.components.TextClickableComponent
 import com.project.id4you.presentation.components.TextComponent
 import com.project.id4you.presentation.ui.theme.AppColor
-import com.project.id4you.presentation.userLogin.UserLoginViewModel
 
 @Composable
-fun UserLoginScreen(
-    navController: NavController,
-    viewModel: UserLoginViewModel = hiltViewModel()
+fun RegistrationScreen(
+    viewModel: UserRegistrationViewModel = hiltViewModel(),
+    onNavigateToLogin: () -> Unit
 ) {
-
     val state = viewModel.state.value
-    val errorMessage = "Login is incorrect."
+    val errorMessage = "Oops.. An unexpected error occurred."
 
-    val inputStateEmail = remember { mutableStateOf(TextFieldValue()) }
-    val (inputValueEmail, setInputValueEmail) = inputStateEmail
+    val emailInputState = remember { mutableStateOf(TextFieldValue()) }
+    val (emailInputValue, setEmailInputValue) = emailInputState
 
-    val inputStatePassword = remember { mutableStateOf(TextFieldValue()) }
-    val (inputValuePassword, setInputValuePassword) = inputStatePassword
+    val passwordInputState = remember { mutableStateOf(TextFieldValue()) }
+    val (passwordInputValue, setPasswordInputValue) = passwordInputState
+
+    val passwordRepeatInputState = remember { mutableStateOf(TextFieldValue()) }
+    val (passwordRepeatInputValue, setPasswordRepeatInputValue) = passwordRepeatInputState
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
-        ScreenHeader(navController)
+        ScreenHeader(
+            headerText = "Sign Up",
+            buttonText = "Login",
+            onNavigateToLogin = onNavigateToLogin
+        )
         CustomTextField(
             labelText = "Email",
-            inputState = inputStateEmail
+            inputState = emailInputState
         )
         CustomTextField(
             labelText = "Password",
-            inputState = inputStatePassword,
+            inputState = passwordInputState,
+            isPasswordField = true
+        )
+        CustomTextField(
+            labelText = "Repeat Password",
+            inputState = passwordRepeatInputState,
             isPasswordField = true
         )
         ButtonComponent(
+            modifier = Modifier.width(375.dp),
+            labelText = "Sign Up",
             method = {
-                login(
-                    viewModel = viewModel,
-                    emailValue = inputValueEmail,
-                    passwordValue = inputValuePassword
+                registerUser(
+                    viewModel,
+                    emailInputValue,
+                    passwordInputValue,
+                    passwordRepeatInputValue
                 )
             },
-            modifier = Modifier.width(375.dp),
-            labelText = "Login",
             textColor = AppColor.White,
             buttonColor = AppColor.Blue
         )
-        TextClickableComponent(
-            labelText = "Forgot your password?",
-            fontWeight = 500,
-            fontSize = 12.sp
-        )
-    }
-
-    if (state.error.isNotBlank()) {
-        ErrorText(errorMessage = errorMessage)
-    }
-
-    if (state.isLoading) {
-        LoadingIndicator()
+        if (state.error.isNotBlank()) {
+            ErrorText(errorMessage = errorMessage)
+        }
+        LoadingState(state = state)
     }
 
     if (state.isSuccess) {
-        navController.navigate("document-page-screen")
-        viewModel.resetState()
+        LaunchedEffect(Unit) {
+            onNavigateToLogin()
+        }
     }
 }
 
 @Composable
-fun ScreenHeader(navController: NavController) {
+fun LoadingState(state: UserRegistrationState) {
+    if (state.isLoading) {
+        LoadingIndicator()
+    }
+}
+
+@Composable
+fun ScreenHeader(
+    headerText: String,
+    buttonText: String,
+    onNavigateToLogin: () -> Unit
+) {
     Spacer(modifier = Modifier.height(16.dp))
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -98,14 +112,14 @@ fun ScreenHeader(navController: NavController) {
         modifier = Modifier.fillMaxWidth()
     ) {
         TextComponent(
-            labelText = "Login",
+            labelText = headerText,
             fontWeight = 500,
             fontSize = 32.sp
         )
         Spacer(modifier = Modifier.width(64.dp))
         TextClickableComponent(
-            method = { navController.navigate("registration-screen") },
-            labelText = "Sign Up",
+            method = { onNavigateToLogin() },
+            labelText = buttonText,
             fontWeight = 500,
             fontSize = 15.sp
         )
@@ -113,13 +127,15 @@ fun ScreenHeader(navController: NavController) {
     Spacer(modifier = Modifier.height(16.dp))
 }
 
-fun login(
-    viewModel: UserLoginViewModel,
+fun registerUser(
+    viewModel: UserRegistrationViewModel,
     emailValue: TextFieldValue,
     passwordValue: TextFieldValue,
+    passwordRepeatValue: TextFieldValue
 ) {
-    viewModel.loginUser(
+    viewModel.registerUser(
         emailValue.text,
         passwordValue.text,
+        passwordRepeatValue.text
     )
 }

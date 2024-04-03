@@ -1,4 +1,4 @@
-package com.project.id4you.presentation
+package com.project.id4you.presentation.documentsList
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,7 +25,6 @@ import com.project.id4you.presentation.components.CardComponent
 import com.project.id4you.presentation.components.icons.AddButton
 import com.project.id4you.presentation.components.icons.FilterButton
 import com.project.id4you.presentation.components.icons.SettingsButton
-import com.project.id4you.presentation.documentsList.DocumentsListViewModel
 
 @Composable
 fun UserDocumentPageScreen(

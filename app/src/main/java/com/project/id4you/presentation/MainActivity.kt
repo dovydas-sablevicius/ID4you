@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.project.id4you.presentation.ui.theme.ID4YouTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,14 +27,12 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-
                     NavHost(
                         navController = navController,
-                        startDestination = "login-screen"
+                        startDestination = Routes.Unauthenticated.Route.route
                     ) {
-                        composable("registration-screen") { RegistrationScreen(navController = navController) }
-                        composable("login-screen") { UserLoginScreen(navController = navController) }
-                        composable("document-page-screen") { UserDocumentPageScreen() }
+                        unauthenticatedGraph(navController)
+                        authenticatedGraph(navController)
                     }
                 }
             }
