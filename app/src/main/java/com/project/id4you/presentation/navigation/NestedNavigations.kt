@@ -44,7 +44,7 @@ fun NavGraphBuilder.unauthenticatedGraph(navController: NavController) {
     }
 }
 
-fun NavGraphBuilder.authenticatedGraph(navController: NavController) {
+fun NavGraphBuilder.authenticatedGraph() {
     navigation(
         route = Routes.Authenticated.Route.route,
         startDestination = Routes.Authenticated.DocumentsPage.route
