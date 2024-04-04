@@ -19,7 +19,7 @@ fun SettingsButton(
     method: () -> Unit = {}
 ) {
     IconButton(
-        onClick = { method },
+        onClick = method,
         modifier = Modifier.size(size)
     ) {
         Icon(
