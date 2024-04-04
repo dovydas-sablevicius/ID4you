@@ -12,7 +12,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,7 +22,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.SystemFontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -36,7 +34,8 @@ import com.project.id4you.presentation.ui.theme.AppColor.Companion.Blue
 fun CustomTextField(
     labelText: String,
     isPasswordField: Boolean = false,
-    inputState: MutableState<TextFieldValue>,
+    value: String,
+    onValueChange: (value: String) -> Unit,
     color: Color = Blue,
     borderWidth: Dp = 1.dp,
     fontFamily: SystemFontFamily = FontFamily.Default,
@@ -48,16 +47,11 @@ fun CustomTextField(
     roundCornerRadius: Dp = 8.dp,
 ) {
     val (isPasswordVisible, setPasswordVisible) = remember { mutableStateOf(!isPasswordField) }
-    val (inputValue, setInputValue) = inputState
 
     Box() {
         TextField(
-            value = inputValue,
-            onValueChange = { newValue ->
-                if (newValue.text.length <= 30) {
-                    setInputValue(newValue)
-                }
-            },
+            value = value,
+            onValueChange = onValueChange,
             label = {
                 Text(
                     text = labelText,

@@ -1,4 +1,4 @@
-package com.project.id4you.presentation.userRegistration
+package com.project.id4you.presentation.screens.userRegistration
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -18,8 +18,44 @@ class UserRegistrationViewModel @Inject constructor(
 ) : ViewModel() {
     private val _state = mutableStateOf(UserRegistrationState())
     val state: State<UserRegistrationState> = _state
+    fun onEvent(event: UserRegistrationEvent) {
+        when (event) {
+            is UserRegistrationEvent.EnteredEmail -> {
+                updateEmail(event.value)
+            }
 
-    fun registerUser(email: String, password: String, passwordConfirm: String) {
+            is UserRegistrationEvent.EnteredPassword -> {
+                updatePassword(event.value)
+            }
+
+            is UserRegistrationEvent.EnteredPasswordAgain -> {
+                updatePasswordAgain(event.value)
+            }
+
+            UserRegistrationEvent.PressedRegisterButton -> {
+                registerAction()
+            }
+        }
+    }
+
+    private fun updateEmail(value: String) {
+        _state.value = state.value.copy(email = value)
+    }
+
+    private fun updatePassword(value: String) {
+        _state.value = state.value.copy(password = value)
+    }
+
+    private fun updatePasswordAgain(value: String) {
+        _state.value = state.value.copy(passwordAgain = value)
+    }
+
+    private fun registerAction() {
+        val (email, password, passwordAgain) = _state.value
+        registerUser(email, password, passwordAgain)
+    }
+
+    private fun registerUser(email: String, password: String, passwordConfirm: String) {
         val unexpectedErrorMessage: String = "An unexpected error occurred."
         viewModelScope.launch {
             registerUserUseCase(email, password, passwordConfirm).onEach { result ->
@@ -39,9 +75,5 @@ class UserRegistrationViewModel @Inject constructor(
                 }
             }.launchIn(viewModelScope)
         }
-    }
-
-    fun resetState() {
-        _state.value = _state.value.copy(isSuccess = false, isLoading = false, error = "")
     }
 }

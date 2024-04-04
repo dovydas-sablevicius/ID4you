@@ -1,4 +1,4 @@
-package com.project.id4you.presentation.documentsList
+package com.project.id4you.presentation.screens.documentsList
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
