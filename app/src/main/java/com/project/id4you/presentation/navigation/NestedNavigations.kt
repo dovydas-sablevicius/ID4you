@@ -61,7 +61,7 @@ fun NavGraphBuilder.authenticatedGraph() {
     ) {
         // Dashboard
         composable(route = Routes.Authenticated.DocumentsPage.route) {
-            val viewModel = hiltViewModel<DocumentsListViewModel>();
+            val viewModel = hiltViewModel<DocumentsListViewModel>()
             UserDocumentPageScreen(state = viewModel.state.value)
         }
     }
