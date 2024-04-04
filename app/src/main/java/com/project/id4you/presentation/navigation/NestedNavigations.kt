@@ -1,12 +1,16 @@
 package com.project.id4you.presentation.navigation
 
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.project.id4you.presentation.documentsList.DocumentsListViewModel
 import com.project.id4you.presentation.documentsList.UserDocumentPageScreen
 import com.project.id4you.presentation.userLogin.UserLoginScreen
+import com.project.id4you.presentation.userLogin.UserLoginViewModel
 import com.project.id4you.presentation.userRegistration.RegistrationScreen
+import com.project.id4you.presentation.userRegistration.UserRegistrationViewModel
 
 fun NavGraphBuilder.unauthenticatedGraph(navController: NavController) {
     navigation(
@@ -15,12 +19,18 @@ fun NavGraphBuilder.unauthenticatedGraph(navController: NavController) {
     )
     {
         composable(route = Routes.Unauthenticated.Registration.route) {
-            RegistrationScreen(onNavigateToLogin = {
-                navController.navigate(route = Routes.Unauthenticated.Login.route)
-            })
+            val viewModel = hiltViewModel<UserRegistrationViewModel>()
+            RegistrationScreen(state = viewModel.state.value,
+                onEvent = viewModel::onEvent,
+                onNavigateToLogin = {
+                    navController.navigate(route = Routes.Unauthenticated.Login.route)
+                })
         }
         composable(Routes.Unauthenticated.Login.route) {
+            val viewModel = hiltViewModel<UserLoginViewModel>()
             UserLoginScreen(
+                state = viewModel.state.value,
+                onEvent = viewModel::onEvent,
                 onSuccessfulLogin = {
                     navController.navigate(route = Routes.Authenticated.Route.route)
                     {
@@ -51,7 +61,8 @@ fun NavGraphBuilder.authenticatedGraph() {
     ) {
         // Dashboard
         composable(route = Routes.Authenticated.DocumentsPage.route) {
-            UserDocumentPageScreen()
+            val viewModel = hiltViewModel<DocumentsListViewModel>();
+            UserDocumentPageScreen(state = viewModel.state.value)
         }
     }
 }

@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.ErrorText
@@ -24,10 +23,10 @@ import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
 fun RegistrationScreen(
-    viewModel: UserRegistrationViewModel = hiltViewModel(),
+    state: UserRegistrationState,
+    onEvent: (UserRegistrationEvent) -> Unit,
     onNavigateToLogin: () -> Unit
 ) {
-    val state = viewModel.state.value
     val errorMessage = "Oops.. An unexpected error occurred."
 
     Column(
@@ -42,24 +41,24 @@ fun RegistrationScreen(
         CustomTextField(
             labelText = "Email",
             value = state.email,
-            onValueChange = { viewModel.onEvent(UserRegistrationEvent.EnteredEmail(it)) }
+            onValueChange = { onEvent(UserRegistrationEvent.EnteredEmail(it)) }
         )
         CustomTextField(
             labelText = "Password",
             value = state.password,
-            onValueChange = { viewModel.onEvent(UserRegistrationEvent.EnteredPassword(it)) },
+            onValueChange = { onEvent(UserRegistrationEvent.EnteredPassword(it)) },
             isPasswordField = true
         )
         CustomTextField(
             labelText = "Repeat Password",
             value = state.passwordAgain,
-            onValueChange = { viewModel.onEvent(UserRegistrationEvent.EnteredPasswordAgain(it)) },
+            onValueChange = { onEvent(UserRegistrationEvent.EnteredPasswordAgain(it)) },
             isPasswordField = true
         )
         ButtonComponent(
             modifier = Modifier.width(375.dp),
             labelText = "Sign Up",
-            method = { viewModel.onEvent(UserRegistrationEvent.PressedRegisterButton) },
+            method = { onEvent(UserRegistrationEvent.PressedRegisterButton) },
             textColor = AppColor.White,
             buttonColor = AppColor.Blue
         )

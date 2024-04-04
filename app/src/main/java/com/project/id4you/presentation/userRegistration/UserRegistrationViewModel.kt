@@ -18,6 +18,42 @@ class UserRegistrationViewModel @Inject constructor(
 ) : ViewModel() {
     private val _state = mutableStateOf(UserRegistrationState())
     val state: State<UserRegistrationState> = _state
+    fun onEvent(event: UserRegistrationEvent) {
+        when (event) {
+            is UserRegistrationEvent.EnteredEmail -> {
+                updateEmail(event.value)
+            }
+
+            is UserRegistrationEvent.EnteredPassword -> {
+                updatePassword(event.value)
+            }
+
+            is UserRegistrationEvent.EnteredPasswordAgain -> {
+                updatePasswordAgain(event.value)
+            }
+
+            UserRegistrationEvent.PressedRegisterButton -> {
+                registerAction()
+            }
+        }
+    }
+
+    private fun updateEmail(value: String) {
+        _state.value = state.value.copy(email = value)
+    }
+
+    private fun updatePassword(value: String) {
+        _state.value = state.value.copy(password = value)
+    }
+
+    private fun updatePasswordAgain(value: String) {
+        _state.value = state.value.copy(passwordAgain = value)
+    }
+
+    private fun registerAction() {
+        val (email, password, passwordAgain) = _state.value
+        registerUser(email, password, passwordAgain)
+    }
 
     private fun registerUser(email: String, password: String, passwordConfirm: String) {
         val unexpectedErrorMessage: String = "An unexpected error occurred."
@@ -38,27 +74,6 @@ class UserRegistrationViewModel @Inject constructor(
                     }
                 }
             }.launchIn(viewModelScope)
-        }
-    }
-
-    fun onEvent(event: UserRegistrationEvent) {
-        when (event) {
-            is UserRegistrationEvent.EnteredEmail -> {
-                _state.value = state.value.copy(email = event.value)
-            }
-
-            is UserRegistrationEvent.EnteredPassword -> {
-                _state.value = state.value.copy(password = event.value)
-            }
-
-            is UserRegistrationEvent.EnteredPasswordAgain -> {
-                _state.value = state.value.copy(passwordAgain = event.value)
-            }
-
-            UserRegistrationEvent.PressedRegisterButton -> {
-                val (email, password, passwordAgain) = _state.value
-                registerUser(email, password, passwordAgain)
-            }
         }
     }
 }

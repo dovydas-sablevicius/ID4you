@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.project.id4you.data.repository.model.DocumentStatus
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CardComponent
@@ -28,10 +27,8 @@ import com.project.id4you.presentation.components.icons.SettingsButton
 
 @Composable
 fun UserDocumentPageScreen(
-    viewModel: DocumentsListViewModel = hiltViewModel()
+    state: DocumentsListState
 ) {
-    val state = viewModel.state.value
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
         //modifier = Modifier.verticalScroll()

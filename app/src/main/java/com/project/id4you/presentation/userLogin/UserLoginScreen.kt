@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.ErrorText
@@ -24,12 +23,11 @@ import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
 fun UserLoginScreen(
-    viewModel: UserLoginViewModel = hiltViewModel(),
+    state: UserLoginState,
+    onEvent: (UserLoginEvent) -> Unit,
     onSuccessfulLogin: () -> Unit,
     onNavigateToRegistration: () -> Unit
 ) {
-
-    val state = viewModel.state.value
     val errorMessage = "Login is incorrect."
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -39,17 +37,17 @@ fun UserLoginScreen(
         CustomTextField(
             labelText = "Email",
             value = state.email,
-            onValueChange = { viewModel.onEvent(UserLoginEvent.EnteredEmail(it)) }
+            onValueChange = { onEvent(UserLoginEvent.EnteredEmail(it)) }
         )
         CustomTextField(
             labelText = "Password",
             value = state.password,
-            onValueChange = { viewModel.onEvent(UserLoginEvent.EnteredPassword(it)) },
+            onValueChange = { onEvent(UserLoginEvent.EnteredPassword(it)) },
             isPasswordField = true
         )
         ButtonComponent(
             method = {
-                viewModel.onEvent(UserLoginEvent.PressedLoginButton)
+                onEvent(UserLoginEvent.PressedLoginButton)
             },
             modifier = Modifier.width(375.dp),
             labelText = "Login",
