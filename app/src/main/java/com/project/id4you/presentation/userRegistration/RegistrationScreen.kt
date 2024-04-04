@@ -52,7 +52,7 @@ fun RegistrationScreen(
         )
         CustomTextField(
             labelText = "Repeat Password",
-            value = state.password,
+            value = state.passwordAgain,
             onValueChange = { viewModel.onEvent(UserRegistrationEvent.EnteredPasswordAgain(it)) },
             isPasswordField = true
         )
