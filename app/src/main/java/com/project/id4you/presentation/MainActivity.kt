@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = Routes.Unauthenticated.Route.route
                     ) {
                         unauthenticatedGraph(navController)
-                        authenticatedGraph(navController)
+                        authenticatedGraph()
                     }
                 }
             }
