@@ -1,4 +1,4 @@
-package com.project.id4you.presentation.userLogin
+package com.project.id4you.presentation.screens.userLogin
 
 sealed class UserLoginEvent {
     data class EnteredEmail(val value: String) : UserLoginEvent()

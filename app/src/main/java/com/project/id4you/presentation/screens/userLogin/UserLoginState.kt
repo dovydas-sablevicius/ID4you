@@ -1,4 +1,4 @@
-package com.project.id4you.presentation.userLogin
+package com.project.id4you.presentation.screens.userLogin
 
 data class UserLoginState(
     val isLoading: Boolean = false,

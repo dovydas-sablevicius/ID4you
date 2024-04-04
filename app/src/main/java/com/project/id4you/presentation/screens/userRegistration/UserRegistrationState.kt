@@ -1,4 +1,4 @@
-package com.project.id4you.presentation.userRegistration
+package com.project.id4you.presentation.screens.userRegistration
 
 data class UserRegistrationState(
     val email: String = "",

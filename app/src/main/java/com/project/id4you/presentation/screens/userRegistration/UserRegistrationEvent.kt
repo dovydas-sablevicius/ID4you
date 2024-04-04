@@ -1,4 +1,4 @@
-package com.project.id4you.presentation.userRegistration
+package com.project.id4you.presentation.screens.userRegistration
 
 sealed class UserRegistrationEvent {
     data class EnteredEmail(val value: String) : UserRegistrationEvent()

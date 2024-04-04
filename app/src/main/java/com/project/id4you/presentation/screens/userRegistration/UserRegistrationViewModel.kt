@@ -1,4 +1,4 @@
-package com.project.id4you.presentation.userRegistration
+package com.project.id4you.presentation.screens.userRegistration
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

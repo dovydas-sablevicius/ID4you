@@ -1,11 +1,7 @@
-package com.project.id4you.presentation.userLogin
+package com.project.id4you.presentation.screens.userLogin
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,7 +14,7 @@ import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.ErrorText
 import com.project.id4you.presentation.components.LoadingIndicator
 import com.project.id4you.presentation.components.TextClickableComponent
-import com.project.id4you.presentation.components.TextComponent
+import com.project.id4you.presentation.screens.userLogin.components.ScreenHeader
 import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
@@ -75,28 +71,3 @@ fun UserLoginScreen(
         }
     }
 }
-
-@Composable
-fun ScreenHeader(onNavigateToRegistration: () -> Unit) {
-    Spacer(modifier = Modifier.height(16.dp))
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Absolute.Right,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        TextComponent(
-            labelText = "Login",
-            fontWeight = 500,
-            fontSize = 32.sp
-        )
-        Spacer(modifier = Modifier.width(64.dp))
-        TextClickableComponent(
-            method = { onNavigateToRegistration() },
-            labelText = "Sign Up",
-            fontWeight = 500,
-            fontSize = 15.sp
-        )
-    }
-    Spacer(modifier = Modifier.height(16.dp))
-}
-
