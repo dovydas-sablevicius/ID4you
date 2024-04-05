@@ -4,6 +4,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -16,6 +17,7 @@ import com.project.id4you.presentation.ui.theme.AppColor.Companion.Blue
 @Suppress("LongParameterList")
 @Composable
 fun TextClickableComponent(
+    modifier: Modifier = Modifier,
     labelText: String,
     textColor: Color = Blue,
     backgroundColor: Color = Color.Transparent,
@@ -23,9 +25,10 @@ fun TextClickableComponent(
     fontStyle: FontStyle = FontStyle.Normal,
     fontSize: TextUnit = 12.sp,
     fontWeight: Int = 400,
-    method: () -> Unit = {}
+    method: () -> Unit = {},
 ) {
     Button(
+        modifier = modifier,
         onClick = method,
         colors = ButtonDefaults.buttonColors(
             contentColor = textColor,

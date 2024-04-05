@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.project.id4you.common.TestTags
 import com.project.id4you.presentation.components.TextClickableComponent
 import com.project.id4you.presentation.components.TextComponent
 
@@ -32,7 +34,8 @@ fun ScreenHeader(onNavigateToRegistration: () -> Unit) {
             method = { onNavigateToRegistration() },
             labelText = "Sign Up",
             fontWeight = 500,
-            fontSize = 15.sp
+            fontSize = 15.sp,
+            modifier = Modifier.testTag(TestTags.NavigateToRegistrationButtonTag)
         )
     }
     Spacer(modifier = Modifier.height(16.dp))
