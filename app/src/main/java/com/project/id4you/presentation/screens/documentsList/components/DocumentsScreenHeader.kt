@@ -6,16 +6,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.project.id4you.presentation.components.icons.AddButton
 import com.project.id4you.presentation.components.icons.FilterButton
 import com.project.id4you.presentation.components.icons.SettingsButton
+import com.project.id4you.presentation.components.text.TextComponent
+import com.project.id4you.presentation.components.text.TextType
 
 @Composable
 fun DocumentScreenHeader() {
@@ -28,7 +27,7 @@ fun DocumentScreenHeader() {
     ) {
         AddButton(size = 35.dp)
         Spacer(modifier = Modifier.width(32.dp))
-        Text(text = "Documents", fontSize = 32.sp, fontWeight = FontWeight.Bold)
+        TextComponent(labelText = "Documents", textType = TextType.HEADER)
         FilterButton()
         SettingsButton()
     }
