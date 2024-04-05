@@ -18,9 +18,9 @@ class UserRepositoryImplTest {
     fun loginUser() {
         val pocketBaseApi = MockPocketBaseApi()
         userRepositoryImpl = UserRepositoryImpl(pocketBaseApi)
-        var email: String = "test@test.com"
-        var password: String = "password123"
-        var user: User = User(email, "", "", "")
+        val email: String = "test@test.com"
+        val password: String = "password123"
+        val user: User = User(email, "", "", "")
         val response: List<Resource<User>>
         runBlocking {
             response = userRepositoryImpl.loginUser(email, password).toList()
@@ -34,8 +34,8 @@ class UserRepositoryImplTest {
     fun testLoginHttpExceptions() {
         val pocketBaseApi = MockPocketBaseApiHttpException()
         userRepositoryImpl = UserRepositoryImpl(pocketBaseApi)
-        var email: String = "test@test.com"
-        var password: String = "password123"
+        val email: String = "test@test.com"
+        val password: String = "password123"
         var user: User = User(email, "", "", "")
         val response: List<Resource<User>>
         runBlocking {
@@ -50,8 +50,8 @@ class UserRepositoryImplTest {
     fun testLoginIOException() {
         val pocketBaseApi = MockPocketBaseApiIOException()
         userRepositoryImpl = UserRepositoryImpl(pocketBaseApi)
-        var email: String = "test@test.com"
-        var password: String = "password123"
+        val email: String = "test@test.com"
+        val password: String = "password123"
         var user: User = User(email, "", "", "")
         val response: List<Resource<User>>
         runBlocking {
