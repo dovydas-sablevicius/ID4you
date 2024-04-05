@@ -36,7 +36,6 @@ class UserRepositoryImplTest {
         userRepositoryImpl = UserRepositoryImpl(pocketBaseApi)
         val email: String = "test@test.com"
         val password: String = "password123"
-        var user: User = User(email, "", "", "")
         val response: List<Resource<User>>
         runBlocking {
             response = userRepositoryImpl.loginUser(email, password).toList()
@@ -52,7 +51,6 @@ class UserRepositoryImplTest {
         userRepositoryImpl = UserRepositoryImpl(pocketBaseApi)
         val email: String = "test@test.com"
         val password: String = "password123"
-        var user: User = User(email, "", "", "")
         val response: List<Resource<User>>
         runBlocking {
             response = userRepositoryImpl.loginUser(email, password).toList()

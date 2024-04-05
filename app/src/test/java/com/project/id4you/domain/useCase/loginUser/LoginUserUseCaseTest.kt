@@ -17,8 +17,8 @@ class LoginUserUseCaseTest {
 
     @Test
     fun testLogin() {
-        var email: String = "test@test.com"
-        var password: String = "password123"
+        val email: String = "test@test.com"
+        val password: String = "password123"
         runBlocking {
             loginUserUseCase.invoke(email, password)
         }
