@@ -35,7 +35,7 @@ fun ScreenHeader(onNavigateToRegistration: () -> Unit) {
             labelText = "Sign Up",
             fontWeight = 500,
             fontSize = 15.sp,
-            modifier = Modifier.testTag(TestTags.NavigateToRegistrationButtonTag)
+            modifier = Modifier.testTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON)
         )
     }
     Spacer(modifier = Modifier.height(16.dp))

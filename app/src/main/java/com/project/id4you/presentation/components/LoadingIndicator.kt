@@ -11,9 +11,9 @@ import androidx.compose.ui.unit.dp
 import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
-fun LoadingIndicator() {
+fun LoadingIndicator(modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp),
         contentAlignment = Alignment.Center

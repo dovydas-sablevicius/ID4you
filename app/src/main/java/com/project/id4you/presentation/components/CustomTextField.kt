@@ -32,6 +32,7 @@ import com.project.id4you.presentation.ui.theme.AppColor.Companion.Blue
 @Suppress("LongParameterList")
 @Composable
 fun CustomTextField(
+    modifier: Modifier = Modifier,
     labelText: String,
     isPasswordField: Boolean = false,
     value: String,
@@ -48,7 +49,7 @@ fun CustomTextField(
 ) {
     val (isPasswordVisible, setPasswordVisible) = remember { mutableStateOf(!isPasswordField) }
 
-    Box() {
+    Box {
         TextField(
             value = value,
             onValueChange = onValueChange,
@@ -61,7 +62,7 @@ fun CustomTextField(
                     fontSize = fontSize
                 )
             },
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontalPadding, verticalPadding)
                 .border(

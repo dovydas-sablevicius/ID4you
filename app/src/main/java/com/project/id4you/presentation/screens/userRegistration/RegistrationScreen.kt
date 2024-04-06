@@ -29,7 +29,7 @@ fun RegistrationScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
-            .testTag(TestTags.RegistrationScreenColumn)
+            .testTag(TestTags.REGISTRATION_SCREEN)
     ) {
         ScreenHeader(
             headerText = "Sign Up",
