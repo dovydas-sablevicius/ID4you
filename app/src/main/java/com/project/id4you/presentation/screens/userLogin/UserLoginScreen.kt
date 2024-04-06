@@ -31,7 +31,10 @@ fun UserLoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
-        ScreenHeader(onNavigateToRegistration)
+        ScreenHeader(
+            modifier = Modifier.testTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON),
+            onNavigateToRegistration = onNavigateToRegistration
+        )
         CustomTextField(
             labelText = "Email",
             value = state.email,
@@ -58,7 +61,7 @@ fun UserLoginScreen(
         )
         TextClickableComponent(
             labelText = "Forgot your password?",
-            textType = TextType.CLICKABLE
+            textType = TextType.CLICKABLE,
             modifier = Modifier.testTag(TestTags.FORGOT_PASSWORD_BUTTON)
         )
     }

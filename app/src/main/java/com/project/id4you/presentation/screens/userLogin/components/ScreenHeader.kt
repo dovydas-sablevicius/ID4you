@@ -9,15 +9,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.project.id4you.presentation.components.text.TextClickableComponent
 import com.project.id4you.presentation.components.text.TextComponent
 import com.project.id4you.presentation.components.text.TextType
-import com.project.id4you.common.TestTags
 
 @Composable
-fun ScreenHeader(onNavigateToRegistration: () -> Unit) {
+fun ScreenHeader(modifier: Modifier = Modifier, onNavigateToRegistration: () -> Unit) {
     Spacer(modifier = Modifier.height(16.dp))
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -32,8 +30,8 @@ fun ScreenHeader(onNavigateToRegistration: () -> Unit) {
         TextClickableComponent(
             onClick = { onNavigateToRegistration() },
             labelText = "Sign Up",
-            textType = TextType.CLICKABLE
-            modifier = Modifier.testTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON)
+            textType = TextType.CLICKABLE,
+            modifier = modifier
         )
     }
     Spacer(modifier = Modifier.height(16.dp))
