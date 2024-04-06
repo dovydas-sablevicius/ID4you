@@ -9,13 +9,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.project.id4you.common.TestTags
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.ErrorText
 import com.project.id4you.presentation.components.LoadingIndicator
-import com.project.id4you.presentation.components.TextClickableComponent
+import com.project.id4you.presentation.components.text.TextClickableComponent
+import com.project.id4you.presentation.components.text.TextType
 import com.project.id4you.presentation.screens.userLogin.components.ScreenHeader
 import com.project.id4you.presentation.ui.theme.AppColor
 
@@ -58,8 +58,7 @@ fun UserLoginScreen(
         )
         TextClickableComponent(
             labelText = "Forgot your password?",
-            fontWeight = 500,
-            fontSize = 12.sp,
+            textType = TextType.CLICKABLE
             modifier = Modifier.testTag(TestTags.FORGOT_PASSWORD_BUTTON)
         )
     }

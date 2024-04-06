@@ -11,10 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.project.id4you.presentation.components.text.TextClickableComponent
+import com.project.id4you.presentation.components.text.TextComponent
+import com.project.id4you.presentation.components.text.TextType
 import com.project.id4you.common.TestTags
-import com.project.id4you.presentation.components.TextClickableComponent
-import com.project.id4you.presentation.components.TextComponent
 
 @Composable
 fun ScreenHeader(onNavigateToRegistration: () -> Unit) {
@@ -26,15 +26,13 @@ fun ScreenHeader(onNavigateToRegistration: () -> Unit) {
     ) {
         TextComponent(
             labelText = "Login",
-            fontWeight = 500,
-            fontSize = 32.sp
+            textType = TextType.HEADER
         )
         Spacer(modifier = Modifier.width(64.dp))
         TextClickableComponent(
-            method = { onNavigateToRegistration() },
+            onClick = { onNavigateToRegistration() },
             labelText = "Sign Up",
-            fontWeight = 500,
-            fontSize = 15.sp,
+            textType = TextType.CLICKABLE
             modifier = Modifier.testTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON)
         )
     }
