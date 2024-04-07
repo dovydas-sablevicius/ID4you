@@ -41,7 +41,7 @@ class DocumentListViewModelTest {
             IdCard("id1", "Card 1", "", ""),
             IdCard("id2", "Card 2", "", "")
         )
-        
+
         documentsListViewModel = DocumentsListViewModel(getIdCardsUseCase)
         assert(documentsListViewModel.state.value.documents[0].name == idCards[0].name)
     }
@@ -56,3 +56,4 @@ class DocumentListViewModelTest {
     }
 
 }
+

@@ -44,3 +44,4 @@ fun generateDocumentsListStateError(error: String): DocumentsListState {
 fun generateDocumentsListLoading(): DocumentsListState {
     return DocumentsListState(true)
 }
+
