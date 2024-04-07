@@ -7,7 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.project.id4you.common.TestTags
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.ErrorText
@@ -25,7 +27,9 @@ fun RegistrationScreen(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag(TestTags.REGISTRATION_SCREEN)
     ) {
         ScreenHeader(
             headerText = "Sign Up",
