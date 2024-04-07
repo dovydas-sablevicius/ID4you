@@ -3,7 +3,7 @@ package com.project.id4you.presentation.screens.documentsList
 import com.project.id4you.data.repository.model.IdCard
 import org.junit.Test
 
-class DocumentListStateTest {
+class DocumentsListStateTest {
 
     @Test
     fun testDefaultDocumentsListState() {
