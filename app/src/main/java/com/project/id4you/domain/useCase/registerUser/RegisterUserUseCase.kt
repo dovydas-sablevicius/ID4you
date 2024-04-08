@@ -1,4 +1,4 @@
-package com.project.id4you.domain.useCase.loginUser
+package com.project.id4you.domain.useCase.registerUser
 
 import com.project.id4you.common.Resource
 import com.project.id4you.domain.repository.UserRepository

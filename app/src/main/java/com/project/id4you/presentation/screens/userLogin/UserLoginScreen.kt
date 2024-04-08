@@ -7,7 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.project.id4you.common.TestTags
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.ErrorText
@@ -29,39 +31,49 @@ fun UserLoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
-        ScreenHeader(onNavigateToRegistration)
+        ScreenHeader(
+            modifier = Modifier.testTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON),
+            onNavigateToRegistration = onNavigateToRegistration
+        )
         CustomTextField(
             labelText = "Email",
             value = state.email,
-            onValueChange = { onEvent(UserLoginEvent.EnteredEmail(it)) }
+            onValueChange = { onEvent(UserLoginEvent.EnteredEmail(it)) },
+            modifier = Modifier.testTag(TestTags.LOGIN_SCREEN_EMAIL_INPUT)
         )
         CustomTextField(
             labelText = "Password",
             value = state.password,
             onValueChange = { onEvent(UserLoginEvent.EnteredPassword(it)) },
-            isPasswordField = true
+            isPasswordField = true,
+            modifier = Modifier.testTag(TestTags.LOGIN_SCREEN_PASSWORD_INPUT)
         )
         ButtonComponent(
             method = {
                 onEvent(UserLoginEvent.PressedLoginButton)
             },
-            modifier = Modifier.width(375.dp),
+            modifier = Modifier
+                .width(375.dp)
+                .testTag(TestTags.LOGIN_BUTTON),
             labelText = "Login",
             textColor = AppColor.White,
             buttonColor = AppColor.Blue
         )
         TextClickableComponent(
             labelText = "Forgot your password?",
-            textType = TextType.CLICKABLE
+            textType = TextType.CLICKABLE,
+            modifier = Modifier.testTag(TestTags.FORGOT_PASSWORD_BUTTON)
         )
     }
 
     if (state.error.isNotBlank()) {
-        ErrorText(errorMessage = errorMessage)
+        ErrorText(
+            errorMessage = errorMessage,
+        )
     }
 
     if (state.isLoading) {
-        LoadingIndicator()
+        LoadingIndicator(modifier = Modifier.testTag(TestTags.LOADING_COMPONENT))
     }
 
     if (state.isSuccess) {
