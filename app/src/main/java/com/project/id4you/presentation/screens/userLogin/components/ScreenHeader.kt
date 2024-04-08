@@ -15,7 +15,7 @@ import com.project.id4you.presentation.components.text.TextComponent
 import com.project.id4you.presentation.components.text.TextType
 
 @Composable
-fun ScreenHeader(onNavigateToRegistration: () -> Unit) {
+fun ScreenHeader(modifier: Modifier = Modifier, onNavigateToRegistration: () -> Unit) {
     Spacer(modifier = Modifier.height(16.dp))
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -30,7 +30,8 @@ fun ScreenHeader(onNavigateToRegistration: () -> Unit) {
         TextClickableComponent(
             onClick = { onNavigateToRegistration() },
             labelText = "Sign Up",
-            textType = TextType.CLICKABLE
+            textType = TextType.CLICKABLE,
+            modifier = modifier
         )
     }
     Spacer(modifier = Modifier.height(16.dp))

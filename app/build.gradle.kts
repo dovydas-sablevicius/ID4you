@@ -18,7 +18,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.project.id4you.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -93,6 +93,8 @@ dependencies {
     // For local unit tests
     testImplementation(libs.hilt.android.testing)
     kaptTest(libs.hilt.compiler)
+
+    testImplementation(libs.jetbrains.kotlinx.coroutines.test)
 
 
     //retrofit
