@@ -85,7 +85,7 @@ class UserLoginScreenKtTest {
     }
 
     @Test
-    fun loadingComponentWorks() {
+    fun errorMessageGetsDisplayed() {
         composeRule.onNodeWithTag(TestTags.LOGIN_SCREEN_EMAIL_INPUT).assertIsDisplayed()
         composeRule.onNodeWithTag(TestTags.LOGIN_SCREEN_PASSWORD_INPUT).assertIsDisplayed()
         composeRule.onNodeWithTag(TestTags.LOGIN_BUTTON).assertIsDisplayed()
