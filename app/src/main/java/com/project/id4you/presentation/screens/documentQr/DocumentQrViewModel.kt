@@ -38,7 +38,6 @@ class DocumentQrViewModel @Inject constructor(
 
     fun createOrUpdateQrCode(documentId: String) {
         val jwt = generateJwt(documentId)
-        println(jwt)
         generateQrCode(jwt, QR_CODE_WIDTH, QR_CODE_HEIGHT).let { qrCode ->
             _state.value = state.value.copy(documentQrCode = qrCode)
         }

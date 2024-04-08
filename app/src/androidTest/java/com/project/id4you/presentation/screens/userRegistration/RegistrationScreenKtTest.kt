@@ -45,7 +45,7 @@ class RegistrationScreenKtTest {
                     startDestination = Routes.Unauthenticated.Route.route
                 ) {
                     unauthenticatedGraph(navController)
-                    authenticatedGraph()
+                    authenticatedGraph(navController)
                 }
                 navController.navigate(Routes.Unauthenticated.Registration.route)
             }
