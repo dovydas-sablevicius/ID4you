@@ -13,7 +13,7 @@ import com.project.id4you.common.TestTags
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CustomTextField
 import com.project.id4you.presentation.components.ErrorText
-import com.project.id4you.presentation.screens.userRegistration.components.LoadingState
+import com.project.id4you.presentation.components.LoadingIndicator
 import com.project.id4you.presentation.screens.userRegistration.components.ScreenHeader
 import com.project.id4you.presentation.ui.theme.AppColor
 
@@ -34,36 +34,45 @@ fun RegistrationScreen(
         ScreenHeader(
             headerText = "Sign Up",
             buttonText = "Login",
-            onNavigateToLogin = onNavigateToLogin
+            onNavigateToLogin = onNavigateToLogin,
+            modifier = Modifier.testTag(TestTags.NAVIGATE_TO_LOGIN_BUTTON)
         )
         CustomTextField(
             labelText = "Email",
             value = state.email,
-            onValueChange = { onEvent(UserRegistrationEvent.EnteredEmail(it)) }
+            onValueChange = { onEvent(UserRegistrationEvent.EnteredEmail(it)) },
+            modifier = Modifier.testTag(TestTags.REGISTRATION_SCREEN_EMAIL_INPUT)
         )
         CustomTextField(
             labelText = "Password",
             value = state.password,
             onValueChange = { onEvent(UserRegistrationEvent.EnteredPassword(it)) },
-            isPasswordField = true
+            isPasswordField = true,
+            modifier = Modifier.testTag(TestTags.REGISTRATION_SCREEN_PASSWORD_INPUT)
         )
         CustomTextField(
             labelText = "Repeat Password",
             value = state.passwordAgain,
             onValueChange = { onEvent(UserRegistrationEvent.EnteredPasswordAgain(it)) },
-            isPasswordField = true
+            isPasswordField = true,
+            modifier = Modifier.testTag(TestTags.REGISTRATION_SCREEN_PASSWORD_CONFIRM_INPUT)
         )
         ButtonComponent(
-            modifier = Modifier.width(375.dp),
+            modifier = Modifier
+                .width(375.dp)
+                .testTag(TestTags.SIGN_UP_BUTTON),
             labelText = "Sign Up",
             method = { onEvent(UserRegistrationEvent.PressedRegisterButton) },
             textColor = AppColor.White,
             buttonColor = AppColor.Blue
         )
-        if (state.error.isNotBlank()) {
-            ErrorText(errorMessage = errorMessage)
-        }
-        LoadingState(state = state)
+    }
+    if (state.error.isNotBlank()) {
+        ErrorText(errorMessage = errorMessage)
+    }
+
+    if (state.isLoading) {
+        LoadingIndicator(modifier = Modifier.testTag(TestTags.LOADING_COMPONENT))
     }
 
     if (state.isSuccess) {
