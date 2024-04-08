@@ -97,6 +97,8 @@ dependencies {
     testImplementation(libs.hilt.android.testing)
     kaptTest(libs.hilt.compiler)
     testImplementation(libs.jetbrains.kotlinx.coroutines.test)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.robolectric)
 
     //retrofit
     implementation(libs.retrofit)

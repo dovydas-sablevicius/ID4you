@@ -36,7 +36,7 @@ class DocumentQrViewModel @Inject constructor(
         }
     }
 
-    private fun createOrUpdateQrCode(documentId: String) {
+    fun createOrUpdateQrCode(documentId: String) {
         val jwt = generateJwt(documentId)
         println(jwt)
         generateQrCode(jwt, QR_CODE_WIDTH, QR_CODE_HEIGHT).let { qrCode ->
@@ -46,8 +46,7 @@ class DocumentQrViewModel @Inject constructor(
     }
 
     private fun generateJwt(documentId: String): String {
-        @Suppress("ForbiddenComment")
-        //TODO: Store secret in a secure place
+        //TODO("Store secret in a secure place")
         val algorithm = Algorithm.HMAC256("secret")
         return JWT.create()
             .withIssuer("ID4You")

@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import com.project.id4you.presentation.screens.documentQr.Constants.JWT_EXPIRATION_TIME
 import com.project.id4you.presentation.screens.documentQr.Constants.THOUSAND_MILLISECONDS
 import org.junit.Test
+import org.mockito.kotlin.mock
 
 class DocumentQrStateTest {
     @Test
@@ -30,7 +31,7 @@ class DocumentQrStateTest {
     @Test
     fun testSuccessDocumentQrState() {
         val documentId: String = "12345"
-        val documentQrCode: Bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+        val documentQrCode: Bitmap = mock()
 
         val successState = generateDocumentQrStateSuccess(documentId, documentQrCode)
 
