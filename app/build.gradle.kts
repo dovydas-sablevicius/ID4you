@@ -54,9 +54,45 @@ android {
 }
 
 koverReport {
+
+    filters {
+        excludes {
+
+            classes(
+                "*_*Factory.*",
+                "*_Factory.*",
+                "Hilt_*",
+                "*_Hilt*",
+                "*_Factory*",
+                "NavigationHostKt",
+                "*ComposableSingletons*",
+                "*Hilt_MainActivity*",
+                "AppModule_*",
+                "*NavigationHostKt*",
+                "*DocumentStatus*"
+            )
+            annotatedBy(
+                "KoverIgnore",
+                "androidx.compose.runtime.Composable",
+                "androidx.compose.ui.tooling.preview.Preview",
+                "dagger.hilt.android.AndroidEntryPoint"
+            )
+            packages(
+                "dagger.hilt.internal.aggregatedroot.codegen",
+                "hilt_aggregated_deps",
+                "com.project.id4you.di",
+                "com.project.id4you.presentation.navigation.graphs",
+                "com.project.id4you.presentation.ui.theme",
+                "com.project.id4you.presentation.navigation",
+                "com.project.id4you.presentation.components.text",
+                "com.project.id4you.presentation.screens.documentDetail"
+            )
+        }
+    }
+
     verify {
         rule {
-            isEnabled = false
+            isEnabled = true
             bound {
                 minValue = 80
             }
