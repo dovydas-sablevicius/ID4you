@@ -16,6 +16,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.project.id4you.presentation.screens.documentQr.Constants.JWT_EXPIRATION_TIME
 import com.project.id4you.presentation.screens.documentQr.Constants.QR_CODE_HEIGHT
 import com.project.id4you.presentation.screens.documentQr.Constants.QR_CODE_WIDTH
+import com.project.id4you.presentation.screens.documentQr.Constants.THOUSAND_MILLISECONDS
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Date
 import javax.inject.Inject
@@ -45,6 +46,7 @@ class DocumentQrViewModel @Inject constructor(
     }
 
     private fun generateJwt(documentId: String): String {
+        @Suppress("ForbiddenComment")
         //TODO: Store secret in a secure place
         val algorithm = Algorithm.HMAC256("secret")
         return JWT.create()
@@ -74,17 +76,18 @@ class DocumentQrViewModel @Inject constructor(
 
     private fun resetTimer() {
         countDownTimer?.cancel()
-        countDownTimer = object : CountDownTimer(JWT_EXPIRATION_TIME.toLong(), 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                val remainingTime = (millisUntilFinished / 1000).toInt()
-                _state.value = _state.value.copy(qrCodeRemainingTime = remainingTime)
-            }
+        countDownTimer =
+            object : CountDownTimer(JWT_EXPIRATION_TIME.toLong(), THOUSAND_MILLISECONDS.toLong()) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val remainingTime = (millisUntilFinished / THOUSAND_MILLISECONDS).toInt()
+                    _state.value = _state.value.copy(qrCodeRemainingTime = remainingTime)
+                }
 
-            override fun onFinish() {
-                _state.value = _state.value.copy(qrCodeRemainingTime = 0)
-                createOrUpdateQrCode(_state.value.documentId)
-            }
-        }.start()
+                override fun onFinish() {
+                    _state.value = _state.value.copy(qrCodeRemainingTime = 0)
+                    createOrUpdateQrCode(_state.value.documentId)
+                }
+            }.start()
     }
 
     fun onEvent(event: DocumentQrEvent) {
