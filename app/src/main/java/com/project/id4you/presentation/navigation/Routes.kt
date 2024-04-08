@@ -10,5 +10,7 @@ sealed class Routes {
     sealed class Authenticated(val route: String) : Routes() {
         data object Route : Unauthenticated(route = "authenticated")
         data object DocumentsPage : Authenticated(route = "document-page-screen")
+        data object DocumentDetail : Authenticated(route = "document-detail-screen")
+        data object DocumentQr : Authenticated(route = "document-qr-screen")
     }
 }

@@ -7,5 +7,5 @@ import com.project.id4you.presentation.navigation.graphs.unauthenticatedGraph
 
 fun NavGraphBuilder.createNavigationGraph(navController: NavController) {
     unauthenticatedGraph(navController)
-    authenticatedGraph()
+    authenticatedGraph(navController)
 }
