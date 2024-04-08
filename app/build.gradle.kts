@@ -97,6 +97,8 @@ dependencies {
     testImplementation(libs.hilt.android.testing)
     kaptTest(libs.hilt.compiler)
 
+    testImplementation(libs.jetbrains.kotlinx.coroutines.test)
+
     //retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
