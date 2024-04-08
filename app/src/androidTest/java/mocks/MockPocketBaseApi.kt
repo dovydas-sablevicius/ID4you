@@ -15,6 +15,17 @@ import java.time.LocalDate
 class MockPocketBaseApi : PocketBaseApi {
     private val state = mutableListOf<UserDto>()
     override suspend fun registerUser(userRegistrationDto: UserRegistrationDto) {
+
+        if (userRegistrationDto.email == "" || userRegistrationDto.password == "") {
+            throw HttpException(
+                Response.error<Nothing>(
+                    500,
+                    "login http exception".toResponseBody()
+                )
+            )
+        }
+
+        delay(1000L)
         val record = Record(
             "1",
             "users",

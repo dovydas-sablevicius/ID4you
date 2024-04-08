@@ -18,7 +18,8 @@ import com.project.id4you.presentation.components.text.TextType
 fun ScreenHeader(
     headerText: String,
     buttonText: String,
-    onNavigateToLogin: () -> Unit
+    onNavigateToLogin: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Spacer(modifier = Modifier.height(16.dp))
     Row(
@@ -31,7 +32,8 @@ fun ScreenHeader(
         TextClickableComponent(
             onClick = { onNavigateToLogin() },
             labelText = buttonText,
-            textType = TextType.CLICKABLE
+            textType = TextType.CLICKABLE,
+            modifier = modifier
         )
     }
     Spacer(modifier = Modifier.height(16.dp))

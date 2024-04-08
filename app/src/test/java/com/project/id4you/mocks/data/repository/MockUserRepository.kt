@@ -17,8 +17,13 @@ class MockUserRepository : UserRepository {
     ): Flow<Resource<Unit>> {
         return flow {
             emit(Resource.Loading())
-            users.add(User(email, java.util.UUID.randomUUID().toString(), "", ""))
-            emit(Resource.Success(Unit))
+            if (password == passwordAgain) {
+                users.add(User(email, java.util.UUID.randomUUID().toString(), "", ""))
+                emit(Resource.Success(Unit))
+            } else {
+                emit(Resource.Error("Passwords do not match"))
+            }
+
         }
 
     }
