@@ -68,7 +68,7 @@ fun RegistrationScreen(
         )
     }
     if (state.error.isNotBlank()) {
-        ErrorText(errorMessage = errorMessage, modifier = Modifier.testTag(TestTags.ERROR_MESSAGE))
+        ErrorText(errorMessage = errorMessage)
     }
 
     if (state.isLoading) {

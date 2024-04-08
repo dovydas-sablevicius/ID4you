@@ -86,7 +86,7 @@ class RegistrationScreenKtTest {
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_CONFIRM_INPUT)
             .performTextInput(passwordAgain)
         composeRule.onNodeWithTag(TestTags.SIGN_UP_BUTTON).performClick()
-        runBlocking { delay(500L) }
+        runBlocking { delay(200L) }
         composeRule.onNodeWithTag(TestTags.LOADING_COMPONENT).assertIsDisplayed()
         runBlocking { delay(700L) }
         composeRule.onNodeWithTag(TestTags.LOGIN_SCREEN).assertIsDisplayed()
@@ -100,6 +100,7 @@ class RegistrationScreenKtTest {
             .assertIsDisplayed()
         composeRule.onNodeWithTag(TestTags.SIGN_UP_BUTTON).assertIsDisplayed()
         composeRule.onNodeWithTag(TestTags.SIGN_UP_BUTTON).performClick()
+        runBlocking { delay(1000L) }
         composeRule.onNodeWithTag(TestTags.ERROR_MESSAGE).assertIsDisplayed()
             .assertTextContains("Oops.. An unexpected error occurred.")
     }

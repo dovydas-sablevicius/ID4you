@@ -29,7 +29,9 @@ fun UserLoginScreen(
     val errorMessage = "Login is incorrect."
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth().testTag(TestTags.LOGIN_SCREEN)
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag(TestTags.LOGIN_SCREEN)
     ) {
         ScreenHeader(
             modifier = Modifier.testTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON),
@@ -68,7 +70,7 @@ fun UserLoginScreen(
 
     if (state.error.isNotBlank()) {
         ErrorText(
-            errorMessage = errorMessage,
+            errorMessage = errorMessage
         )
     }
 
