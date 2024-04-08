@@ -45,7 +45,7 @@ class UserLoginScreenKtTest {
                     startDestination = Routes.Unauthenticated.Route.route
                 ) {
                     unauthenticatedGraph(navController)
-                    authenticatedGraph()
+                    authenticatedGraph(navController)
                 }
             }
         }

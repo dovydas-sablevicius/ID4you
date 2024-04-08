@@ -46,7 +46,6 @@ class UserLoginViewModel @Inject constructor(
         }
     }
 
-
     fun onEvent(event: UserLoginEvent) {
         when (event) {
             is UserLoginEvent.EnteredEmail -> {

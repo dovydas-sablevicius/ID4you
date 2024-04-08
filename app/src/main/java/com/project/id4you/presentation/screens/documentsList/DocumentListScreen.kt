@@ -20,8 +20,9 @@ import com.project.id4you.presentation.components.CardComponent
 import com.project.id4you.presentation.screens.documentsList.components.DocumentScreenHeader
 
 @Composable
-fun UserDocumentPageScreen(
-    state: DocumentsListState
+fun DocumentsListScreen(
+    state: DocumentsListState,
+    onNavigateToDocumentDetailScreen: (String) -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -43,7 +44,10 @@ fun UserDocumentPageScreen(
                     modifier = Modifier.testTag(TestTags.ID_CARD),
                     documentName = document.name,
                     documentType = "ID Card",
-                    documentStatus = DocumentStatus.VERIFIED
+                    documentStatus = DocumentStatus.VERIFIED,
+                    method = {
+                        onNavigateToDocumentDetailScreen(document.id)
+                    },
                 )
             }
         }
@@ -60,4 +64,3 @@ fun UserDocumentPageScreen(
         )
     }
 }
-

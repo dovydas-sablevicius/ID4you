@@ -6,7 +6,8 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-const val DEFAULT_FONT_WEIGHT = 500;
+const val DEFAULT_FONT_WEIGHT = 400;
+const val REGULAR_FONT_WEIGHT = 500;
 
 enum class TextType(val textStyle: TextStyle) {
     HEADER(
@@ -25,7 +26,22 @@ enum class TextType(val textStyle: TextStyle) {
             fontWeight = FontWeight(DEFAULT_FONT_WEIGHT)
         )
     ),
-    REGULAR(TextStyle(/* define your regular text style */)),
+    REGULAR(
+        TextStyle(
+            fontFamily = FontFamily.Default,
+            fontStyle = FontStyle.Normal,
+            fontSize = 20.sp,
+            fontWeight = FontWeight(REGULAR_FONT_WEIGHT)
+        )
+    ),
+    SMALL(
+        TextStyle(
+            fontFamily = FontFamily.Default,
+            fontStyle = FontStyle.Normal,
+            fontSize = 17.sp,
+            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT)
+        )
+    ),
     ERROR(TextStyle(/* define your error text style */)),
     DATA(TextStyle(/* define your data text style */));
 

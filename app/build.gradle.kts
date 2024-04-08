@@ -54,9 +54,45 @@ android {
 }
 
 koverReport {
+
+    filters {
+        excludes {
+
+            classes(
+                "*_*Factory.*",
+                "*_Factory.*",
+                "Hilt_*",
+                "*_Hilt*",
+                "*_Factory*",
+                "NavigationHostKt",
+                "*ComposableSingletons*",
+                "*Hilt_MainActivity*",
+                "AppModule_*",
+                "*NavigationHostKt*",
+                "*DocumentStatus*"
+            )
+            annotatedBy(
+                "KoverIgnore",
+                "androidx.compose.runtime.Composable",
+                "androidx.compose.ui.tooling.preview.Preview",
+                "dagger.hilt.android.AndroidEntryPoint"
+            )
+            packages(
+                "dagger.hilt.internal.aggregatedroot.codegen",
+                "hilt_aggregated_deps",
+                "com.project.id4you.di",
+                "com.project.id4you.presentation.navigation.graphs",
+                "com.project.id4you.presentation.ui.theme",
+                "com.project.id4you.presentation.navigation",
+                "com.project.id4you.presentation.components.text",
+                "com.project.id4you.presentation.screens.documentDetail"
+            )
+        }
+    }
+
     verify {
         rule {
-            isEnabled = false
+            isEnabled = true
             bound {
                 minValue = 80
             }
@@ -74,7 +110,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("com.google.android.material:material:1.2.0")
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -87,21 +123,31 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
+
     // For instrumentation tests
     androidTestImplementation(libs.hilt.android.testing)
     kaptAndroidTest(libs.hilt.android.compiler)
+    testImplementation(libs.jetbrains.kotlinx.coroutines.test)
+
     // For local unit tests
     testImplementation(libs.hilt.android.testing)
     kaptTest(libs.hilt.compiler)
-
     testImplementation(libs.jetbrains.kotlinx.coroutines.test)
-
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.robolectric)
 
     //retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
+
+    //QR code
+    implementation(libs.core)
+    implementation(libs.javase)
+
+    //JWT
+    implementation(libs.java.jwt)
 }
 kapt {
     correctErrorTypes = true

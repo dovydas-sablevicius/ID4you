@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.project.id4you.common.TestTags
 import com.project.id4you.presentation.components.text.TextClickableComponent
 import com.project.id4you.presentation.components.text.TextComponent
 import com.project.id4you.presentation.components.text.TextType
@@ -27,7 +29,11 @@ fun ScreenHeader(
         horizontalArrangement = Arrangement.Absolute.Right,
         modifier = Modifier.fillMaxWidth()
     ) {
-        TextComponent(labelText = headerText, textType = TextType.HEADER)
+        TextComponent(
+            labelText = headerText,
+            textType = TextType.HEADER,
+            modifier = Modifier.Companion.testTag(TestTags.DOCUMENT_QR_HEADER)
+        )
         Spacer(modifier = Modifier.width(64.dp))
         TextClickableComponent(
             onClick = { onNavigateToLogin() },
