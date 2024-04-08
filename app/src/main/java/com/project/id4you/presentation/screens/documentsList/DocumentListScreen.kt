@@ -29,14 +29,19 @@ fun DocumentsListScreen(
         modifier = Modifier.testTag(TestTags.DOCUMENT_LIST_SCREEN)
     ) {
 
-        DocumentScreenHeader()
+        DocumentScreenHeader(
+            modifier = Modifier.testTag(TestTags.DOCUMENT_LIST_HEADER)
+        )
 
         LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(TestTags.DOCUMENT_LIST),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(state.documents) { document ->
                 CardComponent(
+                    modifier = Modifier.testTag(TestTags.ID_CARD),
                     documentName = document.name,
                     documentType = "ID Card",
                     documentStatus = DocumentStatus.VERIFIED,
@@ -54,7 +59,8 @@ fun DocumentsListScreen(
             buttonColor = Color.Blue,
             modifier = Modifier
                 .width(350.dp)
-                .padding(vertical = 16.dp),
+                .padding(vertical = 16.dp)
+                .testTag(TestTags.SCAN_BUTTON),
         )
     }
 }

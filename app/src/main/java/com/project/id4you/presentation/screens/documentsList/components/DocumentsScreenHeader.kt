@@ -19,13 +19,12 @@ import com.project.id4you.presentation.components.text.TextComponent
 import com.project.id4you.presentation.components.text.TextType
 
 @Composable
-fun DocumentScreenHeader() {
-
+fun DocumentScreenHeader(modifier: Modifier = Modifier) {
     Spacer(modifier = Modifier.height(20.dp))
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         AddButton(size = 35.dp)
         Spacer(modifier = Modifier.width(32.dp))
