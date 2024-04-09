@@ -41,7 +41,7 @@ class DocumentListScreenKtTest {
                     startDestination = Routes.Unauthenticated.Route.route
                 ) {
                     unauthenticatedGraph(navController)
-                    authenticatedGraph()
+                    authenticatedGraph(navController)
                 }
                 navController.navigate(Routes.Authenticated.DocumentsPage.route)
             }
