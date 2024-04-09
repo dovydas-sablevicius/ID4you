@@ -15,13 +15,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkAppColorScheme = darkColorScheme(
+val DarkAppColorScheme = darkColorScheme(
     primary = AppColor.White,
     secondary = AppColor.Blue,
     tertiary = AppColor.Black
 )
 
-private val LightAppColorScheme = lightColorScheme(
+val LightAppColorScheme = lightColorScheme(
     primary = AppColor.White,
     secondary = AppColor.Blue,
     tertiary = AppColor.Black
