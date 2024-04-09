@@ -83,9 +83,6 @@ koverReport {
                 "hilt_aggregated_deps",
                 "com.project.id4you.di",
                 "com.project.id4you.presentation.navigation.graphs",
-                // "com.project.id4you.presentation.ui.theme",
-                //"com.project.id4you.presentation.navigation",
-                // "com.project.id4you.presentation.components.text",
                 "com.project.id4you.presentation.screens.documentDetail"
             )
         }
