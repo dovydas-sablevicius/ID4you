@@ -8,6 +8,7 @@ import com.project.id4you.data.remote.dto.user.Record
 import com.project.id4you.data.remote.dto.user.UserDto
 import com.project.id4you.data.remote.dto.user.UserLoginDto
 import com.project.id4you.data.remote.dto.user.UserRegistrationDto
+import java.time.LocalDate
 
 class MockPocketBaseApi : PocketBaseApi {
     private val users = mutableListOf<UserDto>()
@@ -17,15 +18,19 @@ class MockPocketBaseApi : PocketBaseApi {
         users.add(
             UserDto(
                 Record(
-                    "",
-                    "",
-                    "",
-                    "test@test.com",
-                    false,
-                    java.util.UUID.randomUUID().toString(),
-                    "",
-                    "",
-                    false
+                    id = "1",
+                    email = "test@test.com",
+                    username = java.util.UUID.randomUUID().toString(),
+                    created = LocalDate.now().toString(),
+                    updated = LocalDate.now().toString(),
+                    birthDate = LocalDate.now().toString(),
+                    collectionId = "1",
+                    name = java.util.UUID.randomUUID().toString(),
+                    surname = java.util.UUID.randomUUID().toString(),
+                    verified = false,
+                    collectionName = "users",
+                    emailVisibility = false,
+                    personalCode = java.util.UUID.randomUUID().toString()
                 ),
                 ""
             )
@@ -73,15 +78,19 @@ class MockPocketBaseApi : PocketBaseApi {
 
     override suspend fun registerUser(userRegistrationDto: UserRegistrationDto) {
         val record = Record(
-            "",
-            "",
-            "",
-            userRegistrationDto.email,
-            false,
-            java.util.UUID.randomUUID().toString(),
-            "",
-            "",
-            false
+            id = "1",
+            email = userRegistrationDto.email,
+            username = java.util.UUID.randomUUID().toString(),
+            created = LocalDate.now().toString(),
+            updated = LocalDate.now().toString(),
+            birthDate = LocalDate.now().toString(),
+            collectionId = "1",
+            name = java.util.UUID.randomUUID().toString(),
+            surname = java.util.UUID.randomUUID().toString(),
+            verified = false,
+            collectionName = "users",
+            emailVisibility = false,
+            personalCode = java.util.UUID.randomUUID().toString()
         )
         val userDto = UserDto(record, "")
         users.add(userDto)

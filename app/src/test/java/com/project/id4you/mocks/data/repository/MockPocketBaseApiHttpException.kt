@@ -10,6 +10,7 @@ import com.project.id4you.data.remote.dto.user.UserRegistrationDto
 import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.HttpException
 import retrofit2.Response
+import java.time.LocalDate
 
 class MockPocketBaseApiHttpException : PocketBaseApi {
     private val users = mutableListOf<UserDto>()
@@ -19,15 +20,19 @@ class MockPocketBaseApiHttpException : PocketBaseApi {
         users.add(
             UserDto(
                 Record(
-                    "",
-                    "",
-                    "",
-                    "test@test.com",
-                    false,
-                    java.util.UUID.randomUUID().toString(),
-                    "",
-                    "",
-                    false
+                    id = "1",
+                    email = "test@test.com",
+                    username = java.util.UUID.randomUUID().toString(),
+                    created = LocalDate.now().toString(),
+                    updated = LocalDate.now().toString(),
+                    birthDate = LocalDate.now().toString(),
+                    collectionId = "1",
+                    name = java.util.UUID.randomUUID().toString(),
+                    surname = java.util.UUID.randomUUID().toString(),
+                    verified = false,
+                    collectionName = "users",
+                    emailVisibility = false,
+                    personalCode = java.util.UUID.randomUUID().toString()
                 ),
                 ""
             )

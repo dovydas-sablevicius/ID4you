@@ -28,15 +28,19 @@ class MockPocketBaseApi : PocketBaseApi {
 
         delay(1000L)
         val record = Record(
-            "1",
-            "users",
-            LocalDate.now().toString(),
-            userRegistrationDto.email,
-            false,
-            java.util.UUID.randomUUID().toString(),
-            LocalDate.now().toString(),
-            java.util.UUID.randomUUID().toString(),
-            false
+            id = "1",
+            email = userRegistrationDto.email,
+            username = java.util.UUID.randomUUID().toString(),
+            created = LocalDate.now().toString(),
+            updated = LocalDate.now().toString(),
+            birthDate = LocalDate.now().toString(),
+            collectionId = "1",
+            name = java.util.UUID.randomUUID().toString(),
+            surname = java.util.UUID.randomUUID().toString(),
+            verified = false,
+            collectionName = "users",
+            emailVisibility = false,
+            personalCode = java.util.UUID.randomUUID().toString()
         )
         val user = UserDto(record, "")
         state.add(user)
@@ -52,15 +56,19 @@ class MockPocketBaseApi : PocketBaseApi {
             )
         }
         val record = Record(
-            "1",
-            "users",
-            LocalDate.now().toString(),
-            userLoginDto.identity,
-            false,
-            java.util.UUID.randomUUID().toString(),
-            LocalDate.now().toString(),
-            java.util.UUID.randomUUID().toString(),
-            false
+            id = "1",
+            email = userLoginDto.identity,
+            username = java.util.UUID.randomUUID().toString(),
+            created = LocalDate.now().toString(),
+            updated = LocalDate.now().toString(),
+            birthDate = LocalDate.now().toString(),
+            collectionId = "1",
+            name = java.util.UUID.randomUUID().toString(),
+            surname = java.util.UUID.randomUUID().toString(),
+            verified = false,
+            collectionName = "users",
+            emailVisibility = false,
+            personalCode = java.util.UUID.randomUUID().toString()
         )
         val user = UserDto(record, "token")
         state.add(user)
