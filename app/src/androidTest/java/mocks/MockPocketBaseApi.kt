@@ -81,10 +81,16 @@ class MockPocketBaseApi : PocketBaseApi {
                 collectionName = "Collection 1",
                 created = "2022-04-05",
                 id = "1",
-                name = "Card 1",
-                photos = listOf("https://example.com/photo1.jpg", "https://example.com/photo2.jpg"),
+                documentName = "Card 1",
+                documentPhotos = listOf(
+                    "https://example.com/photo1.jpg",
+                    "https://example.com/photo2.jpg"
+                ),
                 updated = "2022-04-05",
-                userRelation = "user"
+                documentOwner = "user",
+                passportCode = "4145656460",
+                type = "Passport",
+                valid = false
             )
         )
         return DocumentsDto(idCards, 1, 1, 1, 1)
