@@ -23,5 +23,23 @@ class MockDocumentRepository : DocumentRepository {
             }
         }
     }
+
+    override suspend fun getDocument(authToken: String, id: String): Flow<Resource<Document>> {
+        val documents = listOf(
+            Document("id1", "Card 1", "", ""),
+            Document("id2", "Card 2", "", "")
+        )
+
+        return flow {
+            emit(Resource.Loading())
+            if (authToken == "Token") {
+                val document: Document =
+                    documents.find { document: Document -> document.id == id }!!
+                emit(Resource.Success(document))
+            } else {
+                emit(Resource.Error("Wrong Data"))
+            }
+        }
+    }
 }
 

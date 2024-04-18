@@ -88,4 +88,8 @@ class MockPocketBaseApiIOException : PocketBaseApi {
     override suspend fun getDocuments(authToken: String): DocumentsDto {
         throw IOException()
     }
+
+    override suspend fun getDocument(authToken: String, id: String): DocumentDto {
+        throw IOException()
+    }
 }

@@ -104,4 +104,8 @@ class MockPocketBaseApi : PocketBaseApi {
         return DocumentsDto(idCards, 1, 1, 1, 1)
     }
 
+    override suspend fun getDocument(authToken: String, id: String): DocumentDto {
+        TODO("Not yet implemented")
+    }
+
 }
