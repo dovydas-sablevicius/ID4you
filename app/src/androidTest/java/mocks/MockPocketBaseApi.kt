@@ -82,7 +82,7 @@ class MockPocketBaseApi : PocketBaseApi {
             )
     }
 
-    override suspend fun getIdCards(authToken: String): DocumentsDto {
+    override suspend fun getDocuments(authToken: String): DocumentsDto {
         val idCards = listOf(
             DocumentDto(
                 collectionId = "1",

@@ -11,19 +11,19 @@ import org.junit.Test
 
 class DocumentRepositoryImplTest {
 
-    private lateinit var idCardRepositoryImpl: IdCardRepositoryImpl
+    private lateinit var documentRepositoryImpl: DocumentRepositoryImpl
 
     @Test
     fun getIdCard() {
         val pocketBaseApi = MockPocketBaseApi()
-        val idCardRepositoryImpl = IdCardRepositoryImpl(pocketBaseApi)
+        val documentRepositoryImpl = DocumentRepositoryImpl(pocketBaseApi)
 
         val authToken: String = ""
         val name: String = "Card 2"
 
         val response: List<Resource<List<Document>>>
         runBlocking {
-            response = idCardRepositoryImpl.getIdCards(authToken).toList()
+            response = documentRepositoryImpl.getDocuments(authToken).toList()
         }
         assert(response.first()::class == Resource.Loading<Document>()::class)
         assert(response[1].data!![1].name == name)
@@ -32,13 +32,13 @@ class DocumentRepositoryImplTest {
     @Test
     fun testDocumentListHttpExceptions() {
         val pocketBaseApi = MockPocketBaseApiHttpException()
-        idCardRepositoryImpl = IdCardRepositoryImpl(pocketBaseApi)
+        documentRepositoryImpl = DocumentRepositoryImpl(pocketBaseApi)
 
         val authToken: String = ""
 
         val response: List<Resource<List<Document>>>
         runBlocking {
-            response = idCardRepositoryImpl.getIdCards(authToken).toList()
+            response = documentRepositoryImpl.getDocuments(authToken).toList()
         }
         assert(response.first()::class == Resource.Loading<Document>()::class)
         assert(response[1]::class == Resource.Error<Document>("HTTP 500 Response.error()")::class)
@@ -48,13 +48,13 @@ class DocumentRepositoryImplTest {
     @Test
     fun testDocumentListIOException() {
         val pocketBaseApi = MockPocketBaseApiIOException()
-        idCardRepositoryImpl = IdCardRepositoryImpl(pocketBaseApi)
+        documentRepositoryImpl = DocumentRepositoryImpl(pocketBaseApi)
 
         val authToken: String = ""
 
         val response: List<Resource<List<Document>>>
         runBlocking {
-            response = idCardRepositoryImpl.getIdCards(authToken).toList()
+            response = documentRepositoryImpl.getDocuments(authToken).toList()
         }
         assert(response.first()::class == Resource.Loading<Document>()::class)
         assert(response[1]::class == Resource.Error<Document>("Couldn't reach server.")::class)

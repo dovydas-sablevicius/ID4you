@@ -2,12 +2,12 @@ package com.project.id4you.mocks.data.repository
 
 import com.project.id4you.common.Resource
 import com.project.id4you.data.repository.model.Document
-import com.project.id4you.domain.repository.IdCardRepository
+import com.project.id4you.domain.repository.DocumentRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class MockIdCardRepository : IdCardRepository {
-    override suspend fun getIdCards(authToken: String): Flow<Resource<List<Document>>> {
+class MockDocumentRepository : DocumentRepository {
+    override suspend fun getDocuments(authToken: String): Flow<Resource<List<Document>>> {
 
         val documents = listOf(
             Document("id1", "Card 1", "", ""),

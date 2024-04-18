@@ -96,7 +96,7 @@ class MockPocketBaseApiHttpException : PocketBaseApi {
         )
     }
 
-    override suspend fun getIdCards(authToken: String): DocumentsDto {
+    override suspend fun getDocuments(authToken: String): DocumentsDto {
         throw HttpException(
             Response.error<Nothing>(
                 500,
