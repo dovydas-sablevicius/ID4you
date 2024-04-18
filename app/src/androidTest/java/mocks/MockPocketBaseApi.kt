@@ -1,8 +1,8 @@
 package mocks
 
 import com.project.id4you.data.remote.PocketBaseApi
-import com.project.id4you.data.remote.dto.idCard.IdCardDto
-import com.project.id4you.data.remote.dto.idCard.IdCardsDto
+import com.project.id4you.data.remote.dto.document.DocumentDto
+import com.project.id4you.data.remote.dto.document.DocumentsDto
 import com.project.id4you.data.remote.dto.user.Record
 import com.project.id4you.data.remote.dto.user.UserDto
 import com.project.id4you.data.remote.dto.user.UserLoginDto
@@ -74,9 +74,9 @@ class MockPocketBaseApi : PocketBaseApi {
             )
     }
 
-    override suspend fun getIdCards(authToken: String): IdCardsDto {
+    override suspend fun getIdCards(authToken: String): DocumentsDto {
         val idCards = listOf(
-            IdCardDto(
+            DocumentDto(
                 collectionId = "1",
                 collectionName = "Collection 1",
                 created = "2022-04-05",
@@ -87,7 +87,7 @@ class MockPocketBaseApi : PocketBaseApi {
                 userRelation = "user"
             )
         )
-        return IdCardsDto(idCards, 1, 1, 1, 1)
+        return DocumentsDto(idCards, 1, 1, 1, 1)
     }
 
 }

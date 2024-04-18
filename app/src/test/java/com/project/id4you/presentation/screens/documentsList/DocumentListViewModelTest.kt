@@ -1,6 +1,6 @@
 package com.project.id4you.presentation.screens.documentsList
 
-import com.project.id4you.data.repository.model.IdCard
+import com.project.id4you.data.repository.model.Document
 import com.project.id4you.domain.useCase.getIdCards.GetIdCardsUseCase
 import com.project.id4you.mocks.data.repository.MockIdCardRepository
 import com.project.id4you.presentation.singleton.AuthToken
@@ -37,13 +37,13 @@ class DocumentListViewModelTest {
 
         AuthToken.value = "Token"
 
-        val idCards = listOf(
-            IdCard("id1", "Card 1", "", ""),
-            IdCard("id2", "Card 2", "", "")
+        val documents = listOf(
+            Document("id1", "Card 1", "", ""),
+            Document("id2", "Card 2", "", "")
         )
 
         documentsListViewModel = DocumentsListViewModel(getIdCardsUseCase)
-        assert(documentsListViewModel.state.value.documents[0].name == idCards[0].name)
+        assert(documentsListViewModel.state.value.documents[0].name == documents[0].name)
     }
 
     @Test
