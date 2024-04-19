@@ -2,36 +2,40 @@ package com.project.id4you.presentation.screens.documentDetail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.project.id4you.presentation.components.ButtonComponent
+import com.project.id4you.presentation.screens.documentDetail.components.AttributeInformation
+import com.project.id4you.presentation.screens.documentDetail.components.Header
 
 @Composable
 fun DocumentDetailScreen(
     state: DocumentDetailState,
-    onNavigateToDocumentQrScreen: (String) -> Unit
+    onNavigateToDocumentQrScreen: (String) -> Unit,
+    onNavigateBackToDocumentList: () -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-        if (state.documentId.isEmpty()) {
-            Text(text = "Error: Document ID not found")
-        } else {
-            Text(text = state.documentId)
+        Header(navigateBack = onNavigateBackToDocumentList)
+        Column(
+            modifier = Modifier.padding(26.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            AttributeInformation(attributeName = "Test", attributeValue = "TTest")
+            AttributeInformation(attributeName = "Test", attributeValue = "TTest")
+            AttributeInformation(attributeName = "Test", attributeValue = "TTest")
+            AttributeInformation(attributeName = "Test", attributeValue = "TTest")
         }
-
-        Spacer(modifier = Modifier.weight(1f))
 
         ButtonComponent(
             labelText = "QR Code",
@@ -45,4 +49,13 @@ fun DocumentDetailScreen(
             }
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun test() {
+    DocumentDetailScreen(
+        state = DocumentDetailState(),
+        onNavigateToDocumentQrScreen = {},
+        onNavigateBackToDocumentList = {})
 }
