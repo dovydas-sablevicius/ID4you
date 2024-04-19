@@ -1,6 +1,6 @@
 package com.project.id4you.presentation.screens.documentsList
 
-import com.project.id4you.data.repository.model.IdCard
+import com.project.id4you.data.repository.model.Document
 import org.junit.Test
 
 class DocumentsListStateTest {
@@ -10,7 +10,7 @@ class DocumentsListStateTest {
         val defaultState = generateDefaultDocumentsListState()
         assert(!defaultState.isLoading)
         assert(defaultState.error == "")
-        assert(defaultState.documents == emptyList<IdCard>())
+        assert(defaultState.documents == emptyList<Document>())
     }
 
     @Test
@@ -18,7 +18,7 @@ class DocumentsListStateTest {
         val loadingState = generateDocumentsListLoading()
         assert(loadingState.isLoading)
         assert(loadingState.error == "")
-        assert(loadingState.documents == emptyList<IdCard>())
+        assert(loadingState.documents == emptyList<Document>())
     }
 
     @Test
@@ -28,7 +28,7 @@ class DocumentsListStateTest {
 
         assert(!errorState.isLoading)
         assert(errorState.error == error)
-        assert(errorState.documents == emptyList<IdCard>())
+        assert(errorState.documents == emptyList<Document>())
 
     }
 }

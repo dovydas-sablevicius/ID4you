@@ -1,8 +1,8 @@
 package com.project.id4you.mocks.data.repository
 
 import com.project.id4you.data.remote.PocketBaseApi
-import com.project.id4you.data.remote.dto.idCard.IdCardDto
-import com.project.id4you.data.remote.dto.idCard.IdCardsDto
+import com.project.id4you.data.remote.dto.document.DocumentDto
+import com.project.id4you.data.remote.dto.document.DocumentsDto
 import com.project.id4you.data.remote.dto.user.Record
 import com.project.id4you.data.remote.dto.user.UserDto
 import com.project.id4you.data.remote.dto.user.UserLoginDto
@@ -10,24 +10,29 @@ import com.project.id4you.data.remote.dto.user.UserRegistrationDto
 import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.HttpException
 import retrofit2.Response
+import java.time.LocalDate
 
 class MockPocketBaseApiHttpException : PocketBaseApi {
     private val users = mutableListOf<UserDto>()
-    private val cards = mutableListOf<IdCardsDto>()
+    private val cards = mutableListOf<DocumentsDto>()
 
     init {
         users.add(
             UserDto(
                 Record(
-                    "",
-                    "",
-                    "",
-                    "test@test.com",
-                    false,
-                    java.util.UUID.randomUUID().toString(),
-                    "",
-                    "",
-                    false
+                    id = "1",
+                    email = "test@test.com",
+                    username = java.util.UUID.randomUUID().toString(),
+                    created = LocalDate.now().toString(),
+                    updated = LocalDate.now().toString(),
+                    birthDate = LocalDate.now().toString(),
+                    collectionId = "1",
+                    name = java.util.UUID.randomUUID().toString(),
+                    surname = java.util.UUID.randomUUID().toString(),
+                    verified = false,
+                    collectionName = "users",
+                    emailVisibility = false,
+                    personalCode = java.util.UUID.randomUUID().toString()
                 ),
                 ""
             )
@@ -36,27 +41,39 @@ class MockPocketBaseApiHttpException : PocketBaseApi {
 
     init {
         cards.add(
-            IdCardsDto(
+            DocumentsDto(
                 arrayListOf(
-                    IdCardDto(
+                    DocumentDto(
                         collectionId = "",
                         collectionName = "",
                         created = "",
                         id = "id1",
-                        name = "Card 1",
-                        photos = listOf(),
+                        documentName = "Card 1",
+                        documentPhotos = listOf(),
                         updated = "",
-                        userRelation = ""
+                        documentOwner = "",
+                        valid = false,
+                        type = "Passport",
+                        documentCode = "4548494",
+                        driverLicenseCategory = listOf(),
+                        validFrom = "",
+                        validUntil = ""
                     ),
-                    IdCardDto(
+                    DocumentDto(
                         collectionId = "",
                         collectionName = "",
                         created = "",
                         id = "id2",
-                        name = "Card 2",
-                        photos = listOf(),
+                        documentName = "Card 2",
+                        documentPhotos = listOf(),
                         updated = "",
-                        userRelation = ""
+                        documentOwner = "",
+                        valid = false,
+                        type = "Passport",
+                        documentCode = "4548494",
+                        validUntil = "",
+                        validFrom = "",
+                        driverLicenseCategory = listOf()
                     )
                 ),
                 1,
@@ -85,12 +102,16 @@ class MockPocketBaseApiHttpException : PocketBaseApi {
         )
     }
 
-    override suspend fun getIdCards(authToken: String): IdCardsDto {
+    override suspend fun getDocuments(authToken: String): DocumentsDto {
         throw HttpException(
             Response.error<Nothing>(
                 500,
                 "id cards http exception".toResponseBody()
             )
         )
+    }
+
+    override suspend fun getDocument(authToken: String, id: String): DocumentDto {
+        TODO("Not yet implemented")
     }
 }

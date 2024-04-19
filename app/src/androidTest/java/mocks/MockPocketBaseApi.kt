@@ -1,8 +1,8 @@
 package mocks
 
 import com.project.id4you.data.remote.PocketBaseApi
-import com.project.id4you.data.remote.dto.idCard.IdCardDto
-import com.project.id4you.data.remote.dto.idCard.IdCardsDto
+import com.project.id4you.data.remote.dto.document.DocumentDto
+import com.project.id4you.data.remote.dto.document.DocumentsDto
 import com.project.id4you.data.remote.dto.user.Record
 import com.project.id4you.data.remote.dto.user.UserDto
 import com.project.id4you.data.remote.dto.user.UserLoginDto
@@ -28,15 +28,19 @@ class MockPocketBaseApi : PocketBaseApi {
 
         delay(1000L)
         val record = Record(
-            "1",
-            "users",
-            LocalDate.now().toString(),
-            userRegistrationDto.email,
-            false,
-            java.util.UUID.randomUUID().toString(),
-            LocalDate.now().toString(),
-            java.util.UUID.randomUUID().toString(),
-            false
+            id = "1",
+            email = userRegistrationDto.email,
+            username = java.util.UUID.randomUUID().toString(),
+            created = LocalDate.now().toString(),
+            updated = LocalDate.now().toString(),
+            birthDate = LocalDate.now().toString(),
+            collectionId = "1",
+            name = java.util.UUID.randomUUID().toString(),
+            surname = java.util.UUID.randomUUID().toString(),
+            verified = false,
+            collectionName = "users",
+            emailVisibility = false,
+            personalCode = java.util.UUID.randomUUID().toString()
         )
         val user = UserDto(record, "")
         state.add(user)
@@ -52,15 +56,19 @@ class MockPocketBaseApi : PocketBaseApi {
             )
         }
         val record = Record(
-            "1",
-            "users",
-            LocalDate.now().toString(),
-            userLoginDto.identity,
-            false,
-            java.util.UUID.randomUUID().toString(),
-            LocalDate.now().toString(),
-            java.util.UUID.randomUUID().toString(),
-            false
+            id = "1",
+            email = userLoginDto.identity,
+            username = java.util.UUID.randomUUID().toString(),
+            created = LocalDate.now().toString(),
+            updated = LocalDate.now().toString(),
+            birthDate = LocalDate.now().toString(),
+            collectionId = "1",
+            name = java.util.UUID.randomUUID().toString(),
+            surname = java.util.UUID.randomUUID().toString(),
+            verified = false,
+            collectionName = "users",
+            emailVisibility = false,
+            personalCode = java.util.UUID.randomUUID().toString()
         )
         val user = UserDto(record, "token")
         state.add(user)
@@ -74,20 +82,33 @@ class MockPocketBaseApi : PocketBaseApi {
             )
     }
 
-    override suspend fun getIdCards(authToken: String): IdCardsDto {
+    override suspend fun getDocuments(authToken: String): DocumentsDto {
         val idCards = listOf(
-            IdCardDto(
+            DocumentDto(
                 collectionId = "1",
                 collectionName = "Collection 1",
                 created = "2022-04-05",
                 id = "1",
-                name = "Card 1",
-                photos = listOf("https://example.com/photo1.jpg", "https://example.com/photo2.jpg"),
+                documentName = "Card 1",
+                documentPhotos = listOf(
+                    "https://example.com/photo1.jpg",
+                    "https://example.com/photo2.jpg"
+                ),
                 updated = "2022-04-05",
-                userRelation = "user"
+                documentOwner = "user",
+                documentCode = "4145656460",
+                type = "Passport",
+                valid = false,
+                driverLicenseCategory = listOf(),
+                validFrom = "",
+                validUntil = ""
             )
         )
-        return IdCardsDto(idCards, 1, 1, 1, 1)
+        return DocumentsDto(idCards, 1, 1, 1, 1)
+    }
+
+    override suspend fun getDocument(authToken: String, id: String): DocumentDto {
+        TODO("Not yet implemented")
     }
 
 }

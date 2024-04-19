@@ -2,30 +2,35 @@ package com.project.id4you.mocks.data.repository
 
 import android.content.res.Resources.NotFoundException
 import com.project.id4you.data.remote.PocketBaseApi
-import com.project.id4you.data.remote.dto.idCard.IdCardDto
-import com.project.id4you.data.remote.dto.idCard.IdCardsDto
+import com.project.id4you.data.remote.dto.document.DocumentDto
+import com.project.id4you.data.remote.dto.document.DocumentsDto
 import com.project.id4you.data.remote.dto.user.Record
 import com.project.id4you.data.remote.dto.user.UserDto
 import com.project.id4you.data.remote.dto.user.UserLoginDto
 import com.project.id4you.data.remote.dto.user.UserRegistrationDto
+import java.time.LocalDate
 
 class MockPocketBaseApi : PocketBaseApi {
     private val users = mutableListOf<UserDto>()
-    private val cards = mutableListOf<IdCardsDto>()
+    private val cards = mutableListOf<DocumentsDto>()
 
     init {
         users.add(
             UserDto(
                 Record(
-                    "",
-                    "",
-                    "",
-                    "test@test.com",
-                    false,
-                    java.util.UUID.randomUUID().toString(),
-                    "",
-                    "",
-                    false
+                    id = "1",
+                    email = "test@test.com",
+                    username = java.util.UUID.randomUUID().toString(),
+                    created = LocalDate.now().toString(),
+                    updated = LocalDate.now().toString(),
+                    birthDate = LocalDate.now().toString(),
+                    collectionId = "1",
+                    name = java.util.UUID.randomUUID().toString(),
+                    surname = java.util.UUID.randomUUID().toString(),
+                    verified = false,
+                    collectionName = "users",
+                    emailVisibility = false,
+                    personalCode = java.util.UUID.randomUUID().toString()
                 ),
                 ""
             )
@@ -34,27 +39,39 @@ class MockPocketBaseApi : PocketBaseApi {
 
     init {
         cards.add(
-            IdCardsDto(
+            DocumentsDto(
                 arrayListOf(
-                    IdCardDto(
+                    DocumentDto(
                         collectionId = "",
                         collectionName = "",
                         created = "",
                         id = "id1",
-                        name = "Card 1",
-                        photos = listOf(),
+                        documentName = "Card 1",
+                        documentPhotos = listOf(),
                         updated = "",
-                        userRelation = ""
+                        documentOwner = "",
+                        valid = false,
+                        type = "Passport",
+                        documentCode = "417856164",
+                        validUntil = "",
+                        validFrom = "",
+                        driverLicenseCategory = listOf()
                     ),
-                    IdCardDto(
+                    DocumentDto(
                         collectionId = "",
                         collectionName = "",
                         created = "",
                         id = "id2",
-                        name = "Card 2",
-                        photos = listOf(),
+                        documentName = "Card 2",
+                        documentPhotos = listOf(),
                         updated = "",
-                        userRelation = ""
+                        documentOwner = "",
+                        valid = false,
+                        type = "ID Card",
+                        documentCode = "15415489",
+                        driverLicenseCategory = listOf(),
+                        validFrom = "",
+                        validUntil = ""
                     )
                 ),
                 1,
@@ -67,15 +84,19 @@ class MockPocketBaseApi : PocketBaseApi {
 
     override suspend fun registerUser(userRegistrationDto: UserRegistrationDto) {
         val record = Record(
-            "",
-            "",
-            "",
-            userRegistrationDto.email,
-            false,
-            java.util.UUID.randomUUID().toString(),
-            "",
-            "",
-            false
+            id = "1",
+            email = userRegistrationDto.email,
+            username = java.util.UUID.randomUUID().toString(),
+            created = LocalDate.now().toString(),
+            updated = LocalDate.now().toString(),
+            birthDate = LocalDate.now().toString(),
+            collectionId = "1",
+            name = java.util.UUID.randomUUID().toString(),
+            surname = java.util.UUID.randomUUID().toString(),
+            verified = false,
+            collectionName = "users",
+            emailVisibility = false,
+            personalCode = java.util.UUID.randomUUID().toString()
         )
         val userDto = UserDto(record, "")
         users.add(userDto)
@@ -87,8 +108,12 @@ class MockPocketBaseApi : PocketBaseApi {
     }
 
 
-    override suspend fun getIdCards(authToken: String): IdCardsDto {
+    override suspend fun getDocuments(authToken: String): DocumentsDto {
         return cards.firstOrNull()
             ?: throw NotFoundException()
+    }
+
+    override suspend fun getDocument(authToken: String, id: String): DocumentDto {
+        TODO("Not yet implemented")
     }
 }
