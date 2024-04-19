@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.project.id4you.presentation.ui.theme.AppColor
 
@@ -23,8 +21,8 @@ fun AttributeInformation(
     modifier: Modifier = Modifier,
     attributeName: String,
     attributeValue: String,
-    textColor : Color = AppColor.Blue,
-    dividerColor : Color = AppColor.Blue
+    textColor: Color = AppColor.Blue,
+    dividerColor: Color = AppColor.Blue
 ) {
     Column(
         modifier = modifier
@@ -36,27 +34,25 @@ fun AttributeInformation(
                 .fillMaxWidth()
                 .padding(bottom = 5.dp),
         ) {
-            Text(text = attributeName,
+            Text(
+                text = attributeName,
                 color = textColor,
                 textAlign = TextAlign.Start,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
-                modifier = Modifier.weight(1f))
-            Text(text = attributeValue,
+                modifier = Modifier.weight(1f)
+            )
+            Text(
+                text = attributeValue,
                 color = textColor,
                 textAlign = TextAlign.End,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
-                modifier = Modifier.weight(1f))
+                modifier = Modifier.weight(1f)
+            )
         }
         HorizontalDivider(color = dividerColor, thickness = 3.dp)
     }
 
 
-}
-
-@Preview(showBackground = true)
-@Composable
-fun Check() {
-    AttributeInformation(attributeName = "sadasdasd", attributeValue = "TestValue")
 }
