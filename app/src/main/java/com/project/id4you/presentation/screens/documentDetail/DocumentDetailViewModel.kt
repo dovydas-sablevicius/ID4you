@@ -10,6 +10,7 @@ import com.project.id4you.common.Resource
 import com.project.id4you.domain.useCase.getDocument.GetDocumentUseCase
 import com.project.id4you.presentation.singleton.AuthToken
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,14 +25,12 @@ class DocumentDetailViewModel @Inject constructor(
     val state: State<DocumentDetailState> = _state
 
     init {
-        getDocumentId()
-        getDocument(AuthToken.value, _state.value.documentId)
+        getDocument(AuthToken.value, getDocumentId())
     }
 
-    private fun getDocumentId() {
-        savedStateHandle.get<String>("documentId")?.let { documentId ->
-            _state.value = state.value.copy(documentId = documentId)
-        }
+    private fun getDocumentId(): String {
+        return savedStateHandle.get<String>("documentId")
+            ?: throw Exception("Failed To Get Document Id")
     }
 
     private fun getDocument(authToken: String, id: String) {
@@ -52,13 +51,13 @@ class DocumentDetailViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         _state.value = DocumentDetailState(
-                            documentId = result.data!!.id,
+                            document = result.data,
                             isSuccess = true
                         )
                     }
                 }
 
-            }
+            }.launchIn(viewModelScope)
         }
     }
 

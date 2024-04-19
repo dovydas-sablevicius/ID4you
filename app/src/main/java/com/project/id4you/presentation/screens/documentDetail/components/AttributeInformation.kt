@@ -22,7 +22,8 @@ fun AttributeInformation(
     attributeName: String,
     attributeValue: String,
     textColor: Color = AppColor.Blue,
-    dividerColor: Color = AppColor.Blue
+    dividerColor: Color = AppColor.Blue,
+    valueWeight: Float = 1f
 ) {
     Column(
         modifier = modifier
@@ -48,7 +49,7 @@ fun AttributeInformation(
                 textAlign = TextAlign.End,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(valueWeight)
             )
         }
         HorizontalDivider(color = dividerColor, thickness = 3.dp)
