@@ -11,6 +11,7 @@ import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import java.time.LocalDate
 
 class DocumentListViewModelTest {
 
@@ -38,8 +39,24 @@ class DocumentListViewModelTest {
         AuthToken.value = "Token"
 
         val documents = listOf(
-            Document("id1", "Card 1", "", ""),
-            Document("id2", "Card 2", "", "")
+            Document(
+                "id1",
+                "Card 1",
+                "",
+                true,
+                "456456456456",
+                LocalDate.now().toString(),
+                listOf()
+            ),
+            Document(
+                "id2",
+                "Card 2",
+                "",
+                true,
+                "456456456456",
+                LocalDate.now().toString(),
+                listOf()
+            )
         )
 
         documentsListViewModel = DocumentsListViewModel(getDocumentsUseCase)

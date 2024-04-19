@@ -2,7 +2,10 @@ package com.project.id4you.presentation.screens.documentDetail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -17,6 +20,7 @@ import com.project.id4you.presentation.components.text.TextComponent
 import com.project.id4you.presentation.components.text.TextType
 import com.project.id4you.presentation.screens.documentDetail.components.AttributeInformation
 import com.project.id4you.presentation.screens.documentDetail.components.DocumentDetailScreenHeader
+import com.project.id4you.presentation.ui.theme.AppColor
 import java.time.LocalDate
 
 @Composable
@@ -84,17 +88,27 @@ private fun SuccessScreen(
             modifier = Modifier.padding(26.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            AttributeInformation(attributeName = "Document Name", attributeValue = document.name)
+            AttributeInformation(attributeName = "Name", attributeValue = document.name)
+            AttributeInformation(attributeName = "Type", attributeValue = document.type)
             AttributeInformation(
-                attributeName = "Created",
-                attributeValue = document.created,
-                valueWeight = 3f
+                attributeName = "Valid Until",
+                attributeValue = document.validUntil
             )
             AttributeInformation(
-                attributeName = "Updated",
-                attributeValue = document.updated,
-                valueWeight = 3f
+                attributeName = "Document Code",
+                attributeValue = document.documentCode
             )
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth().padding(6.dp)) {
+                TextComponent(labelText = "Valid:", textType = TextType.REGULAR )
+                if (document.valid)
+                {
+                    TextComponent(labelText = "True", textType = TextType.REGULAR, color = AppColor.Green )
+                }
+                else
+                {
+                    TextComponent(labelText = "False", textType = TextType.REGULAR, color = AppColor.Red )
+                }
+            }
         }
 
         ButtonComponent(
@@ -120,8 +134,11 @@ fun SuccessScreenPreview() {
             document = Document(
                 id = "1",
                 name = "Document Name",
-                created = LocalDate.now().toString(),
-                updated = LocalDate.now().toString()
+                validUntil = LocalDate.now().toString(),
+                valid = true,
+                type = "Passport",
+                documentPhotos = listOf(),
+                documentCode = "556456456"
             )
         ),
         onNavigateToDocumentQrScreen = {},

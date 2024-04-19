@@ -14,19 +14,28 @@ data class DocumentDto(
     @SerializedName("document_photos")
     val documentPhotos: List<String>,
     val id: String,
-    @SerializedName("passport_code")
-    val passportCode: String,
+    @SerializedName("document_code")
+    val documentCode: String,
     val type: String,
     val updated: String,
-    val valid: Boolean
+    val valid: Boolean,
+    @SerializedName("driver_license_category")
+    val driverLicenseCategory: List<String>,
+    @SerializedName("valid_from")
+    val validFrom: String,
+    @SerializedName("valid_until")
+    val validUntil: String
 )
 
 
 fun DocumentDto.toDocument(): Document {
     return Document(
         id = id,
+        documentCode = documentCode,
         name = documentName,
-        updated = updated,
-        created = created
+        type = type,
+        valid = valid,
+        validUntil = validUntil,
+        documentPhotos = documentPhotos
     )
 }
