@@ -3,7 +3,6 @@ package com.project.id4you.presentation.screens.documentDetail
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -98,15 +97,26 @@ private fun SuccessScreen(
                 attributeName = "Document Code",
                 attributeValue = document.documentCode
             )
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth().padding(6.dp)) {
-                TextComponent(labelText = "Valid:", textType = TextType.REGULAR )
-                if (document.valid)
-                {
-                    TextComponent(labelText = "True", textType = TextType.REGULAR, color = AppColor.Green )
-                }
-                else
-                {
-                    TextComponent(labelText = "False", textType = TextType.REGULAR, color = AppColor.Red )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(6.dp)
+            ) {
+                TextComponent(labelText = "Valid:", textType = TextType.REGULAR)
+                if (document.valid) {
+                    TextComponent(
+                        labelText = "True",
+                        textType = TextType.REGULAR,
+                        color = AppColor.Green
+                    )
+                } else {
+                    TextComponent(
+                        labelText = "False",
+                        textType = TextType.REGULAR,
+                        color = AppColor.Red
+                    )
                 }
             }
         }

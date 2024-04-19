@@ -10,6 +10,6 @@ class AppColor {
         val White = Color(0xFFFFFFFF)
         val Blue = Color(0xFF404CFA)
         val DisabledBlue = Color(0xFF8189FF)
-        val Green = Color(0xFF4EB100);
+        val Green = Color(0xFF4EB100)
     }
 }
