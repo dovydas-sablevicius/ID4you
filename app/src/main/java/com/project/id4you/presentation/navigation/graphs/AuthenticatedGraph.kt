@@ -21,7 +21,6 @@ fun NavGraphBuilder.authenticatedGraph(navController: NavController) {
         documentsListScreen(navController)
         documentDetailScreen(navController)
         documentQrScreen()
-        //documentCreateScreen()
     }
 }
 
@@ -36,9 +35,7 @@ private fun NavGraphBuilder.documentsListScreen(navController: NavController) {
                 )
             },
             onNavigateToDocumentCreationScreen = {
-                navController.navigate(
-                    route = Routes.Authenticated.DocumentCreation.route
-                )
+                navController.navigate(route = Routes.Authenticated.DocumentCreation.route)
             }
         )
     }

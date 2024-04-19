@@ -1,11 +1,11 @@
 package com.project.id4you.presentation.screens.documentsList.components
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Settings
@@ -26,20 +26,31 @@ fun DocumentScreenHeader(
     method: () -> Unit
 ) {
     Spacer(modifier = Modifier.height(20.dp))
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        modifier = modifier.fillMaxWidth()
-    ) {
-        ClickableIcon(size = 35.dp, imageVector = Icons.Outlined.Add)
-        Spacer(modifier = Modifier.width(32.dp))
-        TextComponent(
-            labelText = "Documents",
-            textType = TextType.HEADER,
-            modifier = Modifier.Companion.testTag(TestTags.DOCUMENT_QR_HEADER)
-        )
-        ClickableIcon(painterId = R.drawable.baseline_tune_24)
-        ClickableIcon(imageVector = Icons.Outlined.Settings)
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(20.dp, 2.dp), contentAlignment = Alignment.CenterStart
+    )
+    {
+        ClickableIcon(size = 35.dp, imageVector = Icons.Outlined.Add, method = method)
+        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd)
+        {
+            Row {
+                ClickableIcon(painterId = R.drawable.baseline_tune_24)
+                Spacer(modifier = Modifier.padding(5.dp))
+                ClickableIcon(imageVector = Icons.Outlined.Settings)
+            }
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center)
+            {
+                TextComponent(
+                    labelText = "Documents",
+                    textType = TextType.HEADER,
+                    modifier = Modifier.Companion.testTag(TestTags.DOCUMENT_QR_HEADER)
+                )
+            }
+
+        }
     }
     Spacer(modifier = Modifier.height(10.dp))
 }
+
