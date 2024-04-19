@@ -1,4 +1,5 @@
 [versions]
+accompanistPermissions = "0.24.0"
 agp = "8.3.1"
 converterGson = "2.9.0"
 core = "3.5.3"
@@ -22,6 +23,7 @@ retrofit = "2.9.0"
 robolectric = "4.12.1"
 
 [libraries]
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltLifecycleViewmodel" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }

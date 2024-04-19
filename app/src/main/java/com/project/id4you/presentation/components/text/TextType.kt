@@ -1,5 +1,6 @@
 package com.project.id4you.presentation.components.text
 
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -16,6 +17,15 @@ enum class TextType(val textStyle: TextStyle) {
             fontStyle = FontStyle.Normal,
             fontSize = 32.sp,
             fontWeight = FontWeight(DEFAULT_FONT_WEIGHT)
+        )
+    ),
+    HEADER_WHITE(
+        TextStyle(
+            fontFamily = FontFamily.Default,
+            fontStyle = FontStyle.Normal,
+            fontSize = 32.sp,
+            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT),
+            color = Color.White
         )
     ),
     CLICKABLE(

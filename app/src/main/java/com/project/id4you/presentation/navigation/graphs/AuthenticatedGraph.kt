@@ -10,6 +10,8 @@ import com.project.id4you.presentation.screens.documentDetail.DocumentDetailScre
 import com.project.id4you.presentation.screens.documentDetail.DocumentDetailViewModel
 import com.project.id4you.presentation.screens.documentQr.DocumentQrScreen
 import com.project.id4you.presentation.screens.documentQr.DocumentQrViewModel
+import com.project.id4you.presentation.screens.documentQrScan.DocumentQrScanScreen
+import com.project.id4you.presentation.screens.documentQrScan.DocumentQrScanViewModel
 import com.project.id4you.presentation.screens.documentsList.DocumentsListScreen
 import com.project.id4you.presentation.screens.documentsList.DocumentsListViewModel
 
@@ -21,6 +23,7 @@ fun NavGraphBuilder.authenticatedGraph(navController: NavController) {
         documentsListScreen(navController)
         documentDetailScreen(navController)
         documentQrScreen()
+        documentQrScanScreen(navController)
     }
 }
 
@@ -58,6 +61,21 @@ private fun NavGraphBuilder.documentQrScreen() {
         DocumentQrScreen(
             state = viewModel.state.value,
             onEvent = viewModel::onEvent,
+        )
+    }
+}
+
+private fun NavGraphBuilder.documentQrScanScreen(navController: NavController) {
+    composable(route = Routes.Authenticated.DocumentQrScan.route + "/{documentId}") {
+        val viewModel = hiltViewModel<DocumentQrScanViewModel>()
+        DocumentQrScanScreen(
+            state = viewModel.state.value,
+            onEvent = viewModel::onEvent,
+            onNavigateToDocumentDetailScreen = { documentId ->
+                navController.navigate(
+                    route = Routes.Authenticated.DocumentDetail.route + "/${documentId}"
+                )
+            }
         )
     }
 }
