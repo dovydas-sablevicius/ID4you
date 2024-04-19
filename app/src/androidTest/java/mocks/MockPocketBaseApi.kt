@@ -98,7 +98,10 @@ class MockPocketBaseApi : PocketBaseApi {
                 documentOwner = "user",
                 documentCode = "4145656460",
                 type = "Passport",
-                valid = false
+                valid = false,
+                driverLicenseCategory = listOf(),
+                validFrom = "",
+                validUntil = ""
             )
         )
         return DocumentsDto(idCards, 1, 1, 1, 1)

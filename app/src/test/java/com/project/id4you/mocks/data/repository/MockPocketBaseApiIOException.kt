@@ -52,7 +52,10 @@ class MockPocketBaseApiIOException : PocketBaseApi {
                         documentOwner = "",
                         documentCode = "456456",
                         type = "Passport",
-                        valid = false
+                        valid = false,
+                        driverLicenseCategory = listOf(),
+                        validFrom = "",
+                        validUntil = ""
                     ),
                     DocumentDto(
                         collectionId = "",
@@ -65,7 +68,10 @@ class MockPocketBaseApiIOException : PocketBaseApi {
                         documentOwner = "",
                         documentCode = "456456",
                         type = "Passport",
-                        valid = false
+                        valid = false,
+                        validUntil = "",
+                        validFrom = "",
+                        driverLicenseCategory = listOf()
 
                     )
                 ),

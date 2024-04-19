@@ -54,7 +54,10 @@ class MockPocketBaseApiHttpException : PocketBaseApi {
                         documentOwner = "",
                         valid = false,
                         type = "Passport",
-                        documentCode = "4548494"
+                        documentCode = "4548494",
+                        driverLicenseCategory = listOf(),
+                        validFrom = "",
+                        validUntil = ""
                     ),
                     DocumentDto(
                         collectionId = "",
@@ -67,7 +70,10 @@ class MockPocketBaseApiHttpException : PocketBaseApi {
                         documentOwner = "",
                         valid = false,
                         type = "Passport",
-                        documentCode = "4548494"
+                        documentCode = "4548494",
+                        validUntil = "",
+                        validFrom = "",
+                        driverLicenseCategory = listOf()
                     )
                 ),
                 1,
