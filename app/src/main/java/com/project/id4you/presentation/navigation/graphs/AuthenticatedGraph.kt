@@ -47,6 +47,9 @@ private fun NavGraphBuilder.documentDetailScreen(navController: NavController) {
                 navController.navigate(
                     route = Routes.Authenticated.DocumentQr.route + "/${documentId}"
                 )
+            },
+            onNavigateBackToDocumentList = {
+                navController.navigate(route = Routes.Authenticated.DocumentsPage.route)
             }
         )
     }
