@@ -96,7 +96,7 @@ class MockPocketBaseApi : PocketBaseApi {
                 ),
                 updated = "2022-04-05",
                 documentOwner = "user",
-                passportCode = "4145656460",
+                documentCode = "4145656460",
                 type = "Passport",
                 valid = false
             )

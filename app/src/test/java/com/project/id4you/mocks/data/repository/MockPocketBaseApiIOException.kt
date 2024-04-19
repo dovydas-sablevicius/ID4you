@@ -50,7 +50,7 @@ class MockPocketBaseApiIOException : PocketBaseApi {
                         documentPhotos = listOf(),
                         updated = "",
                         documentOwner = "",
-                        passportCode = "456456",
+                        documentCode = "456456",
                         type = "Passport",
                         valid = false
                     ),
@@ -63,7 +63,7 @@ class MockPocketBaseApiIOException : PocketBaseApi {
                         documentPhotos = listOf(),
                         updated = "",
                         documentOwner = "",
-                        passportCode = "456456",
+                        documentCode = "456456",
                         type = "Passport",
                         valid = false
 

@@ -54,7 +54,7 @@ class MockPocketBaseApiHttpException : PocketBaseApi {
                         documentOwner = "",
                         valid = false,
                         type = "Passport",
-                        passportCode = "4548494"
+                        documentCode = "4548494"
                     ),
                     DocumentDto(
                         collectionId = "",
@@ -67,7 +67,7 @@ class MockPocketBaseApiHttpException : PocketBaseApi {
                         documentOwner = "",
                         valid = false,
                         type = "Passport",
-                        passportCode = "4548494"
+                        documentCode = "4548494"
                     )
                 ),
                 1,
