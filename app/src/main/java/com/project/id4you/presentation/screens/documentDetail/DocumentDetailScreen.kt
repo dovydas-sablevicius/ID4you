@@ -41,7 +41,6 @@ fun DocumentDetailScreen(
         return
     }
     LoadingScreen()
-    return
 }
 
 @Composable

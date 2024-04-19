@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("TooGenericExceptionThrown")
 @HiltViewModel
 class DocumentDetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
