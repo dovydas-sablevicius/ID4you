@@ -21,6 +21,7 @@ fun NavGraphBuilder.authenticatedGraph(navController: NavController) {
         documentsListScreen(navController)
         documentDetailScreen(navController)
         documentQrScreen()
+        //documentCreateScreen()
     }
 }
 
@@ -32,6 +33,11 @@ private fun NavGraphBuilder.documentsListScreen(navController: NavController) {
             onNavigateToDocumentDetailScreen = { documentId ->
                 navController.navigate(
                     route = Routes.Authenticated.DocumentDetail.route + "/${documentId}"
+                )
+            },
+            onNavigateToDocumentCreationScreen = {
+                navController.navigate(
+                    route = Routes.Authenticated.DocumentCreation.route
                 )
             }
         )
@@ -61,3 +67,9 @@ private fun NavGraphBuilder.documentQrScreen() {
         )
     }
 }
+
+/*private fun NavGraphBuilder.documentCreateScreen() {
+    composable(route = Routes.Authenticated.DocumentCreation.route) {
+        val viewModel = hiltViewModel<>()
+    }
+}*/

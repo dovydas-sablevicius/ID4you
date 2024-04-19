@@ -22,7 +22,8 @@ import com.project.id4you.presentation.screens.documentsList.components.Document
 @Composable
 fun DocumentsListScreen(
     state: DocumentsListState,
-    onNavigateToDocumentDetailScreen: (String) -> Unit
+    onNavigateToDocumentDetailScreen: (String) -> Unit,
+    onNavigateToDocumentCreationScreen: () -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -30,7 +31,8 @@ fun DocumentsListScreen(
     ) {
 
         DocumentScreenHeader(
-            modifier = Modifier.testTag(TestTags.DOCUMENT_LIST_HEADER)
+            modifier = Modifier.testTag(TestTags.DOCUMENT_LIST_HEADER),
+            method = { onNavigateToDocumentCreationScreen() }
         )
 
         LazyColumn(
