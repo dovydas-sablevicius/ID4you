@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -47,7 +49,7 @@ fun DocumentQrScanScreen(
     val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
 
     if (cameraPermissionState.status.isGranted) {
-        CameraScreen(viewModel, state, onNavigateToDocumentDetailScreen)
+        CameraScreen(onEvent, state, onNavigateToDocumentDetailScreen)
     } else if (cameraPermissionState.status.shouldShowRationale) {
         Text("Camera Permission permanently denied")
     } else {
@@ -60,7 +62,7 @@ fun DocumentQrScanScreen(
 
 @Composable
 fun CameraScreen(
-    viewModel: DocumentQrScanViewModel,
+    onEvent: (DocumentQrScanEvent) -> Unit,
     state: DocumentQrScanState,
     onNavigateToDocumentDetailScreen: (String) -> Unit
 ) {
@@ -88,7 +90,7 @@ fun CameraScreen(
 
                 val imageAnalysis = ImageAnalysis.Builder().build()
                 imageAnalysis.setAnalyzer(
-                    ContextCompat.getMainExecutor(context), QrCodeAnalyzer(viewModel)
+                    ContextCompat.getMainExecutor(context), QrCodeAnalyzer(onEvent)
                 )
 
                 runCatching {
@@ -108,28 +110,18 @@ fun CameraScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = Color.Black.copy(alpha = 0.6f)),
-        ) {
-            if (state.error.isNotBlank()) {
-                Box(
-                    contentAlignment = Alignment.BottomCenter,
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp, vertical = 60.dp),
-                ) {
-                    ErrorText(errorMessage = state.error, contentAlignment = Alignment.BottomCenter)
-                }
-            }
+                .background(color = Color.Black.copy(alpha = 0.5f)),
+        )
 
-            if (state.isLoading) {
-                LoadingIndicator(modifier = Modifier.testTag(TestTags.LOADING_COMPONENT))
-            }
-
-            if (state.isSuccess) {
-                LaunchedEffect(Unit) {
-                    onNavigateToDocumentDetailScreen(state.documentId)
-                }
-            }
-        }
+        Box(
+            modifier = Modifier
+                .size(200.dp)
+                .align(Alignment.Center)
+                .background(
+                    color = Color.White.copy(alpha = 0.1f),
+                    shape = RoundedCornerShape(8.dp)
+                )
+        )
 
         Column(
             modifier = Modifier
@@ -140,6 +132,37 @@ fun CameraScreen(
                 labelText = "Scan QR Code",
                 textType = TextType.HEADER_WHITE,
             )
+        }
+
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(top = 240.dp)
+        ) {
+            TextComponent(
+                labelText = "Place QR Code inside the frame",
+                textType = TextType.SMALL_WHITE,
+            )
+        }
+
+        if (state.error.isNotBlank()) {
+            Box(
+                contentAlignment = Alignment.BottomCenter,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 60.dp),
+            ) {
+                ErrorText(errorMessage = state.error, contentAlignment = Alignment.BottomCenter)
+            }
+        }
+
+        if (state.isLoading) {
+            LoadingIndicator(modifier = Modifier.testTag(TestTags.LOADING_COMPONENT))
+        }
+
+        if (state.isSuccess) {
+            LaunchedEffect(Unit) {
+                onNavigateToDocumentDetailScreen(state.documentId)
+            }
         }
     }
 }

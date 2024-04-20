@@ -66,7 +66,7 @@ private fun NavGraphBuilder.documentQrScreen() {
 }
 
 private fun NavGraphBuilder.documentQrScanScreen(navController: NavController) {
-    composable(route = Routes.Authenticated.DocumentQrScan.route + "/{documentId}") {
+    composable(route = Routes.Authenticated.DocumentQrScan.route) {
         val viewModel = hiltViewModel<DocumentQrScanViewModel>()
         DocumentQrScanScreen(
             state = viewModel.state.value,
