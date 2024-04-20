@@ -146,6 +146,9 @@ dependencies {
 
     //JWT
     implementation(libs.java.jwt)
+
+    //Image Fetching
+    implementation(libs.coil.compose)
 }
 kapt {
     correctErrorTypes = true

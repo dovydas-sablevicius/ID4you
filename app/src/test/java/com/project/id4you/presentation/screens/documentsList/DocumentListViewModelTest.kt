@@ -46,6 +46,8 @@ class DocumentListViewModelTest {
                 true,
                 "456456456456",
                 LocalDate.now().toString(),
+                listOf(),
+                "564156456",
                 listOf()
             ),
             Document(
@@ -55,6 +57,8 @@ class DocumentListViewModelTest {
                 true,
                 "456456456456",
                 LocalDate.now().toString(),
+                listOf(),
+                "564156456",
                 listOf()
             )
         )

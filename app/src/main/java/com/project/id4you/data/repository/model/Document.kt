@@ -8,4 +8,6 @@ data class Document(
     val documentCode: String,
     val validUntil: String,
     val documentPhotos: List<String>,
+    val collectionId: String,
+    val driverLicenseCategory: List<String>,
 )

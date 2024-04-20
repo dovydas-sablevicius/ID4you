@@ -10,7 +10,7 @@ interface PocketBaseDocumentApi {
     @GET("/api/collections/document/records")
     suspend fun getDocuments(@Header("Authorization") authToken: String): DocumentsDto
 
-    @GET("/api/collections/document/records/{id}")
+    @GET("/api/collections/document/records/{id}?expand=document_owner")
     suspend fun getDocument(
         @Header("Authorization") authToken: String,
         @Path("id") id: String

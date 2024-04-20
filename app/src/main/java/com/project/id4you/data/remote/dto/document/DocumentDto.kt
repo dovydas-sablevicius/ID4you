@@ -36,6 +36,8 @@ fun DocumentDto.toDocument(): Document {
         type = type,
         valid = valid,
         validUntil = validUntil,
-        documentPhotos = documentPhotos
+        documentPhotos = documentPhotos,
+        collectionId = collectionId,
+        driverLicenseCategory = driverLicenseCategory
     )
 }
