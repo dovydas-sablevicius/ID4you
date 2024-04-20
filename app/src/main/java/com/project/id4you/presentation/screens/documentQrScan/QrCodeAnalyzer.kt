@@ -8,7 +8,7 @@ import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 
-class QrCodeAnalyzer(private val viewModel: DocumentQrScanViewModel) : ImageAnalysis.Analyzer {
+class QrCodeAnalyzer(private val onEvent: (DocumentQrScanEvent) -> Unit) : ImageAnalysis.Analyzer {
 
     private val options = BarcodeScannerOptions.Builder()
         .setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS)
@@ -35,7 +35,7 @@ class QrCodeAnalyzer(private val viewModel: DocumentQrScanViewModel) : ImageAnal
                         ?.mapNotNull { it.rawValue }
                         ?.joinToString(",")
                         ?.let {
-                            viewModel.onBarcodeDetect(it)
+                            onEvent(DocumentQrScanEvent.OnBarcodeDetectEvent(it))
                         }
                 }.addOnCompleteListener {
                     imageProxy.close()

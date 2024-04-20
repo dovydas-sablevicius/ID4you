@@ -52,6 +52,15 @@ enum class TextType(val textStyle: TextStyle) {
             fontWeight = FontWeight(DEFAULT_FONT_WEIGHT)
         )
     ),
+    SMALL_WHITE(
+        TextStyle(
+            fontFamily = FontFamily.Default,
+            fontStyle = FontStyle.Normal,
+            fontSize = 14.sp,
+            fontWeight = FontWeight(REGULAR_FONT_WEIGHT),
+            color = Color.White
+        )
+    ),
     ERROR(TextStyle(/* define your error text style */)),
     DATA(TextStyle(/* define your data text style */));
 

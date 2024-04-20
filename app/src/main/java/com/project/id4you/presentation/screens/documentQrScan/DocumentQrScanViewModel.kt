@@ -22,7 +22,7 @@ class DocumentQrScanViewModel @Inject constructor(
     private val _state = mutableStateOf(DocumentQrScanState())
     val state: State<DocumentQrScanState> = _state
 
-    fun onBarcodeDetect(text: String) {
+    private fun onBarcodeDetect(text: String) {
         Log.i("myTag", text)
         val (documentId, expiresAt) = decodeAndVerifyJwt(text)
         Log.i("myTag", "$documentId $expiresAt")
@@ -89,7 +89,7 @@ class DocumentQrScanViewModel @Inject constructor(
 
     fun onEvent(event: DocumentQrScanEvent) {
         when (event) {
-            is DocumentQrScanEvent.onBarcodeDetectEvent -> {
+            is DocumentQrScanEvent.OnBarcodeDetectEvent -> {
                 onBarcodeDetect(event.scannedText)
             }
         }
