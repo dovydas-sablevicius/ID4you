@@ -33,7 +33,7 @@ fun CustomDropdown(
     modifier: Modifier = Modifier,
     labelText: String,
     items: List<String>,
-    selectedItem: String?,
+    selectedItem: String = "",
     onItemSelected: (String) -> Unit,
     color: Color = Blue,
     borderWidth: Dp = 1.dp,
@@ -56,7 +56,7 @@ fun CustomDropdown(
                 .clickable { expanded = true }
         ) {
             TextComponent(
-                labelText = selectedItem ?: labelText,
+                labelText = selectedItem.ifEmpty { labelText },
                 textType = TextType.CLICKABLE,
                 color = color,
                 modifier = Modifier

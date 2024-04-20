@@ -24,6 +24,7 @@ import com.project.id4you.presentation.components.text.TextType
 fun CreateDocumentScreen(
     state: CreateDocumentState,
     onEvent: (CreateDocumentEvent) -> Unit,
+    //onNavigateToUploadDocument: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -46,12 +47,13 @@ fun CreateDocumentScreen(
         CustomDropdown(
             labelText = "Select document type",
             items = listOf("Passport", "Driver's License", "ID Card"),
-            selectedItem = null,
-            onItemSelected = { onEvent(CreateDocumentEvent.EnteredName(it)) }
+            selectedItem = state.documentType,
+            onItemSelected = { onEvent(CreateDocumentEvent.EnteredDocumentType(it)) }
         )
 
         Spacer(modifier = Modifier.weight(1f))
         ButtonComponent(
+            method = { onEvent(CreateDocumentEvent.PressedContinueButton) },
             labelText = "Continue",
             textColor = Color.White,
             buttonColor = Color.Blue,
@@ -61,5 +63,11 @@ fun CreateDocumentScreen(
                 .testTag(TestTags.CONTINUE_BUTTON),
         )
     }
+
+    /*if (state.isSuccess) {
+        LaunchedEffect(Unit) {
+            onNavigateToUploadDocument()
+        }
+    }*/
 }
 
