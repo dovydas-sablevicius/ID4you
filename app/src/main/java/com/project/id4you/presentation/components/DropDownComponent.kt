@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -21,13 +22,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.project.id4you.presentation.components.text.TextComponent
+import com.project.id4you.presentation.components.text.TextType
 import com.project.id4you.presentation.ui.theme.AppColor.Companion.Blue
 
 @Composable
@@ -39,10 +37,6 @@ fun CustomDropdown(
     onItemSelected: (String) -> Unit,
     color: Color = Blue,
     borderWidth: Dp = 1.dp,
-    fontFamily: FontFamily = FontFamily.Default,
-    fontStyle: FontStyle = FontStyle.Normal,
-    fontSize: TextUnit = 12.sp,
-    fontWeight: FontWeight = FontWeight.Normal,
     horizontalPadding: Dp = 20.dp,
     verticalPadding: Dp = 10.dp,
     roundCornerRadius: Dp = 8.dp,
@@ -53,6 +47,7 @@ fun CustomDropdown(
         Box(
             modifier = modifier
                 .fillMaxWidth()
+                .height(70.dp)
                 .padding(horizontalPadding, verticalPadding)
                 .border(
                     BorderStroke(borderWidth, color),
@@ -60,29 +55,35 @@ fun CustomDropdown(
                 )
                 .clickable { expanded = true }
         ) {
-            Text(
-                text = selectedItem ?: labelText,
-                fontFamily = fontFamily,
-                fontStyle = fontStyle,
-                fontWeight = fontWeight,
-                fontSize = fontSize,
-                modifier = Modifier.padding(start = 8.dp, end = 20.dp)
+            TextComponent(
+                labelText = selectedItem ?: labelText,
+                textType = TextType.CLICKABLE,
+                color = color,
+                modifier = Modifier
+                    .padding(start = 8.dp, end = 20.dp)
+                    .align(Alignment.CenterStart)
             )
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,
                 contentDescription = "Dropdown Arrow",
                 tint = color,
-                modifier = Modifier.align(Alignment.CenterEnd)
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .padding(end = 10.dp)
             )
         }
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
         ) {
             items.forEach { item ->
-                DropdownMenuItem(text = { item }, onClick = { onItemSelected(item) })
+                DropdownMenuItem(text = { Text(item) }, onClick = {
+                    onItemSelected(item)
+                })
             }
         }
     }
 }
+

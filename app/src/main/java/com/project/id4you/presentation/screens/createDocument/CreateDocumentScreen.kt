@@ -44,9 +44,9 @@ fun CreateDocumentScreen(
         )
 
         CustomDropdown(
-            labelText = "Select Document Type",
-            items = listOf("asd", "dsa"),
-            selectedItem = "Selected Item",
+            labelText = "Select document type",
+            items = listOf("Passport", "Driver's License", "ID Card"),
+            selectedItem = null,
             onItemSelected = { onEvent(CreateDocumentEvent.EnteredName(it)) }
         )
 
