@@ -3,7 +3,6 @@ package com.project.id4you.presentation.screens.documentQrScan
 import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.auth0.jwt.JWT
@@ -16,16 +15,12 @@ import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
-class DocumentQrScanViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle
-) : ViewModel() {
+class DocumentQrScanViewModel @Inject constructor() : ViewModel() {
     private val _state = mutableStateOf(DocumentQrScanState())
     val state: State<DocumentQrScanState> = _state
 
     private fun onBarcodeDetect(text: String) {
-        Log.i("myTag", text)
         val (documentId, expiresAt) = decodeAndVerifyJwt(text)
-        Log.i("myTag", "$documentId $expiresAt")
 
         if (documentId == null || expiresAt == null) {
             _state.value = DocumentQrScanState(
@@ -62,7 +57,7 @@ class DocumentQrScanViewModel @Inject constructor(
         expiresAt ?: return false
 
         val currentTime = Date(System.currentTimeMillis())
-        val expirationDate = Date(expiresAt / 1000)
+        val expirationDate = Date(expiresAt / Constants.THOUSAND_MILLISECONDS)
 
         return currentTime.before(expirationDate)
     }
@@ -80,8 +75,7 @@ class DocumentQrScanViewModel @Inject constructor(
             val expiresAt = decodedToken.expiresAt?.time
             return Pair(documentId, expiresAt)
         } catch (e: JWTDecodeException) {
-            return Pair(null, null)
-        } catch (e: Exception) {
+            Log.e("JWTDecodeException", "Error decoding JWT token: ${e.message}", e)
             return Pair(null, null)
         }
 

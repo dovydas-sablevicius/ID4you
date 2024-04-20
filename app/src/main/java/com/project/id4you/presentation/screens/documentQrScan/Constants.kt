@@ -5,4 +5,5 @@ object Constants {
     const val RESET_ERROR_DELAY_MS: Long = 2000
     const val DOCUMENT_NOT_FOUND_ERROR_MSG = "Document not found"
     const val DOCUMENT_EXPIRED_ERROR_MSG = "QR Code is expired"
+    const val THOUSAND_MILLISECONDS = 1000
 }
