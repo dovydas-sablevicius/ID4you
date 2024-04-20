@@ -36,7 +36,6 @@ import com.project.id4you.presentation.components.LoadingIndicator
 import com.project.id4you.presentation.components.text.TextComponent
 import com.project.id4you.presentation.components.text.TextType
 
-
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun DocumentQrScanScreen(
