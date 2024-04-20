@@ -12,6 +12,8 @@ import com.project.id4you.presentation.screens.documentDetail.DocumentDetailScre
 import com.project.id4you.presentation.screens.documentDetail.DocumentDetailViewModel
 import com.project.id4you.presentation.screens.documentQr.DocumentQrScreen
 import com.project.id4you.presentation.screens.documentQr.DocumentQrViewModel
+import com.project.id4you.presentation.screens.documentUpload.DocumentUploadFrontScreen
+import com.project.id4you.presentation.screens.documentUpload.DocumentUploadFrontViewModel
 import com.project.id4you.presentation.screens.documentsList.DocumentsListScreen
 import com.project.id4you.presentation.screens.documentsList.DocumentsListViewModel
 
@@ -23,7 +25,9 @@ fun NavGraphBuilder.authenticatedGraph(navController: NavController) {
         documentsListScreen(navController)
         documentDetailScreen(navController)
         documentQrScreen()
-        documentCreateScreen()
+        documentCreateScreen(navController)
+        documentUploadFrontScreen(navController)
+        documentUploadFrontPreviewScreen(navController)
     }
 }
 
@@ -71,13 +75,39 @@ private fun NavGraphBuilder.documentQrScreen() {
     }
 }
 
-private fun NavGraphBuilder.documentCreateScreen() {
+private fun NavGraphBuilder.documentCreateScreen(navController: NavController) {
     composable(route = Routes.Authenticated.DocumentCreation.route) {
         val viewModel = hiltViewModel<CreateDocumentViewModel>()
         CreateDocumentScreen(
-            state = viewModel.state.value
-        ) {
-
-        }
+            state = viewModel.state.value,
+            onEvent = viewModel::onEvent,
+            onNavigateToUploadDocumentFront = {
+                navController.navigate(route = Routes.Authenticated.DocumentUploadFront.route)
+            }
+        )
     }
 }
+
+private fun NavGraphBuilder.documentUploadFrontScreen(navController: NavController) {
+    composable(route = Routes.Authenticated.DocumentUploadFront.route) {
+        val viewModel = hiltViewModel<DocumentUploadFrontViewModel>()
+        DocumentUploadFrontScreen(
+            /*state = viewModel.state.value,
+            onNavigateToUploadDocumentFrontPreview = {
+                navController.navigate(route = Routes.Authenticated.DocumentUploadFrontPreview.route)
+            }*/
+        )
+    }
+}
+
+private fun NavGraphBuilder.documentUploadFrontPreviewScreen(navController: NavController) {
+    /*composable(route = Routes.Authenticated.DocumentUploadFront.route) {
+        //val viewModel = hiltViewModel<DocumentFrontUploadViewModel>()
+        /*DocumentUploadScreen(
+
+        )*/
+    }*/
+}
+
+
+

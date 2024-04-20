@@ -24,7 +24,7 @@ import com.project.id4you.presentation.components.text.TextType
 fun CreateDocumentScreen(
     state: CreateDocumentState,
     onEvent: (CreateDocumentEvent) -> Unit,
-    //onNavigateToUploadDocument: () -> Unit
+    onNavigateToUploadDocumentFront: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -53,7 +53,7 @@ fun CreateDocumentScreen(
 
         Spacer(modifier = Modifier.weight(1f))
         ButtonComponent(
-            method = { onEvent(CreateDocumentEvent.PressedContinueButton) },
+            method = { onNavigateToUploadDocumentFront() },
             labelText = "Continue",
             textColor = Color.White,
             buttonColor = Color.Blue,
@@ -63,11 +63,5 @@ fun CreateDocumentScreen(
                 .testTag(TestTags.CONTINUE_BUTTON),
         )
     }
-
-    /*if (state.isSuccess) {
-        LaunchedEffect(Unit) {
-            onNavigateToUploadDocument()
-        }
-    }*/
 }
 

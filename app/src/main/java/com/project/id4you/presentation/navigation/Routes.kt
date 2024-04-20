@@ -13,5 +13,8 @@ sealed class Routes {
         data object DocumentDetail : Authenticated(route = "document-detail-screen")
         data object DocumentQr : Authenticated(route = "document-qr-screen")
         data object DocumentCreation : Authenticated(route = "create-document-screen")
+        data object DocumentUploadFront : Authenticated(route = "upload-document-front-screen")
+        data object DocumentUploadFrontPreview :
+            Authenticated(route = "upload-document-front-preview-screen")
     }
 }
