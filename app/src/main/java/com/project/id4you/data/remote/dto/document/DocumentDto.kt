@@ -24,9 +24,44 @@ data class DocumentDto(
     @SerializedName("valid_from")
     val validFrom: String,
     @SerializedName("valid_until")
-    val validUntil: String
+    val validUntil: String,
+    @SerializedName("expand")
+    val expand: Expand?
 )
 
+data class Expand(
+    @SerializedName("document_owner")
+    val documentOwner: DocumentOwner
+)
+
+data class DocumentOwner(
+    @SerializedName("birth_date")
+    val birthDate: String,
+    @SerializedName("collectionId")
+    val collectionId: String,
+    @SerializedName("collectionName")
+    val collectionName: String,
+    @SerializedName("created")
+    val created: String,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("emailVisibility")
+    val emailVisibility: Boolean,
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("personal_code")
+    val personalCode: String,
+    @SerializedName("surname")
+    val surname: String,
+    @SerializedName("updated")
+    val updated: String,
+    @SerializedName("username")
+    val username: String,
+    @SerializedName("verified")
+    val verified: Boolean
+)
 
 fun DocumentDto.toDocument(): Document {
     return Document(
@@ -38,6 +73,7 @@ fun DocumentDto.toDocument(): Document {
         validUntil = validUntil,
         documentPhotos = documentPhotos,
         collectionId = collectionId,
-        driverLicenseCategory = driverLicenseCategory
+        driverLicenseCategory = driverLicenseCategory,
+        documentOwner = expand?.documentOwner
     )
 }

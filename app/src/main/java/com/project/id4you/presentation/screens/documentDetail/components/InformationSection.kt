@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.project.id4you.data.repository.model.Document
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 @Composable
 fun InformationSection(modifier: Modifier = Modifier, document: Document) {
@@ -16,7 +18,15 @@ fun InformationSection(modifier: Modifier = Modifier, document: Document) {
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-        AttributeInformation(attributeName = "Name", attributeValue = document.name)
+        if (document.documentOwner != null) {
+            val birthdate: LocalDate =
+                LocalDate.parse(document.documentOwner.birthDate.substringBefore(" "))
+            val age: Long = ChronoUnit.YEARS.between(birthdate, LocalDate.now())
+            AttributeInformation(
+                attributeName = "Age",
+                attributeValue = age.toString()
+            )
+        }
         AttributeInformation(attributeName = "Type", attributeValue = document.type)
         AttributeInformation(
             attributeName = "Valid Until",

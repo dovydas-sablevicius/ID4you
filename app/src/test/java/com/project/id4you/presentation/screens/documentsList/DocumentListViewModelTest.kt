@@ -48,7 +48,8 @@ class DocumentListViewModelTest {
                 LocalDate.now().toString(),
                 listOf(),
                 "564156456",
-                listOf()
+                listOf(),
+                null
             ),
             Document(
                 "id2",
@@ -59,7 +60,8 @@ class DocumentListViewModelTest {
                 LocalDate.now().toString(),
                 listOf(),
                 "564156456",
-                listOf()
+                listOf(),
+                null
             )
         )
 
