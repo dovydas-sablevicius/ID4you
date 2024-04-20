@@ -1,4 +1,7 @@
 package com.project.id4you.presentation.screens.createDocument
 
-class CreateDocumentState {
-}
+
+data class CreateDocumentState(
+    val name: String = "",
+    val documentType: String = ""
+)

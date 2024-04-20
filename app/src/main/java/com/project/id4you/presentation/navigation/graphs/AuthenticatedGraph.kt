@@ -6,6 +6,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.project.id4you.presentation.navigation.Routes
+import com.project.id4you.presentation.screens.createDocument.CreateDocumentScreen
+import com.project.id4you.presentation.screens.createDocument.CreateDocumentViewModel
 import com.project.id4you.presentation.screens.documentDetail.DocumentDetailScreen
 import com.project.id4you.presentation.screens.documentDetail.DocumentDetailViewModel
 import com.project.id4you.presentation.screens.documentQr.DocumentQrScreen
@@ -21,6 +23,7 @@ fun NavGraphBuilder.authenticatedGraph(navController: NavController) {
         documentsListScreen(navController)
         documentDetailScreen(navController)
         documentQrScreen()
+        documentCreateScreen()
     }
 }
 
@@ -68,8 +71,13 @@ private fun NavGraphBuilder.documentQrScreen() {
     }
 }
 
-/*private fun NavGraphBuilder.documentCreateScreen() {
+private fun NavGraphBuilder.documentCreateScreen() {
     composable(route = Routes.Authenticated.DocumentCreation.route) {
-        val viewModel = hiltViewModel<>()
+        val viewModel = hiltViewModel<CreateDocumentViewModel>()
+        CreateDocumentScreen(
+            state = viewModel.state.value
+        ) {
+
+        }
     }
-}*/
+}

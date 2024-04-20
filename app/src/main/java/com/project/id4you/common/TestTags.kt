@@ -20,6 +20,7 @@ object TestTags {
     const val FORGOT_PASSWORD_BUTTON = "ForgotPasswordButton"
     const val LOADING_COMPONENT = "LoadingComponent"
     const val ERROR_MESSAGE = "ErrorMessage"
+    const val CONTINUE_BUTTON = "Continue"
 
     //tags for DocumentQrScreen
     const val DOCUMENT_QR_SCREEN = "DocumentQrScreen"
