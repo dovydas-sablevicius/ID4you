@@ -3,6 +3,7 @@ package com.project.id4you.presentation.screens.documentsList
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,20 +27,26 @@ fun DocumentsListScreen(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.testTag(TestTags.DOCUMENT_LIST_SCREEN)
+        modifier = Modifier
+            .testTag(TestTags.DOCUMENT_LIST_SCREEN)
     ) {
 
         DocumentScreenHeader(
             modifier = Modifier.testTag(TestTags.DOCUMENT_LIST_HEADER)
         )
 
+        Spacer(modifier = Modifier.padding(20.dp))
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(550.dp)
                 .testTag(TestTags.DOCUMENT_LIST),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             items(state.documents) { document ->
+                Spacer(modifier = Modifier.padding(8.dp))
                 CardComponent(
                     modifier = Modifier.testTag(TestTags.ID_CARD),
                     documentName = document.name,
