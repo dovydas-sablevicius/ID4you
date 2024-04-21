@@ -22,7 +22,8 @@ import com.project.id4you.presentation.screens.documentsList.components.Document
 @Composable
 fun DocumentsListScreen(
     state: DocumentsListState,
-    onNavigateToDocumentDetailScreen: (String) -> Unit
+    onNavigateToDocumentDetailScreen: (String) -> Unit,
+    onNavigateToQrScanScreen: () -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -61,6 +62,7 @@ fun DocumentsListScreen(
                 .width(350.dp)
                 .padding(vertical = 16.dp)
                 .testTag(TestTags.SCAN_BUTTON),
+            method = onNavigateToQrScanScreen
         )
     }
 }

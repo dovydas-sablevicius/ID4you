@@ -36,6 +36,11 @@ private fun NavGraphBuilder.documentsListScreen(navController: NavController) {
                 navController.navigate(
                     route = Routes.Authenticated.DocumentDetail.route + "/${documentId}"
                 )
+            },
+            onNavigateToQrScanScreen = {
+                navController.navigate(
+                    route = Routes.Authenticated.DocumentQrScan.route
+                )
             }
         )
     }
