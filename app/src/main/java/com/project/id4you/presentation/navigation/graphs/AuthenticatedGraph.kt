@@ -45,13 +45,12 @@ private fun NavGraphBuilder.documentDetailScreen(navController: NavController) {
     composable(route = Routes.Authenticated.DocumentDetail.route + "/{documentId}") {
         val viewModel = hiltViewModel<DocumentDetailViewModel>()
         DocumentDetailScreen(
-            state = viewModel.state.value,
-            onNavigateToDocumentQrScreen = { documentId ->
-                navController.navigate(
-                    route = Routes.Authenticated.DocumentQr.route + "/${documentId}"
-                )
-            }
-        )
+            state = viewModel.state.value
+        ) { documentId ->
+            navController.navigate(
+                route = Routes.Authenticated.DocumentQr.route + "/${documentId}"
+            )
+        }
     }
 }
 

@@ -1,9 +1,9 @@
 package com.project.id4you.di
 
 import com.project.id4you.data.remote.PocketBaseApi
-import com.project.id4you.data.repository.impl.IdCardRepositoryImpl
+import com.project.id4you.data.repository.impl.DocumentRepositoryImpl
 import com.project.id4you.data.repository.impl.UserRepositoryImpl
-import com.project.id4you.domain.repository.IdCardRepository
+import com.project.id4you.domain.repository.DocumentRepository
 import com.project.id4you.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
@@ -29,7 +29,7 @@ object TestAppModule {
 
     @Provides
     @Singleton
-    fun provideIdCardRepository(api: PocketBaseApi): IdCardRepository {
-        return IdCardRepositoryImpl(api)
+    fun provideIdCardRepository(api: PocketBaseApi): DocumentRepository {
+        return DocumentRepositoryImpl(api)
     }
 }
