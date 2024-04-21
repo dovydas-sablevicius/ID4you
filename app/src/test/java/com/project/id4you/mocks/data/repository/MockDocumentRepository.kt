@@ -20,7 +20,8 @@ class MockDocumentRepository : DocumentRepository {
                 LocalDate.now().toString(),
                 listOf(),
                 "145154564",
-                listOf()
+                listOf(),
+                null
             ),
             Document(
                 "id2",
@@ -31,7 +32,8 @@ class MockDocumentRepository : DocumentRepository {
                 LocalDate.now().toString(),
                 listOf(),
                 "564156456",
-                listOf()
+                listOf(),
+                null
             )
         )
 
@@ -56,7 +58,8 @@ class MockDocumentRepository : DocumentRepository {
                 LocalDate.now().toString(),
                 listOf(),
                 "564156456",
-                listOf()
+                listOf(),
+                null
             ),
             Document(
                 "id2",
@@ -67,7 +70,8 @@ class MockDocumentRepository : DocumentRepository {
                 LocalDate.now().toString(),
                 listOf(),
                 "564156456",
-                listOf()
+                listOf(),
+                null
             )
         )
 

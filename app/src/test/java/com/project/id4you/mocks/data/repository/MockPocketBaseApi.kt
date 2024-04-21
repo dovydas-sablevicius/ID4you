@@ -55,7 +55,8 @@ class MockPocketBaseApi : PocketBaseApi {
                         documentCode = "417856164",
                         validUntil = "",
                         validFrom = "",
-                        driverLicenseCategory = listOf()
+                        driverLicenseCategory = listOf(),
+                        expand = null
                     ),
                     DocumentDto(
                         collectionId = "",
@@ -71,7 +72,8 @@ class MockPocketBaseApi : PocketBaseApi {
                         documentCode = "15415489",
                         driverLicenseCategory = listOf(),
                         validFrom = "",
-                        validUntil = ""
+                        validUntil = "",
+                        expand = null
                     )
                 ),
                 1,

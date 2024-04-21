@@ -126,7 +126,8 @@ fun SuccessScreenPreview() {
                 validUntil = LocalDate.now().toString(),
                 documentPhotos = listOf(),
                 collectionId = "4564564",
-                driverLicenseCategory = listOf()
+                driverLicenseCategory = listOf(),
+                documentOwner = null
             )
         )
     ) {}
