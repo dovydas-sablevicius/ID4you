@@ -1,8 +1,8 @@
 package com.project.id4you.presentation.screens.documentsList
 
-import com.project.id4you.data.repository.model.IdCard
-import com.project.id4you.domain.useCase.getIdCards.GetIdCardsUseCase
-import com.project.id4you.mocks.data.repository.MockIdCardRepository
+import com.project.id4you.data.repository.model.Document
+import com.project.id4you.domain.useCase.getDocuments.GetDocumentsUseCase
+import com.project.id4you.mocks.data.repository.MockDocumentRepository
 import com.project.id4you.presentation.singleton.AuthToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -11,19 +11,20 @@ import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import java.time.LocalDate
 
 class DocumentListViewModelTest {
 
     private lateinit var documentsListViewModel: DocumentsListViewModel
-    private lateinit var getIdCardsUseCase: GetIdCardsUseCase
-    private lateinit var mockIdCardRepository: MockIdCardRepository
+    private lateinit var getDocumentsUseCase: GetDocumentsUseCase
+    private lateinit var mockIdCardRepository: MockDocumentRepository
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setUp() {
         Dispatchers.setMain(Dispatchers.Unconfined)
-        mockIdCardRepository = MockIdCardRepository()
-        getIdCardsUseCase = GetIdCardsUseCase(mockIdCardRepository)
+        mockIdCardRepository = MockDocumentRepository()
+        getDocumentsUseCase = GetDocumentsUseCase(mockIdCardRepository)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -37,13 +38,35 @@ class DocumentListViewModelTest {
 
         AuthToken.value = "Token"
 
-        val idCards = listOf(
-            IdCard("id1", "Card 1", "", ""),
-            IdCard("id2", "Card 2", "", "")
+        val documents = listOf(
+            Document(
+                "id1",
+                "Card 1",
+                "",
+                true,
+                "456456456456",
+                LocalDate.now().toString(),
+                listOf(),
+                "564156456",
+                listOf(),
+                null
+            ),
+            Document(
+                "id2",
+                "Card 2",
+                "",
+                true,
+                "456456456456",
+                LocalDate.now().toString(),
+                listOf(),
+                "564156456",
+                listOf(),
+                null
+            )
         )
 
-        documentsListViewModel = DocumentsListViewModel(getIdCardsUseCase)
-        assert(documentsListViewModel.state.value.documents[0].name == idCards[0].name)
+        documentsListViewModel = DocumentsListViewModel(getDocumentsUseCase)
+        assert(documentsListViewModel.state.value.documents[0].name == documents[0].name)
     }
 
     @Test
@@ -51,7 +74,7 @@ class DocumentListViewModelTest {
 
         AuthToken.value = "asd"
 
-        documentsListViewModel = DocumentsListViewModel(getIdCardsUseCase)
+        documentsListViewModel = DocumentsListViewModel(getDocumentsUseCase)
         assert(documentsListViewModel.state.value.error == "Wrong Data")
     }
 

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project.id4you.common.ExceptionMessages
 import com.project.id4you.common.Resource
-import com.project.id4you.domain.useCase.getIdCards.GetIdCardsUseCase
+import com.project.id4you.domain.useCase.getDocuments.GetDocumentsUseCase
 import com.project.id4you.presentation.singleton.AuthToken
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DocumentsListViewModel @Inject constructor(
-    private val getIdCardsUseCase: GetIdCardsUseCase
+    private val getDocumentsUseCase: GetDocumentsUseCase
 ) : ViewModel() {
     private val _state = mutableStateOf(DocumentsListState())
     val state: State<DocumentsListState> = _state
@@ -27,7 +27,7 @@ class DocumentsListViewModel @Inject constructor(
 
     private fun getDocuments(authToken: String) {
         viewModelScope.launch {
-            getIdCardsUseCase(authToken).onEach { result ->
+            getDocumentsUseCase(authToken).onEach { result ->
                 when (result) {
                     is Resource.Error -> {
                         _state.value =
