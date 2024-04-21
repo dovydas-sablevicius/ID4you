@@ -40,7 +40,7 @@ fun DocumentsListScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(600.dp)
+                .height(550.dp)
                 .testTag(TestTags.DOCUMENT_LIST),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
