@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTDecodeException
+import com.auth0.jwt.exceptions.TokenExpiredException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -20,6 +21,8 @@ class DocumentQrScanViewModel @Inject constructor() : ViewModel() {
     val state: State<DocumentQrScanState> = _state
 
     private fun onBarcodeDetect(text: String) {
+        Log.i("JWT WHEN SCANNED", text)
+
         val (documentId, expiresAt) = decodeAndVerifyJwt(text)
 
         if (documentId == null || expiresAt == null) {
@@ -77,8 +80,10 @@ class DocumentQrScanViewModel @Inject constructor() : ViewModel() {
         } catch (e: JWTDecodeException) {
             Log.e("JWTDecodeException", "Error decoding JWT token: ${e.message}", e)
             return Pair(null, null)
+        } catch (e: TokenExpiredException) {
+            Log.e("TokenExpiredException", "Token has expired: ${e.message}", e)
+            return Pair(null, null)
         }
-
     }
 
     fun onEvent(event: DocumentQrScanEvent) {
