@@ -9,7 +9,6 @@ import javax.inject.Inject
 @Suppress("TooGenericExceptionThrown")
 @HiltViewModel
 class CreateDocumentViewModel @Inject constructor(
-    //savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _state = mutableStateOf((CreateDocumentState()))
     val state: State<CreateDocumentState> = _state

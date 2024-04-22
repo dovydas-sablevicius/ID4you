@@ -1,8 +1,10 @@
 package com.project.id4you.presentation.screens.createDocument
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -37,35 +39,37 @@ fun CreateDocumentScreen(
 
     Column(
         modifier = Modifier
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Spacer(modifier = Modifier.height(20.dp))
-        Box(
-            modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center
-        ) {
-            TextComponent(labelText = "Create", textType = TextType.HEADER)
+        Column() {
+
+            Spacer(modifier = Modifier.height(20.dp))
+            Box(
+                modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center
+            ) {
+                TextComponent(labelText = "Create", textType = TextType.HEADER)
+            }
+
+            CustomTextField(
+                labelText = "Name...",
+                value = state.name,
+                onValueChange = { onEvent(CreateDocumentEvent.EnteredName(it)) }
+            )
+
+            CustomDropdown(
+                labelText = "Select document type",
+                items = listOf("Passport", "Driver's License", "ID Card"),
+                selectedItem = state.documentType,
+                onItemSelected = { onEvent(CreateDocumentEvent.EnteredDocumentType(it)) }
+            )
         }
-
-        CustomTextField(
-            labelText = "Name...",
-            value = state.name,
-            onValueChange = { onEvent(CreateDocumentEvent.EnteredName(it)) }
-        )
-
-        CustomDropdown(
-            labelText = "Select document type",
-            items = listOf("Passport", "Driver's License", "ID Card"),
-            selectedItem = state.documentType,
-            onItemSelected = { onEvent(CreateDocumentEvent.EnteredDocumentType(it)) }
-        )
-
 
         if (state.error.isNotBlank()) {
             ErrorText(errorMessage = errorMessage, modifier = Modifier.size(500.dp))
         }
 
-        Spacer(modifier = Modifier.weight(1f))
         ButtonComponent(
             method = {
                 if (state.name.isNotBlank() && state.documentType.isNotBlank()) {
