@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.project.id4you.presentation.components.text.TextComponent
 import com.project.id4you.presentation.components.text.TextType
-import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
 fun StatusText(valid: Boolean) {
@@ -25,14 +24,12 @@ fun StatusText(valid: Boolean) {
         if (valid) {
             TextComponent(
                 labelText = "Valid",
-                textType = TextType.REGULAR,
-                color = AppColor.Green
+                textType = TextType.SUCCESS
             )
         } else {
             TextComponent(
                 labelText = "Invalid",
-                textType = TextType.REGULAR,
-                color = AppColor.Red
+                textType = TextType.ERROR
             )
         }
     }
