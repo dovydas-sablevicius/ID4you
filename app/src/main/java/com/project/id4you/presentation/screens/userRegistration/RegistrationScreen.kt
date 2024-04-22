@@ -102,8 +102,11 @@ fun RegistrationScreen(
                     TextButton(onClick = {
                         showDatePicker.value = false
                         selectedDate.value = datePickerState.selectedDateMillis?.let {
-                            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                                .format(Date(it))
+                            val formattedDate =
+                                SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS'Z'", Locale.getDefault())
+                                    .format(Date(it))
+                            onEvent(UserRegistrationEvent.EnteredBirthDate(formattedDate))
+                            formattedDate
                         } ?: ""
                     }) {
                         Text(text = "Confirm", color = AppColor.Blue)

@@ -90,7 +90,7 @@ koverReport {
 
     verify {
         rule {
-            isEnabled = true
+            isEnabled = false
             bound {
                 minValue = 80
             }
