@@ -8,7 +8,11 @@ interface UserRepository {
     suspend fun registerUser(
         email: String,
         password: String,
-        passwordAgain: String
+        passwordAgain: String,
+        name: String,
+        surname: String,
+        birthDate: String,
+        personalCode: String
     ): Flow<Resource<Unit>>
 
     suspend fun loginUser(email: String, password: String): Flow<Resource<User>>

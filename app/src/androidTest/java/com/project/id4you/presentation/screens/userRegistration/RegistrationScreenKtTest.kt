@@ -1,4 +1,4 @@
-package com.project.id4you.presentation.screens.userLogin
+package com.project.id4you.presentation.screens.userRegistration
 
 import androidx.activity.compose.setContent
 import androidx.compose.ui.test.assertIsDisplayed
@@ -75,17 +75,25 @@ class RegistrationScreenKtTest {
         val email: String = "test@test.com"
         val password: String = "1234567890"
         val passwordAgain: String = "1234567890"
-        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_EMAIL_INPUT).assertIsDisplayed()
-        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_INPUT).assertIsDisplayed()
-        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_CONFIRM_INPUT)
-            .assertIsDisplayed()
-        composeRule.onNodeWithTag(TestTags.SIGN_UP_BUTTON).assertIsDisplayed()
+        val name: String = "John"
+        val surname: String = "Doe"
+        val birthDate: String = "2000-01-01"
+        val personalCode: String = "12345678901"
+
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_EMAIL_INPUT).performTextInput(email)
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_INPUT)
             .performTextInput(password)
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_CONFIRM_INPUT)
             .performTextInput(passwordAgain)
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_NAME_INPUT).performTextInput(name)
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_SURNAME_INPUT)
+            .performTextInput(surname)
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_BIRTH_DATE_INPUT)
+            .performTextInput(birthDate)
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PERSONAL_CODE_INPUT)
+            .performTextInput(personalCode)
         composeRule.onNodeWithTag(TestTags.SIGN_UP_BUTTON).performClick()
+
         runBlocking { delay(200L) }
         composeRule.onNodeWithTag(TestTags.LOADING_COMPONENT).assertIsDisplayed()
         runBlocking { delay(700L) }

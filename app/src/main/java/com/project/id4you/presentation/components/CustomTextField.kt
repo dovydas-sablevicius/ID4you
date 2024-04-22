@@ -2,12 +2,18 @@ package com.project.id4you.presentation.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -46,6 +52,9 @@ fun CustomTextField(
     horizontalPadding: Dp = 20.dp,
     verticalPadding: Dp = 10.dp,
     roundCornerRadius: Dp = 8.dp,
+    showDatePickerTrigger: Boolean = false,
+    onDatePickerClick: () -> Unit = {},
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
 ) {
     val (isPasswordVisible, setPasswordVisible) = remember { mutableStateOf(!isPasswordField) }
 
@@ -53,6 +62,7 @@ fun CustomTextField(
         TextField(
             value = value,
             onValueChange = onValueChange,
+            keyboardOptions = keyboardOptions,
             label = {
                 Text(
                     text = labelText,
@@ -80,8 +90,24 @@ fun CustomTextField(
                 unfocusedLabelColor = color,
             ),
             visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            singleLine = true
+            singleLine = true,
+            trailingIcon = {
+                if (showDatePickerTrigger) {
+                    IconButton(onClick = onDatePickerClick) {
+                        Icon(
+                            imageVector = Icons.Default.DateRange,
+                            contentDescription = "Select Date",
+                            modifier = Modifier
+                                .align(Alignment.CenterEnd)
+                                .padding(end = 12.dp)
+                                .clickable(onClick = onDatePickerClick),
+                            tint = Blue
+                        )
+                    }
+                }
+            },
         )
+
         if (isPasswordField) {
             Button(
                 onClick = { setPasswordVisible(!isPasswordVisible) },

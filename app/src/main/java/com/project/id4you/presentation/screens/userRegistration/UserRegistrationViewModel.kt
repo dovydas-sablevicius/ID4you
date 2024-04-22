@@ -32,6 +32,22 @@ class UserRegistrationViewModel @Inject constructor(
                 updatePasswordAgain(event.value)
             }
 
+            is UserRegistrationEvent.EnteredName -> {
+                updateName(event.value)
+            }
+
+            is UserRegistrationEvent.EnteredSurname -> {
+                updateSurname(event.value)
+            }
+
+            is UserRegistrationEvent.EnteredPersonalCode -> {
+                updatePersonalCode(event.value)
+            }
+
+            is UserRegistrationEvent.EnteredBirthDate -> {
+                updateBirthDate(event.value)
+            }
+
             UserRegistrationEvent.PressedRegisterButton -> {
                 registerAction()
             }
@@ -50,15 +66,42 @@ class UserRegistrationViewModel @Inject constructor(
         _state.value = state.value.copy(passwordAgain = value)
     }
 
-    private fun registerAction() {
-        val (email, password, passwordAgain) = _state.value
-        registerUser(email, password, passwordAgain)
+    private fun updateName(value: String) {
+        _state.value = state.value.copy(name = value)
     }
 
-    private fun registerUser(email: String, password: String, passwordConfirm: String) {
+    private fun updateSurname(value: String) {
+        _state.value = state.value.copy(surname = value)
+    }
+
+    private fun updatePersonalCode(value: String) {
+        _state.value = state.value.copy(personalCode = value)
+    }
+
+    private fun updateBirthDate(value: String) {
+        _state.value = state.value.copy(birthDate = value)
+    }
+
+    private fun registerAction() {
+        val (email, password, passwordAgain, name, surname, birthDate, personalCode) = state.value
+        registerUser(email, password, passwordAgain, name, surname, birthDate, personalCode)
+    }
+
+    private fun registerUser(
+        email: String, password: String, passwordConfirm: String,
+        name: String, surname: String, birthDate: String, personalCode: String
+    ) {
         val unexpectedErrorMessage: String = "An unexpected error occurred."
         viewModelScope.launch {
-            registerUserUseCase(email, password, passwordConfirm).onEach { result ->
+            registerUserUseCase(
+                email,
+                password,
+                passwordConfirm,
+                name,
+                surname,
+                birthDate,
+                personalCode
+            ).onEach { result ->
                 when (result) {
                     is Resource.Error -> {
                         _state.value =
