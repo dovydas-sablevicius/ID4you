@@ -10,6 +10,10 @@ object TestTags {
     const val REGISTRATION_SCREEN_EMAIL_INPUT = "RegistrationEmailInput"
     const val REGISTRATION_SCREEN_PASSWORD_INPUT = "RegistrationPasswordInput"
     const val REGISTRATION_SCREEN_PASSWORD_CONFIRM_INPUT = "RegistrationPasswordConfirmInput"
+    const val REGISTRATION_SCREEN_NAME_INPUT = "RegistrationNameInput"
+    const val REGISTRATION_SCREEN_SURNAME_INPUT = "RegistrationSurnameInput"
+    const val REGISTRATION_SCREEN_BIRTH_DATE_INPUT = "RegistrationBirthDateInput"
+    const val REGISTRATION_SCREEN_PERSONAL_CODE_INPUT = "RegistrationPersonalCodeInput"
     const val SIGN_UP_BUTTON = "SignUpButton"
     const val LOGIN_BUTTON = "LoginButton"
     const val DOCUMENT_LIST_SCREEN = "DocumentListScreen"
@@ -20,6 +24,7 @@ object TestTags {
     const val FORGOT_PASSWORD_BUTTON = "ForgotPasswordButton"
     const val LOADING_COMPONENT = "LoadingComponent"
     const val ERROR_MESSAGE = "ErrorMessage"
+
 
     //tags for DocumentQrScreen
     const val DOCUMENT_QR_SCREEN = "DocumentQrScreen"

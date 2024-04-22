@@ -20,13 +20,25 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun registerUser(
         email: String,
         password: String,
-        passwordAgain: String
+        passwordAgain: String,
+        name: String,
+        surname: String,
+        birthDate: String,
+        personalCode: String
     ): Flow<Resource<Unit>> =
         flow {
             try {
                 emit(Resource.Loading())
                 val userRegistrationDto: UserRegistrationDto =
-                    UserRegistrationDto(email, password, passwordAgain)
+                    UserRegistrationDto(
+                        email,
+                        password,
+                        passwordAgain,
+                        name,
+                        surname,
+                        birthDate,
+                        personalCode
+                    )
                 val response: Unit = api.registerUser(userRegistrationDto)
                 emit(Resource.Success(response))
             } catch (e: HttpException) {

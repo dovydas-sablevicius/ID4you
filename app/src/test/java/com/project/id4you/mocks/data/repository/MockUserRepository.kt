@@ -9,16 +9,19 @@ import kotlinx.coroutines.flow.flow
 
 class MockUserRepository : UserRepository {
     private val users = mutableListOf<User>()
-
     override suspend fun registerUser(
         email: String,
         password: String,
-        passwordAgain: String
+        passwordAgain: String,
+        name: String,
+        surname: String,
+        birthDate: String,
+        personalCode: String
     ): Flow<Resource<Unit>> {
         return flow {
             emit(Resource.Loading())
             if (password == passwordAgain) {
-                users.add(User(email, java.util.UUID.randomUUID().toString(), "", ""))
+                users.add(User(email, java.util.UUID.randomUUID().toString(), name, surname))
                 emit(Resource.Success(Unit))
             } else {
                 emit(Resource.Error("Passwords do not match"))

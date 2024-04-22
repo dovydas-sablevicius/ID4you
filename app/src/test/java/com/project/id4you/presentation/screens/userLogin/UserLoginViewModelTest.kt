@@ -27,9 +27,33 @@ class UserLoginViewModelTest {
         loginUserUseCase = LoginUserUseCase(fakeUserRepository)
         userLoginViewModel = UserLoginViewModel(loginUserUseCase)
         runBlocking {
-            fakeUserRepository.registerUser("test@test.com", "password123", "password123")
-            fakeUserRepository.registerUser("test1@test.com", "password123", "password123")
-            fakeUserRepository.registerUser("test2@test.com", "password123", "password123")
+            fakeUserRepository.registerUser(
+                "test@test.com",
+                "password123",
+                "password123",
+                "John",
+                "Doe",
+                "2000-01-01",
+                "12345678901"
+            )
+            fakeUserRepository.registerUser(
+                "test1@test.com",
+                "password123",
+                "password123",
+                "Jane",
+                "Doe",
+                "2000-01-02",
+                "12345678902"
+            )
+            fakeUserRepository.registerUser(
+                "test2@test.com",
+                "password123",
+                "password123",
+                "Jim",
+                "Doe",
+                "2000-01-03",
+                "12345678903"
+            )
         }
 
     }
