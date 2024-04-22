@@ -19,18 +19,33 @@ fun InformationSection(modifier: Modifier = Modifier, document: Document) {
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         if (document.documentOwner != null) {
-            val birthdate: LocalDate =
-                LocalDate.parse(document.documentOwner.birthDate.substringBefore(" "))
-            val age: Long = ChronoUnit.YEARS.between(birthdate, LocalDate.now())
+
             AttributeInformation(
-                attributeName = "Age",
-                attributeValue = age.toString()
+                attributeName = "Name",
+                attributeValue = document.documentOwner.name
+            )
+            AttributeInformation(
+                attributeName = "Surname",
+                attributeValue = document.documentOwner.surname
+            )
+            if (document.documentOwner.birthDate.isNotEmpty()) {
+                val birthdate: LocalDate =
+                    LocalDate.parse(document.documentOwner.birthDate.substringBefore(" "))
+                val age: Long = ChronoUnit.YEARS.between(birthdate, LocalDate.now())
+                AttributeInformation(
+                    attributeName = "Age",
+                    attributeValue = age.toString()
+                )
+            }
+            AttributeInformation(
+                attributeName = "Personal Code",
+                attributeValue = document.documentOwner.personalCode
             )
         }
         AttributeInformation(attributeName = "Type", attributeValue = document.type)
         AttributeInformation(
             attributeName = "Valid Until",
-            attributeValue = document.validUntil
+            attributeValue = document.validUntil.substringBefore(" ")
         )
         AttributeInformation(
             attributeName = "Document Code",

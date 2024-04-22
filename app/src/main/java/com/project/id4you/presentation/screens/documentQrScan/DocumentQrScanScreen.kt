@@ -141,7 +141,6 @@ fun CameraScreen(
             TextComponent(
                 labelText = "Scan QR Code",
                 textType = TextType.HEADER_WHITE,
-                color = Color.White
             )
         }
 
@@ -153,7 +152,6 @@ fun CameraScreen(
             TextComponent(
                 labelText = "Place QR Code inside the frame",
                 textType = TextType.SMALL_WHITE,
-                color = Color.White
             )
         }
 
