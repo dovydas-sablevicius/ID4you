@@ -1,5 +1,6 @@
 package com.project.id4you.presentation.screens.documentUpload
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,11 +19,10 @@ import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
 fun DocumentUploadFrontScreen(
-    /*state: DocumentUploadFrontState,
-    onNavigateToUploadDocumentFrontPreview: () -> Unit*/
     documentName: String,
     documentType: String
 ) {
+    Log.i(documentName, "veikia")
     Box(
         modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center
     ) {
@@ -49,3 +49,5 @@ fun DocumentUploadFrontScreen(
         }
     }
 }
+
+

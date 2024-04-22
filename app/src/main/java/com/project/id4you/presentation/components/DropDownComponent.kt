@@ -28,6 +28,7 @@ import com.project.id4you.presentation.components.text.TextComponent
 import com.project.id4you.presentation.components.text.TextType
 import com.project.id4you.presentation.ui.theme.AppColor.Companion.Blue
 
+@Suppress("LongParameterList")
 @Composable
 fun CustomDropdown(
     modifier: Modifier = Modifier,

@@ -13,7 +13,6 @@ import com.project.id4you.presentation.screens.documentDetail.DocumentDetailView
 import com.project.id4you.presentation.screens.documentQr.DocumentQrScreen
 import com.project.id4you.presentation.screens.documentQr.DocumentQrViewModel
 import com.project.id4you.presentation.screens.documentUpload.DocumentUploadFrontScreen
-import com.project.id4you.presentation.screens.documentUpload.DocumentUploadFrontViewModel
 import com.project.id4you.presentation.screens.documentsList.DocumentsListScreen
 import com.project.id4you.presentation.screens.documentsList.DocumentsListViewModel
 
@@ -26,8 +25,7 @@ fun NavGraphBuilder.authenticatedGraph(navController: NavController) {
         documentDetailScreen(navController)
         documentQrScreen()
         documentCreateScreen(navController)
-        documentUploadFrontScreen(navController)
-        documentUploadFrontPreviewScreen(navController)
+        documentUploadFrontScreen()
     }
 }
 
@@ -79,15 +77,21 @@ private fun NavGraphBuilder.documentCreateScreen(navController: NavController) {
             state = viewModel.state.value,
             onEvent = viewModel::onEvent,
             onNavigateToUploadDocumentFront = { documentName, documentType ->
-                navController.navigate(route = Routes.Authenticated.DocumentUploadFront.route + "?documentName=${documentName}&documentType=${documentType}")
+                navController.navigate(
+                    route = Routes.Authenticated.DocumentUploadFront.route +
+                            "?documentName=${documentName}&documentType=${documentType}"
+                )
             }
         )
     }
 }
 
-private fun NavGraphBuilder.documentUploadFrontScreen(navController: NavController) {
-    composable(route = Routes.Authenticated.DocumentUploadFront.route + "?documentName={documentName}&documentType={documentType}") { backStackEntry ->
-        val viewModel = hiltViewModel<DocumentUploadFrontViewModel>()
+private fun NavGraphBuilder.documentUploadFrontScreen() {
+    composable(
+        route = Routes.Authenticated.DocumentUploadFront.route +
+                "?documentName={documentName}&documentType={documentType}"
+    ) { backStackEntry ->
+        //val viewModel = hiltViewModel<DocumentUploadFrontViewModel>()
         val documentName = backStackEntry.arguments?.getString("documentName")
         val documentType = backStackEntry.arguments?.getString("documentType")
 
@@ -95,22 +99,10 @@ private fun NavGraphBuilder.documentUploadFrontScreen(navController: NavControll
             documentName = documentName ?: "",
             documentType = documentType ?: "",
 
-            /*state = viewModel.state.value,
-            onNavigateToUploadDocumentFrontPreview = {
-                navController.navigate(route = Routes.Authenticated.DocumentUploadFrontPreview.route)
-            }*/
-        )
+            )
     }
 }
 
-private fun NavGraphBuilder.documentUploadFrontPreviewScreen(navController: NavController) {
-    /*composable(route = Routes.Authenticated.DocumentUploadFront.route) {
-        //val viewModel = hiltViewModel<DocumentFrontUploadViewModel>()
-        /*DocumentUploadScreen(
-
-        )*/
-    }*/
-}
 
 
 
