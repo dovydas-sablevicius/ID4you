@@ -101,7 +101,8 @@ class MockPocketBaseApi : PocketBaseApi {
                 valid = false,
                 driverLicenseCategory = listOf(),
                 validFrom = "",
-                validUntil = ""
+                validUntil = "",
+                expand = null
             )
         )
         return DocumentsDto(idCards, 1, 1, 1, 1)

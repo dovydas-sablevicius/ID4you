@@ -55,7 +55,8 @@ class MockPocketBaseApiIOException : PocketBaseApi {
                         valid = false,
                         driverLicenseCategory = listOf(),
                         validFrom = "",
-                        validUntil = ""
+                        validUntil = "",
+                        expand = null
                     ),
                     DocumentDto(
                         collectionId = "",
@@ -71,7 +72,8 @@ class MockPocketBaseApiIOException : PocketBaseApi {
                         valid = false,
                         validUntil = "",
                         validFrom = "",
-                        driverLicenseCategory = listOf()
+                        driverLicenseCategory = listOf(),
+                        expand = null
 
                     )
                 ),

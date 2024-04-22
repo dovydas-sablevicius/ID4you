@@ -5,12 +5,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,46 +40,57 @@ fun CardComponent(
     modifier: Modifier = Modifier,
     method: () -> Unit = {}
 ) {
-    Button(
-        onClick = method,
-        modifier = modifier
-            .height(100.dp)
-            .width(350.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = backgroundColor
-        ),
-        shape = RoundedCornerShape(20.dp),
-        border = BorderStroke(1.dp, Color.Black)
+    Surface(
+        tonalElevation = 20.dp,
+        shadowElevation = 10.dp,
+        shape = RoundedCornerShape(8.dp),
+        color = Color.Transparent
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(20.dp)
+        Button(
+            onClick = method,
+            modifier = modifier
+                .height(100.dp)
+                .width(360.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = backgroundColor
+            ),
+            shape = RoundedCornerShape(12.dp),
+            border = BorderStroke(0.dp, color = Color.Gray.copy(alpha = 0.7f))
         ) {
-
-            Icon(
-                painter = painterResource(id = R.drawable.document_icon),
-                tint = iconColor,
-                contentDescription = null,
-                modifier = Modifier.size(40.dp)
-            )
-
-            Column(
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-                Text(
-                    text = documentName,
-                    color = documentNameColor,
-                    fontSize = 18.sp,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1,
-                    modifier = Modifier.width(100.dp)
+
+                Icon(
+                    painter = painterResource(id = R.drawable.document_icon),
+                    tint = iconColor,
+                    contentDescription = null,
+                    modifier = Modifier.size(40.dp)
                 )
-                Text(text = documentType, color = documentTypeColor, fontSize = 12.sp)
+
+                Column(
+                ) {
+                    Text(
+                        text = documentName,
+                        color = documentNameColor,
+                        fontSize = 18.sp,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1,
+                        modifier = Modifier.width(100.dp)
+                    )
+                    Text(text = documentType, color = documentTypeColor, fontSize = 12.sp)
+                }
+
+                Text(
+                    text = documentStatus.name,
+                    color = documentNameColor,
+                    fontSize = 16.sp,
+                    modifier = Modifier.offset(x = 20.dp)
+                )
+                DocumentIcon(documentStatus)
+
             }
-
-            Text(text = documentStatus.name, color = documentNameColor, fontSize = 16.sp)
-
-            DocumentIcon(documentStatus)
-
         }
     }
 }
@@ -85,8 +98,8 @@ fun CardComponent(
 @Composable
 fun DocumentIcon(documentStatus: DocumentStatus) {
 
-    var iconPainter: Painter
-    var iconTint: Color
+    val iconPainter: Painter
+    val iconTint: Color
 
     when (documentStatus) {
         DocumentStatus.VERIFIED -> {
@@ -109,6 +122,8 @@ fun DocumentIcon(documentStatus: DocumentStatus) {
         painter = iconPainter,
         tint = iconTint,
         contentDescription = null,
-        modifier = Modifier.size(30.dp)
+        modifier = Modifier
+            .size(30.dp)
+            .offset(x = 10.dp)
     )
 }

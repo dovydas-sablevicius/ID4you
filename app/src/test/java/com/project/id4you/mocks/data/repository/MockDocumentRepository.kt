@@ -11,8 +11,30 @@ class MockDocumentRepository : DocumentRepository {
     override suspend fun getDocuments(authToken: String): Flow<Resource<List<Document>>> {
 
         val documents = listOf(
-            Document("id1", "Card 1", "", true, "415564", LocalDate.now().toString(), listOf()),
-            Document("id2", "Card 2", "", true, "14556456456", LocalDate.now().toString(), listOf())
+            Document(
+                "id1",
+                "Card 1",
+                "",
+                true,
+                "415564",
+                LocalDate.now().toString(),
+                listOf(),
+                "145154564",
+                listOf(),
+                null
+            ),
+            Document(
+                "id2",
+                "Card 2",
+                "",
+                true,
+                "14556456456",
+                LocalDate.now().toString(),
+                listOf(),
+                "564156456",
+                listOf(),
+                null
+            )
         )
 
         return flow {
@@ -34,7 +56,10 @@ class MockDocumentRepository : DocumentRepository {
                 true,
                 "456456456456",
                 LocalDate.now().toString(),
-                listOf()
+                listOf(),
+                "564156456",
+                listOf(),
+                null
             ),
             Document(
                 "id2",
@@ -43,7 +68,10 @@ class MockDocumentRepository : DocumentRepository {
                 true,
                 "456456456456",
                 LocalDate.now().toString(),
-                listOf()
+                listOf(),
+                "564156456",
+                listOf(),
+                null
             )
         )
 

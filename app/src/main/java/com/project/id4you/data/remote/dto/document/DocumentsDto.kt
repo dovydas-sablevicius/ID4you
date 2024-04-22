@@ -7,3 +7,4 @@ data class DocumentsDto(
     val totalItems: Int,
     val totalPages: Int
 )
+

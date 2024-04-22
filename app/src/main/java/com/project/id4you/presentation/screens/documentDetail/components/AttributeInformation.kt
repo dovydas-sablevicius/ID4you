@@ -34,7 +34,7 @@ fun AttributeInformation(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 5.dp),
+                .padding(bottom = 2.dp),
         ) {
             Text(
                 text = attributeName,
@@ -53,7 +53,7 @@ fun AttributeInformation(
                 modifier = Modifier.weight(valueWeight)
             )
         }
-        HorizontalDivider(color = dividerColor, thickness = 3.dp)
+        HorizontalDivider(color = dividerColor, thickness = 1.dp)
     }
 
 
