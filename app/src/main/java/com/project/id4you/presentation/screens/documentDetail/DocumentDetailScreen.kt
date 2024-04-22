@@ -64,6 +64,7 @@ private fun ErrorScreen(errorMessage: String) {
     }
 }
 
+@Suppress("MagicNumber")
 @Composable
 private fun SuccessScreen(
     onNavigateToDocumentQrScreen: (String) -> Unit,
