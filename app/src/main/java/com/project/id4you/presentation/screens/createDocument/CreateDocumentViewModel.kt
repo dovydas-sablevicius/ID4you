@@ -24,9 +24,9 @@ class CreateDocumentViewModel @Inject constructor(
                 _state.value = state.value.copy(documentType = event.value)
             }
 
-            /*CreateDocumentEvent.PressedContinueButton -> {
-                //loginUser(_state.value.email, _state.value.password)
-            }*/
+            CreateDocumentEvent.PressedContinueButton -> {
+                _state.value = state.value.copy(error = "You must fill all empty fields.")
+            }
         }
     }
 }

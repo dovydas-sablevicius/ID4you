@@ -10,16 +10,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.text.TextComponent
 import com.project.id4you.presentation.components.text.TextType
+import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
 fun DocumentUploadFrontScreen(
     /*state: DocumentUploadFrontState,
     onNavigateToUploadDocumentFrontPreview: () -> Unit*/
+    documentName: String,
+    documentType: String
 ) {
     Box(
         modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center
@@ -32,11 +34,14 @@ fun DocumentUploadFrontScreen(
             TextComponent(labelText = "Capture document", textType = TextType.HEADER)
 
             Spacer(modifier = Modifier.weight(1f))
+            TextComponent(labelText = "Front of $documentType", textType = TextType.HEADER)
+
+            Spacer(modifier = Modifier.height(50.dp))
             ButtonComponent(
                 method = { /*onNavigateToUploadDocumentFrontPreview()*/ },
                 labelText = "Take Photo",
-                textColor = Color.White,
-                buttonColor = Color.Blue,
+                textColor = AppColor.White,
+                buttonColor = AppColor.Blue,
                 modifier = Modifier
                     .width(350.dp)
                     .padding(vertical = 16.dp)
