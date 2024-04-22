@@ -5,9 +5,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.project.id4you.presentation.ui.theme.AppColor
 
-const val DEFAULT_FONT_WEIGHT = 400;
-const val REGULAR_FONT_WEIGHT = 500;
+const val DEFAULT_FONT_WEIGHT = 400
+const val REGULAR_FONT_WEIGHT = 500
 
 enum class TextType(val textStyle: TextStyle) {
     HEADER(
@@ -42,7 +43,24 @@ enum class TextType(val textStyle: TextStyle) {
             fontWeight = FontWeight(DEFAULT_FONT_WEIGHT)
         )
     ),
-    ERROR(TextStyle(/* define your error text style */)),
+    ERROR(
+        TextStyle(
+            fontFamily = FontFamily.Default,
+            fontStyle = FontStyle.Normal,
+            fontSize = 17.sp,
+            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT),
+            color = AppColor.Red
+        )
+    ),
+    SUCCESS(
+        TextStyle(
+            fontFamily = FontFamily.Default,
+            fontStyle = FontStyle.Normal,
+            fontSize = 17.sp,
+            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT),
+            color = AppColor.Green
+        )
+    ),
     DATA(TextStyle(/* define your data text style */));
 
 }
