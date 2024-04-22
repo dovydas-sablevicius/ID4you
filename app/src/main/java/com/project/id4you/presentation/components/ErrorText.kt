@@ -13,12 +13,16 @@ import com.project.id4you.common.TestTags
 import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
-fun ErrorText(modifier: Modifier = Modifier, errorMessage: String) {
+fun ErrorText(
+    modifier: Modifier = Modifier,
+    errorMessage: String,
+    contentAlignment: Alignment = Alignment.Center
+) {
     Box(
         modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp),
-        contentAlignment = Alignment.Center
+        contentAlignment = contentAlignment
     ) {
         Text(
             text = errorMessage,

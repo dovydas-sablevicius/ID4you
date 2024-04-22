@@ -3,36 +3,36 @@ package com.project.id4you.presentation.screens.documentDetail
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.project.id4you.common.Constants
 import com.project.id4you.data.repository.model.Document
 import com.project.id4you.presentation.components.ButtonComponent
+import com.project.id4you.presentation.components.LoadingIndicator
 import com.project.id4you.presentation.components.text.TextComponent
 import com.project.id4you.presentation.components.text.TextType
 import com.project.id4you.presentation.screens.documentDetail.components.DocumentDetailScreenHeader
 import com.project.id4you.presentation.screens.documentDetail.components.ImageSection
 import com.project.id4you.presentation.screens.documentDetail.components.InformationSection
 import com.project.id4you.presentation.screens.documentDetail.components.StatusText
-import java.time.LocalDate
 
 @Composable
 fun DocumentDetailScreen(
     state: DocumentDetailState,
     onNavigateToDocumentQrScreen: (String) -> Unit,
+    onNavigateToDocumentQrScanScreen: () -> Unit,
 ) {
     if (state.isSuccess && state.document != null) {
         SuccessScreen(
             onNavigateToDocumentQrScreen,
-            state.document
+            onNavigateToDocumentQrScanScreen,
+            state.document,
+            state
         )
         return
     }
@@ -50,7 +50,7 @@ private fun LoadingScreen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextComponent(labelText = "Loading...", textType = TextType.HEADER)
+        LoadingIndicator()
     }
 }
 
@@ -65,15 +65,27 @@ private fun ErrorScreen(errorMessage: String) {
     }
 }
 
+@Suppress("MagicNumber")
 @Composable
 private fun SuccessScreen(
     onNavigateToDocumentQrScreen: (String) -> Unit,
-    document: Document
+    onNavigateToDocumentQrScanScreen: () -> Unit,
+    document: Document,
+    state: DocumentDetailState,
 ) {
     val imageFetchUrl: String =
         Constants.BASE_URL + "/api/files/" + document.collectionId + "/" + document.id + "/"
-    val configuration = LocalConfiguration.current
-    val screenHeight = configuration.screenHeightDp.dp
+
+    val labelText = if (state.isScanned) "Scan" else "QR Code"
+    val onClickMethod: () -> Unit = if (state.isScanned) {
+        onNavigateToDocumentQrScanScreen
+    } else {
+        { onNavigateToDocumentQrScreen(document.id) }
+    }
+
+
+    val columnWeight: Float = 5f
+    val buttonWeight: Float = 1f
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -86,69 +98,27 @@ private fun SuccessScreen(
         )
         Column(
             modifier = Modifier
-                .padding(14.dp),
+                .padding(14.dp)
+                .weight(columnWeight),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             ImageSection(document, imageFetchUrl)
             InformationSection(
-                modifier = Modifier.heightIn(0.dp, screenHeight / 2),
                 document = document
             )
             StatusText(valid = document.valid)
         }
         ButtonComponent(
-            labelText = "QR Code",
+            labelText = labelText,
             textColor = Color.White,
             buttonColor = Color.Blue,
             modifier = Modifier
                 .width(350.dp)
-                .padding(bottom = 6.dp),
-            method = {
-                onNavigateToDocumentQrScreen(document.id)
-            }
+                .padding(bottom = 6.dp)
+                .weight(buttonWeight, false),
+            method = onClickMethod
         )
     }
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun SuccessScreenPreview() {
-    DocumentDetailScreen(
-        state = DocumentDetailState(
-            isSuccess = true,
-            document = Document(
-                id = "1",
-                name = "Document Name",
-                type = "Passport",
-                valid = true,
-                documentCode = "556456456",
-                validUntil = LocalDate.now().toString(),
-                documentPhotos = listOf(),
-                collectionId = "4564564",
-                driverLicenseCategory = listOf(),
-                documentOwner = null
-            )
-        )
-    ) {}
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LoadingScreenPreview() {
-    DocumentDetailScreen(
-        state = DocumentDetailState(
-            isLoading = true
-        )
-    ) {}
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ErrorScreenPreview() {
-    DocumentDetailScreen(
-        state = DocumentDetailState(
-            error = "Big Error"
-        )
-    ) {}
-}

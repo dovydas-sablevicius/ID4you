@@ -34,6 +34,11 @@ class DocumentDetailViewModel @Inject constructor(
             ?: throw Exception("Failed To Get Document Id")
     }
 
+    private fun getSourceScreen(): Boolean {
+        val stringValue = savedStateHandle.get<String>("isScanned")
+        return stringValue?.toBoolean() ?: false
+    }
+
     private fun getDocument(authToken: String, id: String) {
         viewModelScope.launch {
             getDocumentUseCase(authToken, id).onEach { result ->
@@ -53,7 +58,8 @@ class DocumentDetailViewModel @Inject constructor(
                     is Resource.Success -> {
                         _state.value = DocumentDetailState(
                             document = result.data,
-                            isSuccess = true
+                            isSuccess = true,
+                            isScanned = getSourceScreen()
                         )
                     }
                 }
