@@ -24,7 +24,8 @@ import com.project.id4you.presentation.ui.theme.AppColor
 fun DocumentsListScreen(
     state: DocumentsListState,
     onNavigateToDocumentDetailScreen: (String) -> Unit,
-    onNavigateToDocumentCreationScreen: () -> Unit
+    onNavigateToDocumentCreationScreen: () -> Unit,
+    onNavigateToQrScanScreen: () -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -70,6 +71,7 @@ fun DocumentsListScreen(
                 .width(350.dp)
                 .padding(vertical = 16.dp)
                 .testTag(TestTags.SCAN_BUTTON),
+            method = onNavigateToQrScanScreen
         )
     }
 }
