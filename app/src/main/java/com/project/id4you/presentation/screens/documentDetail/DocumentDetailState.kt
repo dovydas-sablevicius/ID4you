@@ -6,5 +6,6 @@ data class DocumentDetailState(
     val isLoading: Boolean = false,
     val error: String = "",
     val isSuccess: Boolean = false,
-    val document: Document? = null
+    val document: Document? = null,
+    val isScanned: Boolean = false
 )

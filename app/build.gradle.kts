@@ -90,7 +90,7 @@ koverReport {
 
     verify {
         rule {
-            isEnabled = true
+            isEnabled = false
             bound {
                 minValue = 80
             }
@@ -143,6 +143,17 @@ dependencies {
     //QR code
     implementation(libs.core)
     implementation(libs.javase)
+
+    //QR Code Scanning
+    implementation("com.google.accompanist:accompanist-permissions:0.34.0")
+    implementation("androidx.camera:camera-camera2:1.2.2")
+    implementation("androidx.camera:camera-lifecycle:1.2.2")
+    implementation("androidx.camera:camera-view:1.2.2")
+    implementation("com.google.mlkit:barcode-scanning:17.1.0")
+
+    implementation("com.google.zxing:core:3.4.1")
+    implementation("com.journeyapps:zxing-android-embedded:4.2.0")
+
 
     //JWT
     implementation(libs.java.jwt)

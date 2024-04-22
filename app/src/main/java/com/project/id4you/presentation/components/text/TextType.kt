@@ -19,6 +19,15 @@ enum class TextType(val textStyle: TextStyle) {
             fontWeight = FontWeight(DEFAULT_FONT_WEIGHT)
         )
     ),
+    HEADER_WHITE(
+        TextStyle(
+            fontFamily = FontFamily.Default,
+            fontStyle = FontStyle.Normal,
+            fontSize = 32.sp,
+            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT),
+            color = AppColor.White
+        )
+    ),
     CLICKABLE(
         TextStyle(
             fontFamily = FontFamily.Default,
@@ -59,6 +68,15 @@ enum class TextType(val textStyle: TextStyle) {
             fontSize = 17.sp,
             fontWeight = FontWeight(DEFAULT_FONT_WEIGHT),
             color = AppColor.Green
+        )
+    ),
+    SMALL_WHITE(
+        TextStyle(
+            fontFamily = FontFamily.Default,
+            fontStyle = FontStyle.Normal,
+            fontSize = 14.sp,
+            fontWeight = FontWeight(REGULAR_FONT_WEIGHT),
+            color = AppColor.White
         )
     ),
     DATA(TextStyle(/* define your data text style */));
