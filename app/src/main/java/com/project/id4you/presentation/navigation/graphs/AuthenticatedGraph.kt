@@ -47,15 +47,21 @@ private fun NavGraphBuilder.documentsListScreen(navController: NavController) {
 }
 
 private fun NavGraphBuilder.documentDetailScreen(navController: NavController) {
-    composable(route = Routes.Authenticated.DocumentDetail.route + "/{documentId}") {
+    composable(route = Routes.Authenticated.DocumentDetail.route + "/{documentId}?isScanned={isScanned}") {
         val viewModel = hiltViewModel<DocumentDetailViewModel>()
         DocumentDetailScreen(
-            state = viewModel.state.value
-        ) { documentId ->
-            navController.navigate(
-                route = Routes.Authenticated.DocumentQr.route + "/${documentId}"
-            )
-        }
+            state = viewModel.state.value,
+            onNavigateToDocumentQrScreen = { documentId ->
+                navController.navigate(
+                    route = Routes.Authenticated.DocumentQr.route + "/${documentId}"
+                )
+            },
+            onNavigateToDocumentQrScanScreen = {
+                navController.navigate(
+                    route = Routes.Authenticated.DocumentQrScan.route
+                )
+            }
+        )
     }
 }
 
@@ -75,9 +81,9 @@ private fun NavGraphBuilder.documentQrScanScreen(navController: NavController) {
         DocumentQrScanScreen(
             state = viewModel.state.value,
             onEvent = viewModel::onEvent,
-            onNavigateToDocumentDetailScreen = { documentId ->
+            onNavigateToDocumentDetailScreen = { documentId, isScanned: Boolean ->
                 navController.navigate(
-                    route = Routes.Authenticated.DocumentDetail.route + "/${documentId}"
+                    route = Routes.Authenticated.DocumentDetail.route + "/${documentId}" + "?isScanned=${isScanned}"
                 )
             }
         )

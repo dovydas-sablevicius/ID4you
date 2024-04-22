@@ -40,7 +40,7 @@ import com.project.id4you.presentation.components.text.TextType
 @Composable
 fun DocumentQrScanScreen(
     state: DocumentQrScanState,
-    onNavigateToDocumentDetailScreen: (String) -> Unit,
+    onNavigateToDocumentDetailScreen: (String, Boolean) -> Unit,
     onEvent: (DocumentQrScanEvent) -> Unit
 ) {
     val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
@@ -74,7 +74,7 @@ fun CameraPermissionErrorText(errorMessage: String) {
 fun CameraScreen(
     onEvent: (DocumentQrScanEvent) -> Unit,
     state: DocumentQrScanState,
-    onNavigateToDocumentDetailScreen: (String) -> Unit
+    onNavigateToDocumentDetailScreen: (String, Boolean) -> Unit
 ) {
     val localContext = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -141,6 +141,7 @@ fun CameraScreen(
             TextComponent(
                 labelText = "Scan QR Code",
                 textType = TextType.HEADER_WHITE,
+                color = Color.White
             )
         }
 
@@ -152,6 +153,7 @@ fun CameraScreen(
             TextComponent(
                 labelText = "Place QR Code inside the frame",
                 textType = TextType.SMALL_WHITE,
+                color = Color.White
             )
         }
 
@@ -171,7 +173,7 @@ fun CameraScreen(
 
         if (state.isSuccess) {
             LaunchedEffect(Unit) {
-                onNavigateToDocumentDetailScreen(state.documentId)
+                onNavigateToDocumentDetailScreen(state.documentId, true)
             }
         }
     }

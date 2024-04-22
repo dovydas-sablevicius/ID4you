@@ -28,11 +28,14 @@ import java.time.LocalDate
 fun DocumentDetailScreen(
     state: DocumentDetailState,
     onNavigateToDocumentQrScreen: (String) -> Unit,
+    onNavigateToDocumentQrScanScreen: () -> Unit,
 ) {
     if (state.isSuccess && state.document != null) {
         SuccessScreen(
             onNavigateToDocumentQrScreen,
-            state.document
+            onNavigateToDocumentQrScanScreen,
+            state.document,
+            state
         )
         return
     }
@@ -68,12 +71,23 @@ private fun ErrorScreen(errorMessage: String) {
 @Composable
 private fun SuccessScreen(
     onNavigateToDocumentQrScreen: (String) -> Unit,
-    document: Document
+    onNavigateToDocumentQrScanScreen: () -> Unit,
+    document: Document,
+    state: DocumentDetailState,
 ) {
     val imageFetchUrl: String =
         Constants.BASE_URL + "/api/files/" + document.collectionId + "/" + document.id + "/"
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
+
+    val labelText = if (state.isScanned) "Scan" else "QR Code"
+    val onClickMethod: () -> Unit = if (state.isScanned) {
+        onNavigateToDocumentQrScanScreen
+    } else {
+        { onNavigateToDocumentQrScreen(document.id) }
+    }
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -97,58 +111,15 @@ private fun SuccessScreen(
             StatusText(valid = document.valid)
         }
         ButtonComponent(
-            labelText = "QR Code",
+            labelText = labelText,
             textColor = Color.White,
             buttonColor = Color.Blue,
             modifier = Modifier
                 .width(350.dp)
                 .padding(bottom = 6.dp),
-            method = {
-                onNavigateToDocumentQrScreen(document.id)
-            }
+            method = onClickMethod
         )
     }
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun SuccessScreenPreview() {
-    DocumentDetailScreen(
-        state = DocumentDetailState(
-            isSuccess = true,
-            document = Document(
-                id = "1",
-                name = "Document Name",
-                type = "Passport",
-                valid = true,
-                documentCode = "556456456",
-                validUntil = LocalDate.now().toString(),
-                documentPhotos = listOf(),
-                collectionId = "4564564",
-                driverLicenseCategory = listOf(),
-                documentOwner = null
-            )
-        )
-    ) {}
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LoadingScreenPreview() {
-    DocumentDetailScreen(
-        state = DocumentDetailState(
-            isLoading = true
-        )
-    ) {}
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ErrorScreenPreview() {
-    DocumentDetailScreen(
-        state = DocumentDetailState(
-            error = "Big Error"
-        )
-    ) {}
-}

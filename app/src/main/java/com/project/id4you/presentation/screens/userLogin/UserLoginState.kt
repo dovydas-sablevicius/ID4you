@@ -4,6 +4,6 @@ data class UserLoginState(
     val isLoading: Boolean = false,
     val error: String = "",
     val isSuccess: Boolean = false,
-    val email: String = "",
-    val password: String = ""
+    val email: String = "test@gmail.com",
+    val password: String = "1234567890"
 )
