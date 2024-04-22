@@ -1,16 +1,17 @@
 package com.project.id4you.presentation.screens.userLogin
 
+import junit.framework.TestCase.assertTrue
 import org.junit.Test
 
 class UserLoginStateTest {
     @Test
     fun testDefaultLoginState() {
         val defaultState = generateDefaultLoginState()
-        assert(!defaultState.isLoading)
-        assert(defaultState.error == "")
-        assert(!defaultState.isSuccess)
-        assert(defaultState.email == "")
-        assert(defaultState.password == "")
+        assertTrue("State is loading", !defaultState.isLoading)
+        assertTrue("Error is not empty", defaultState.error == "")
+        assertTrue("State is success", !defaultState.isSuccess)
+        assertTrue("Email is not empty", defaultState.email == "")
+        assertTrue("Password is not empty", defaultState.password == "")
     }
 
     @Test

@@ -11,8 +11,20 @@ class RegisterUserUseCase @Inject constructor(
     suspend operator fun invoke(
         email: String,
         password: String,
-        passwordConfirm: String
+        passwordConfirm: String,
+        name: String,
+        surname: String,
+        birthDate: String,
+        personalCode: String
     ): Flow<Resource<Unit>> {
-        return repository.registerUser(email, password, passwordConfirm)
+        return repository.registerUser(
+            email,
+            password,
+            passwordConfirm,
+            name,
+            surname,
+            birthDate,
+            personalCode
+        )
     }
 }
