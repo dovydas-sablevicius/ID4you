@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.project.id4you.presentation.ui.theme.AppColor
 
-@Suppress("LongParameterList", "TooGenericExceptionThrown")
+@Suppress("LongParameterList", "TooGenericExceptionThrown", "UnusedParameter")
 @Composable
 fun ClickableIcon(
     size: Dp = 30.dp,
