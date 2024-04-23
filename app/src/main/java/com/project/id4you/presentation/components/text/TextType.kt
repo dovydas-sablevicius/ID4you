@@ -33,7 +33,8 @@ enum class TextType(val textStyle: TextStyle) {
             fontFamily = FontFamily.Default,
             fontStyle = FontStyle.Normal,
             fontSize = 15.sp,
-            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT)
+            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT),
+            color = AppColor.Blue
         )
     ),
     REGULAR(

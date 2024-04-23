@@ -59,7 +59,6 @@ fun CustomDropdown(
             TextComponent(
                 labelText = selectedItem.ifEmpty { labelText },
                 textType = TextType.CLICKABLE,
-                color = color,
                 modifier = Modifier
                     .padding(start = 8.dp, end = 20.dp)
                     .align(Alignment.CenterStart)
