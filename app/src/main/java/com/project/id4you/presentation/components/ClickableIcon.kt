@@ -12,14 +12,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.project.id4you.presentation.ui.theme.AppColor
 
-@Suppress("LongParameterList", "TooGenericExceptionThrown")
+@Suppress("LongParameterList", "TooGenericExceptionThrown", "UnusedParameter")
 @Composable
 fun ClickableIcon(
     size: Dp = 30.dp,
     color: Color = AppColor.Blue,
     method: () -> Unit = {},
     imageVector: ImageVector? = null,
-    painterId: Int? = null
+    painterId: Int? = null,
+    modifier: Modifier
 ) {
     IconButton(
         onClick = method,

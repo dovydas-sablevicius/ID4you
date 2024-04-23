@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.project.id4you.common.TestTags
@@ -19,11 +18,13 @@ import com.project.id4you.data.repository.model.DocumentStatus
 import com.project.id4you.presentation.components.ButtonComponent
 import com.project.id4you.presentation.components.CardComponent
 import com.project.id4you.presentation.screens.documentsList.components.DocumentScreenHeader
+import com.project.id4you.presentation.ui.theme.AppColor
 
 @Composable
 fun DocumentsListScreen(
     state: DocumentsListState,
     onNavigateToDocumentDetailScreen: (String) -> Unit,
+    onNavigateToDocumentCreationScreen: () -> Unit,
     onNavigateToQrScanScreen: () -> Unit
 ) {
     Column(
@@ -33,7 +34,8 @@ fun DocumentsListScreen(
     ) {
 
         DocumentScreenHeader(
-            modifier = Modifier.testTag(TestTags.DOCUMENT_LIST_HEADER)
+            modifier = Modifier.testTag(TestTags.DOCUMENT_LIST_HEADER),
+            method = { onNavigateToDocumentCreationScreen() }
         )
 
         Spacer(modifier = Modifier.padding(20.dp))
@@ -63,8 +65,8 @@ fun DocumentsListScreen(
         Spacer(modifier = Modifier.weight(1f))
         ButtonComponent(
             labelText = "Scan",
-            textColor = Color.White,
-            buttonColor = Color.Blue,
+            textColor = AppColor.White,
+            buttonColor = AppColor.Blue,
             modifier = Modifier
                 .width(350.dp)
                 .padding(vertical = 16.dp)

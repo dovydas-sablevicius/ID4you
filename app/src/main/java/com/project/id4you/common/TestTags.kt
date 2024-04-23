@@ -24,6 +24,13 @@ object TestTags {
     const val FORGOT_PASSWORD_BUTTON = "ForgotPasswordButton"
     const val LOADING_COMPONENT = "LoadingComponent"
     const val ERROR_MESSAGE = "ErrorMessage"
+    const val CONTINUE_BUTTON = "Continue"
+    const val ADD_BUTTON = "Add"
+    const val SETTINGS_BUTTON = "Settings"
+    const val FILTER_BUTTON = "Filter"
+    const val DOCUMENT_CREATION_SCREEN_NAME_FIELD = "CustomDocumentNameField"
+    const val DROPDOWN_FIELD = "DropdownField"
+    const val DOCUMENT_CREATION_SCREEN = "DocumentCreationScreen"
 
 
     //tags for DocumentQrScreen
