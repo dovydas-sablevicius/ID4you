@@ -39,7 +39,8 @@ fun CreateDocumentScreen(
 
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .testTag(TestTags.DOCUMENT_CREATION_SCREEN),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
@@ -55,14 +56,16 @@ fun CreateDocumentScreen(
             CustomTextField(
                 labelText = "Name...",
                 value = state.name,
-                onValueChange = { onEvent(CreateDocumentEvent.EnteredName(it)) }
+                onValueChange = { onEvent(CreateDocumentEvent.EnteredName(it)) },
+                modifier = Modifier.testTag(TestTags.DOCUMENT_CREATION_SCREEN_NAME_FIELD)
             )
 
             CustomDropdown(
                 labelText = "Select document type",
                 items = listOf("Passport", "Driver's License", "ID Card"),
                 selectedItem = state.documentType,
-                onItemSelected = { onEvent(CreateDocumentEvent.EnteredDocumentType(it)) }
+                onItemSelected = { onEvent(CreateDocumentEvent.EnteredDocumentType(it)) },
+                modifier = Modifier.testTag(TestTags.DROPDOWN_FIELD)
             )
         }
 

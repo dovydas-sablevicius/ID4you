@@ -32,13 +32,24 @@ fun DocumentScreenHeader(
             .padding(20.dp, 2.dp), contentAlignment = Alignment.CenterStart
     )
     {
-        ClickableIcon(size = 35.dp, imageVector = Icons.Outlined.Add, method = method)
+        ClickableIcon(
+            size = 35.dp,
+            imageVector = Icons.Outlined.Add,
+            method = method,
+            modifier = Modifier.testTag(TestTags.ADD_BUTTON)
+        )
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd)
         {
             Row {
-                ClickableIcon(painterId = R.drawable.baseline_tune_24)
+                ClickableIcon(
+                    painterId = R.drawable.baseline_tune_24,
+                    modifier = Modifier.testTag(TestTags.FILTER_BUTTON)
+                )
                 Spacer(modifier = Modifier.padding(5.dp))
-                ClickableIcon(imageVector = Icons.Outlined.Settings)
+                ClickableIcon(
+                    imageVector = Icons.Outlined.Settings,
+                    modifier = Modifier.testTag(TestTags.SETTINGS_BUTTON)
+                )
             }
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center)
             {

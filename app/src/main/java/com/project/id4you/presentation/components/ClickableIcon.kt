@@ -19,7 +19,8 @@ fun ClickableIcon(
     color: Color = AppColor.Blue,
     method: () -> Unit = {},
     imageVector: ImageVector? = null,
-    painterId: Int? = null
+    painterId: Int? = null,
+    modifier: Modifier
 ) {
     IconButton(
         onClick = method,

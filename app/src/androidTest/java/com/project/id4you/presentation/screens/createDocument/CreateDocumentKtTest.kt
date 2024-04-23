@@ -1,4 +1,4 @@
-package com.project.id4you.presentation.screens.documentList
+package com.project.id4you.presentation.screens.createDocument
 
 import androidx.activity.compose.setContent
 import androidx.compose.ui.test.assertIsDisplayed
@@ -22,7 +22,7 @@ import org.junit.Test
 
 @HiltAndroidTest
 @UninstallModules(AppModule::class)
-class DocumentListScreenKtTest {
+class CreateDocumentKtTest {
 
     @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
@@ -43,31 +43,19 @@ class DocumentListScreenKtTest {
                     unauthenticatedGraph(navController)
                     authenticatedGraph(navController)
                 }
-                navController.navigate(Routes.Authenticated.DocumentsPage.route)
+                navController.navigate(Routes.Authenticated.DocumentCreation.route)
             }
         }
     }
 
     @Test
     fun allImportantComponentsPresent() {
+        composeRule.onNodeWithTag(TestTags.DOCUMENT_CREATION_SCREEN).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.DOCUMENT_CREATION_SCREEN_NAME_FIELD).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.DROPDOWN_FIELD).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.CONTINUE_BUTTON).assertIsDisplayed()
 
-        composeRule.onNodeWithTag(TestTags.DOCUMENT_LIST_SCREEN).assertIsDisplayed()
-        composeRule.onNodeWithTag(TestTags.DOCUMENT_LIST_HEADER).assertIsDisplayed()
-        composeRule.onNodeWithTag(TestTags.DOCUMENT_LIST).assertIsDisplayed()
-        composeRule.onNodeWithTag(TestTags.ID_CARD).assertIsDisplayed()
-        composeRule.onNodeWithTag(TestTags.SCAN_BUTTON).assertIsDisplayed()
     }
 
-    //FIX
-    /*@Test
-    fun testNavigateToDocumentCreation() {
 
-        composeRule.onNodeWithTag(TestTags.DOCUMENT_LIST_SCREEN).assertIsDisplayed()
-        composeRule.onNodeWithTag(TestTags.DOCUMENT_LIST_HEADER).assertIsDisplayed()
-        composeRule.onNodeWithTag(TestTags.ADD_BUTTON).assertIsDisplayed()
-        composeRule.onNodeWithTag(TestTags.ADD_BUTTON).performClick()
-        composeRule.onNodeWithTag(TestTags.DOCUMENT_CREATION_SCREEN).assertIsDisplayed()
-
-    }*/
 }
-
