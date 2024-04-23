@@ -19,6 +19,7 @@ import com.project.id4you.presentation.ui.theme.ID4YouTheme
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
+import junit.framework.TestCase.fail
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -47,15 +48,25 @@ class RegistrationScreenKtTest {
                     unauthenticatedGraph(navController)
                     authenticatedGraph(navController)
                 }
-                navController.navigate(Routes.Unauthenticated.Registration.route)
             }
         }
     }
 
     @Test
     fun allImportantComponentsPresent() {
+
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN).assertDoesNotExist()
+        composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON).performClick()
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN).assertIsDisplayed()
         composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_LOGIN_BUTTON).assertIsDisplayed()
+
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_EMAIL_INPUT).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_NAME_INPUT).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_SURNAME_INPUT).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_BIRTH_DATE_INPUT).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PERSONAL_CODE_INPUT)
+            .assertIsDisplayed()
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_INPUT).assertIsDisplayed()
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_CONFIRM_INPUT)
             .assertIsDisplayed()
@@ -64,6 +75,9 @@ class RegistrationScreenKtTest {
 
     @Test
     fun testNavigationToLogin() {
+        composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON).performClick()
+
         composeRule.onNodeWithTag(TestTags.LOGIN_SCREEN).assertDoesNotExist()
         composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_LOGIN_BUTTON).assertIsDisplayed()
         composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_LOGIN_BUTTON).performClick()
@@ -79,6 +93,9 @@ class RegistrationScreenKtTest {
         val surname: String = "Doe"
         val birthDate: String = "2000-01-01"
         val personalCode: String = "12345678901"
+
+        composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON).performClick()
 
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_EMAIL_INPUT).performTextInput(email)
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_INPUT)
@@ -102,6 +119,10 @@ class RegistrationScreenKtTest {
 
     @Test
     fun testErrorMessage() {
+
+        composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON).performClick()
+
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_EMAIL_INPUT).assertIsDisplayed()
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_INPUT).assertIsDisplayed()
         composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_CONFIRM_INPUT)
@@ -112,4 +133,44 @@ class RegistrationScreenKtTest {
         composeRule.onNodeWithTag(TestTags.ERROR_MESSAGE).assertIsDisplayed()
             .assertTextContains("Oops.. An unexpected error occurred.")
     }
+
+    @Test
+    fun testRegistrationTime() {
+        val email: String = "test@test.com"
+        val password: String = "1234567890"
+        val passwordAgain: String = "1234567890"
+        val name: String = "John"
+        val surname: String = "Doe"
+        val birthDate: String = "2000-01-01"
+        val personalCode: String = "12345678901"
+
+        composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.NAVIGATE_TO_REGISTRATION_BUTTON).performClick()
+
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_EMAIL_INPUT).performTextInput(email)
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_INPUT)
+            .performTextInput(password)
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PASSWORD_CONFIRM_INPUT)
+            .performTextInput(passwordAgain)
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_NAME_INPUT).performTextInput(name)
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_SURNAME_INPUT)
+            .performTextInput(surname)
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_BIRTH_DATE_INPUT)
+            .performTextInput(birthDate)
+        composeRule.onNodeWithTag(TestTags.REGISTRATION_SCREEN_PERSONAL_CODE_INPUT)
+            .performTextInput(personalCode)
+        composeRule.onNodeWithTag(TestTags.SIGN_UP_BUTTON).performClick()
+
+        val endTimeMillis = System.currentTimeMillis() + 30000
+        while (System.currentTimeMillis() < endTimeMillis) {
+            try {
+                composeRule.onNodeWithTag(TestTags.LOGIN_SCREEN).assertIsDisplayed()
+                return
+            } catch (e: Throwable) {
+            }
+        }
+        fail("Login screen did not appear within 30 seconds")
+    }
+
+
 }
