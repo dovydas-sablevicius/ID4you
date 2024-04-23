@@ -16,7 +16,8 @@ enum class TextType(val textStyle: TextStyle) {
             fontFamily = FontFamily.Default,
             fontStyle = FontStyle.Normal,
             fontSize = 32.sp,
-            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT)
+            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT),
+            color = AppColor.Black
         )
     ),
     HEADER_WHITE(
@@ -33,7 +34,8 @@ enum class TextType(val textStyle: TextStyle) {
             fontFamily = FontFamily.Default,
             fontStyle = FontStyle.Normal,
             fontSize = 15.sp,
-            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT)
+            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT),
+            color = AppColor.Blue
         )
     ),
     REGULAR(
@@ -41,7 +43,8 @@ enum class TextType(val textStyle: TextStyle) {
             fontFamily = FontFamily.Default,
             fontStyle = FontStyle.Normal,
             fontSize = 20.sp,
-            fontWeight = FontWeight(REGULAR_FONT_WEIGHT)
+            fontWeight = FontWeight(REGULAR_FONT_WEIGHT),
+            color = AppColor.Black
         )
     ),
     SMALL(
@@ -49,7 +52,8 @@ enum class TextType(val textStyle: TextStyle) {
             fontFamily = FontFamily.Default,
             fontStyle = FontStyle.Normal,
             fontSize = 17.sp,
-            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT)
+            fontWeight = FontWeight(DEFAULT_FONT_WEIGHT),
+            color = AppColor.Black
         )
     ),
     ERROR(
