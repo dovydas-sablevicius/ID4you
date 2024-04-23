@@ -4,6 +4,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
@@ -13,6 +14,7 @@ import com.project.id4you.presentation.MainActivity
 import com.project.id4you.presentation.navigation.Routes
 import com.project.id4you.presentation.navigation.graphs.authenticatedGraph
 import com.project.id4you.presentation.navigation.graphs.unauthenticatedGraph
+import com.project.id4you.presentation.screens.documentQr.Constants.JWT_EXPIRATION_TIME
 import com.project.id4you.presentation.ui.theme.ID4YouTheme
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -50,7 +52,6 @@ class DocumentQrScreenKtTest {
         }
     }
 
-
     @Test
     fun documentQrScreenComponentsAreDisplayed_whenDocumentIdIsNotEmpty() {
         composeRule.onNodeWithTag(TestTags.DOCUMENT_QR_SCREEN).assertIsDisplayed()
@@ -62,13 +63,29 @@ class DocumentQrScreenKtTest {
     }
 
     @Test
-    fun errorIsNotDisplayed_whenDocumentIdIsNotEmpty() {
-        composeRule.onNodeWithTag(TestTags.DOCUMENT_QR_ERROR).assertDoesNotExist()
+    fun timerIsDecrementingToZero_whenNavigatedToDocumentQrScreen() {
+        for (i in 29 downTo 1) {
+            composeRule.onNodeWithText("Time remaining: $i seconds").assertIsDisplayed()
+            Thread.sleep(1000)
+        }
+    }
+
+    @Test
+    fun qrCodeAndTimerAreRegenerated_whenTimerReachesZero() {
+        Thread.sleep(JWT_EXPIRATION_TIME.toLong())
+        composeRule.onNodeWithTag(TestTags.DOCUMENT_QR_CODE_IMAGE).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.DOCUMENT_QR_TIME_REMAINING).assertIsDisplayed()
     }
 
     @Test
     fun qrCodeIsRegenerated_whenRegenerateButtonIsClicked() {
         composeRule.onNodeWithTag(TestTags.DOCUMENT_QR_REGENERATE_BUTTON).performClick()
         composeRule.onNodeWithTag(TestTags.DOCUMENT_QR_CODE_IMAGE).assertIsDisplayed()
+        composeRule.onNodeWithTag(TestTags.DOCUMENT_QR_TIME_REMAINING).assertIsDisplayed()
+    }
+
+    @Test
+    fun errorIsNotDisplayed_whenDocumentIdIsNotEmpty() {
+        composeRule.onNodeWithTag(TestTags.DOCUMENT_QR_ERROR).assertDoesNotExist()
     }
 }
